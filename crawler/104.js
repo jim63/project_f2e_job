@@ -61,7 +61,6 @@ function goJobPage(url_job_page, time) {
     setTimeout(() => {
       request(
         {
-          //! 104  一個月內更新，月薪 40000up，日班
           url: url_job_page,
           method: 'GET',
           'Content-Type': 'application/json;charset=UTF-8'
@@ -89,7 +88,7 @@ function goJobPage(url_job_page, time) {
           }
         }
       );
-    }, time * 10000);
+    }, time * 2000);
   });
 }
 
@@ -103,8 +102,6 @@ getTotalPage().then(totalPages => {
           job_info.job_name = data[i].jobNameRaw;
           job_info.salary_low = data[i].salaryLow;
           job_info.salary_high = data[i].salaryHigh;
-
-          // job_info.amount = data[i].jobName;
           job_info.appear_date = data[i].appearDate;
           job_info.apply_amount = data[i].applyDesc;
           job_info.location = data[i].jobAddrNoDesc;
@@ -116,12 +113,12 @@ getTotalPage().then(totalPages => {
           job_info.link_apply_analysis = data[i].link.applyAnalyze.slice(2);
           job_info.link_company = data[i].link.cust.slice(2);
 
-          goJobPage(`https://${job_info.link_job}`, i * page + page).then(data => {
+          goJobPage(`https://${job_info.link_job}`, Number(`${page}${i}`)).then(data => {
             console.log(`${data}\n`);
             job_info.amount = data;
 
             db.query(`INSERT INTO job_104(job_name,salary_low,salary_high,apply_amount,location,address,job_description,company_name,company_scale,link_job,link_apply_analysis,link_company,appear_date,require_amount)
-           VALUE ('${job_info.job_name}','${job_info.salary_low}','${job_info.salary_high}','${
+            VALUE ('${job_info.job_name}','${job_info.salary_low}','${job_info.salary_high}','${
               job_info.apply_amount
             }','${job_info.location}','${job_info.address}','${job_info.job_description}','${job_info.company_name}','${
               job_info.company_scale
@@ -134,61 +131,3 @@ getTotalPage().then(totalPages => {
     }
   });
 });
-// totlaPages.then(totlaPage => {
-//   console.log(totlaPage);
-// });
-
-// let $ = cheerio.load(`<!DOCTYPE html>
-// <html lang="en">
-
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//     <title>Home page</title>
-//     <style>
-//         .fpar {
-//             font-family: Georgia;
-//         }
-//     </style>
-// </head>
-
-// <body>
-//     <main>
-//         <h1>My website</h1>
-
-//         <p class="fpar">
-//             I am a JavaScript programmer.
-//         </p>
-
-//         <p>
-//             My hobbies are:
-//         </p>
-
-//         <ul>
-//             <li>Swimming</li>
-//             <li>Tai Chi</li>
-//             <li>Running</li>
-//             <li>Web development</li>
-//             <li>Reading</li>
-//             <li>Music</li>
-//         </ul>
-//     </main>
-// </body>
-
-// </html>`);
-
-// // console.log(li.contents().text());
-
-// let li = [];
-// $('li').each(function(i, elem) {
-//   if (
-//     $(this)
-//       .text()
-//       .indexOf('wimm') !== -1
-//   ) {
-//     li.push($(this));
-//   }
-// });
-
-// console.log(li[0].next().text());
