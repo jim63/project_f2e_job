@@ -53,7 +53,6 @@ app.get('/park', (req, res) => {
 
 app.get('/store', (req, res) => {
   let storeid = req.query.storeid;
-  console.log('park', location);
   request(
     {
       url: `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC8qLjFTmMo0etL1tVO3OdLBrEKx41Qko0&placeid=${storeid}`,
