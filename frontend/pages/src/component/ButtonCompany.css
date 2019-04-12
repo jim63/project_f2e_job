@@ -1,0 +1,16 @@
+.buttonCompany {
+  background-color: #fff;
+  width: 100px;
+  height: 50px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.buttonCompany:hover {
+  cursor: pointer;
+}
