@@ -22,7 +22,7 @@ app.get('/attraction', (req, res) => {
   console.log('location', location);
   request(
     {
-      url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyC8qLjFTmMo0etL1tVO3OdLBrEKx41Qko0&radius=500&location=${location}&language=zh-TW`,
+      url: `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=AIzaSyC8qLjFTmMo0etL1tVO3OdLBrEKx41Qko0&language=zh-TW&input=${location}&inputtype=textquery`,
       method: 'GET',
       'Content-Type': 'application/json;charset=UTF-8'
     },

@@ -1,9 +1,11 @@
 .jobsContainer {
   /* for footer */
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   /* end */
 
   display: flex;
 
-  justify-content: space-around;
+  justify-content: space-between;
+
+  margin-top: 20px;
 }
