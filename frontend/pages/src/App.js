@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         <Banner />
         <div className='contentsContainer'>
           <Nav />
