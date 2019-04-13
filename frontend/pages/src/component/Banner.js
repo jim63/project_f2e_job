@@ -7,7 +7,9 @@ class Banner extends Component {
     return (
       <nav className='banner' style={{}}>
         {/* <img className='bannerLogo' srcSet='../img/logo.jpg' width='600px' height='300px' alt='' srcset='' /> */}
-        <img className='bannerLogo' srcSet={logo} />
+        {/* <img className='bannerLogo' srcSet={logo} /> */}
+        <img className='bannerLogo' src={'./logo.png'} />
+
         <div className='bannerText' style={{}}>
           <p>WORK LIFE BALANCE</p>
           <p>ARE YOU READY?</p>
