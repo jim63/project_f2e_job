@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import CardJob from './CardJob';
 import './Contents.css';
 import { connect } from 'react-redux';
-
 import { fetch_yourator } from '../action/index';
+import Pages from './Pages';
 
 class Contents extends Component {
   componentDidMount() {
-    this.props.fetch_yourator();
+    this.props.fetch_yourator(3);
   }
 
   render() {
@@ -32,9 +32,18 @@ class Contents extends Component {
       console.log('qq', allJobs);
 
       return (
-        <div className='jobsContainer' style={{ backgroundColor: '#ffffff', display: 'flex', flexWrap: 'wrap' }}>
-          {allJobs}
-        </div>
+        <>
+          <div className='jobsContainer' style={{ backgroundColor: '#ffffff', display: 'flex', flexWrap: 'wrap' }}>
+            {allJobs}
+          </div>
+          <div className='Page'>
+            <Pages page='1' changePage={this.props.fetch_yourator} />
+            <Pages page='2' changePage={this.props.fetch_yourator} />
+            <Pages page='3' changePage={this.props.fetch_yourator} />
+            <Pages page='4' changePage={this.props.fetch_yourator} />
+            <Pages page='5' changePage={this.props.fetch_yourator} />
+          </div>
+        </>
       );
     }
   }

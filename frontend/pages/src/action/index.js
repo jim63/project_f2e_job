@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const fetch_yourator = () => async dispatch => {
-  const response = await axios.get(`http://localhost:3306/yourator`).then(e => {
+export const fetch_yourator = page => async dispatch => {
+  const response = await axios.get(`http://localhost:3306/yourator?page=${page}`).then(e => {
     return e.data;
   });
 

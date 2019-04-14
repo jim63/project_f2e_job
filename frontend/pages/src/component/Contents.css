@@ -9,3 +9,10 @@
 
   margin-top: 20px;
 }
+
+.Page {
+  display: flex;
+  margin: 20px auto;
+  width: 200px;
+  justify-content: space-around;
+}
