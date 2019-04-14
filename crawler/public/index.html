@@ -7,11 +7,14 @@
     <title>Document</title>
   </head>
   <body>
+    <form>page：<input type="text" name="UserName" /> <input type="submit" name="SB" value="送出表單" /></form>
+
     <button onclick="ajax()">qqqq</button>
     <div class="root"></div>
     <script>
+      // let page = document.querySelector('');
       const ajax = function() {
-        fetch(`/qq`)
+        fetch(`/yourator?page=${1}`)
           .then(function(response) {
             console.log(response);
 

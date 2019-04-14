@@ -70,11 +70,3 @@ app.get('/store', (req, res) => {
     }
   );
 });
-
-for (let i = 0; i < 100; i++) {
-  i % 3 === 0 ? console.log(i % 5 === 0 ? 'fizzbuzz' : 'buzz') : console.log(i % 5 === 0 ? 'fizz' : i);
-}
-
-for (let i = 0; i < 100; i++) {
-  i % 3 === 0 ? console.log(i % 5 === 0 ? 'fizzbuzz' : 'buzz') : console.log(i % 5 === 0 ? 'fizz' : i);
-}

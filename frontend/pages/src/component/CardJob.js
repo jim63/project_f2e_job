@@ -7,7 +7,8 @@ class cardJob extends Component {
       <div className='cardJobContainer'>
         <div className='jobCard' style={{}}>
           <div className='jobCardImgContainer' style={{}}>
-            <div className='jobCardImg' />
+            {/* <div className='jobCardImg' /> */}
+            <img src={this.props.imgSRC} className='jobCardImg' width='100%' alt='' srcset='' />
           </div>
           <div className='jobCardText'>
             <p className='companyJobTitle'>

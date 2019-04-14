@@ -5,8 +5,20 @@
 }
 
 .contentsContainer {
-  width: 88%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   max-width: 1200px;
+}
+
+#root {
+  width: 100%;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+body {
+  background-color: #eee;
 }
