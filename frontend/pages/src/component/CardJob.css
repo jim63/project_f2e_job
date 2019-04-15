@@ -1,5 +1,5 @@
 .cardJobContainer {
-  width: 100%;
+  width: 90%;
   max-width: 480px;
   margin: 10px auto;
 }
@@ -16,11 +16,18 @@
   height: 100%;
 }
 
+.jobCard:hover {
+}
+
 .jobCard p {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
+.companyJobTitle {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .company,
 .jobTitle {
   display: none;
@@ -45,7 +52,8 @@
   font-size: 15px;
 }
 
-.description {
+.description,
+.description_wide {
   display: none;
   color: #666;
   font-size: 12px;
@@ -104,6 +112,10 @@
   }
 
   .description {
+    display: none;
+  }
+
+  .description_wide {
     display: block;
   }
 }

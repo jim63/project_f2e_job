@@ -8,7 +8,7 @@ class cardJob extends Component {
         <div className='jobCard' style={{}}>
           <div className='jobCardImgContainer' style={{}}>
             {/* <div className='jobCardImg' /> */}
-            <img src={this.props.imgSRC} className='jobCardImg' width='100%' alt='' />
+            <img src={this.props.imgSRC} className='jobCardImg' width='100%' height='100%' alt='' />
           </div>
           <div className='jobCardText'>
             <p className='companyJobTitle'>
@@ -33,8 +33,13 @@ class cardJob extends Component {
               {this.props.location.length > 20 ? `${this.props.location.slice(0, 20)}...` : this.props.location}
             </p>
             <p className='description'>
-              {this.props.description.length > 100
-                ? `${this.props.description.slice(0, 100)}...`
+              {this.props.description.length > 40
+                ? `${this.props.description.slice(0, 40)}...`
+                : this.props.description}
+            </p>
+            <p className='description_wide'>
+              {this.props.description.length > 80
+                ? `${this.props.description.slice(0, 80)}...`
                 : this.props.description}
             </p>
           </div>

@@ -7,7 +7,7 @@ import Pages from './Pages';
 
 class Contents extends Component {
   componentDidMount() {
-    this.props.fetch_yourator(3);
+    this.props.fetch_yourator(1);
   }
 
   render() {
@@ -42,6 +42,7 @@ class Contents extends Component {
             <Pages page='3' changePage={this.props.fetch_yourator} />
             <Pages page='4' changePage={this.props.fetch_yourator} />
             <Pages page='5' changePage={this.props.fetch_yourator} />
+            <Pages page='6' changePage={this.props.fetch_yourator} />
           </div>
         </>
       );

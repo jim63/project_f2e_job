@@ -12,7 +12,7 @@ class Pages extends Component {
           this.props.changePage(this.props.page);
         }}
       >
-        <p> {this.props.page}</p>
+        <div className='pageButton'> {this.props.page}</div>
       </div>
     );
   }
