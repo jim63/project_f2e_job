@@ -1,6 +1,5 @@
 .jobsContainer {
   /* for footer */
-  margin-bottom: 20px;
   /* end */
 
   display: flex;
@@ -10,8 +9,8 @@
   margin-top: 20px;
 }
 
-.Page {
+.page {
   display: flex;
-  margin: 20px auto;
   justify-content: center;
+  padding: 20px 0px;
 }

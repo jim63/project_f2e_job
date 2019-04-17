@@ -9,6 +9,14 @@ const yourator = (yjobs = '', action = '') => {
   return yjobs;
 };
 
+const current_page = (page = 1, action = '') => {
+  if (action.type === 'CHANGE_PAGE') {
+    return action.payload;
+  }
+  return page;
+};
+
 export default combineReducers({
-  yourator: yourator
+  yourator: yourator,
+  current_page: current_page
 });

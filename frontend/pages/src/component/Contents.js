@@ -15,8 +15,7 @@ class Contents extends Component {
       return <div>loading</div>;
       // cardJobAll = this.props.jobs.yourator.map(e => {});
     } else {
-      let allJobs = this.props.jobs.yourator.map(e => {
-        console.log(e);
+      let allJobs = this.props.jobs.yourator.job_list.map(e => {
         return (
           <CardJob
             key={e.id}
@@ -29,21 +28,17 @@ class Contents extends Component {
           />
         );
       });
-      console.log('qq', allJobs);
+      let pageArea = [];
+      for (let i = 0; i < this.props.jobs.yourator.total_page; i++) {
+        pageArea.push(<Pages page={`${i + 1}`} changePage={this.props.fetch_yourator} />);
+      }
 
       return (
         <>
           <div className='jobsContainer' style={{ backgroundColor: '#ffffff', display: 'flex', flexWrap: 'wrap' }}>
             {allJobs}
           </div>
-          <div className='Page'>
-            <Pages page='1' changePage={this.props.fetch_yourator} />
-            <Pages page='2' changePage={this.props.fetch_yourator} />
-            <Pages page='3' changePage={this.props.fetch_yourator} />
-            <Pages page='4' changePage={this.props.fetch_yourator} />
-            <Pages page='5' changePage={this.props.fetch_yourator} />
-            <Pages page='6' changePage={this.props.fetch_yourator} />
-          </div>
+          <div className='page'>{pageArea}</div>
         </>
       );
     }
@@ -54,7 +49,7 @@ const mapStateToProps = state => {
   return { jobs: state };
 };
 
-// export default Banner;
+// export default Contents;
 
 export default connect(
   mapStateToProps,

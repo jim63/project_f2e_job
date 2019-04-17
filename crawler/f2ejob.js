@@ -20,9 +20,13 @@ app.listen(port, () => {
 
 app.get('/yourator', (req, res) => {
   let page = req.query.page || 1;
-  console.log('location', page);
-  db.query(`SELECT * FROM job_yourator LIMIT ${(Number(page) - 1) * 18}, 18`, (err, result, fields) => {
-    console.log(`SELECT * FROM job_yourator LIMIT ${page},${page + 5}`);
-    res.send(result);
+  db.query(`SELECT COUNT (id) FROM job_yourator;`, (err, result, fields) => {
+    let totalPage = Math.ceil(result[0]['COUNT (id)'] / 18);
+    console.log(totalPage);
+
+    db.query(`SELECT * FROM job_yourator LIMIT ${(Number(page) - 1) * 18}, 18`, (err, result, fields) => {
+      console.log(`SELECT * FROM job_yourator LIMIT ${(Number(page) - 1) * 18}, 18`);
+      res.json({ jobs: result, totalPage: totalPage });
+    });
   });
 });

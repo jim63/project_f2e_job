@@ -81,14 +81,20 @@ function goJobPage(url_job_page, time) {
               target_dt.push($(this));
             }
           });
-          console.log('qqqq', target_dt.length);
+
+          let pictureURL;
+          $('.images figure img').each((i, elem) => {
+            if (i == 0) {
+              pictureURL = $(elem).attr('src');
+            }
+          });
 
           if (target_dt.length > 0) {
-            resolve(`${target_dt[0].next().text()}`);
+            resolve({ people: `${target_dt[0].next().text()}`, picture: pictureURL });
           }
         }
       );
-    }, time * 2000);
+    }, time * 500);
   });
 }
 
@@ -98,7 +104,7 @@ getTotalPage().then(totalPages => {
       getJobsFromPage(page).then(data => {
         for (let i = 0; i < data.length; i++) {
           let job_info = {};
-
+          job_info.job_id = data[i].jobNo;
           job_info.job_name = data[i].jobNameRaw;
           job_info.salary_low = data[i].salaryLow;
           job_info.salary_high = data[i].salaryHigh;
@@ -112,19 +118,21 @@ getTotalPage().then(totalPages => {
           job_info.link_job = data[i].link.job.slice(2);
           job_info.link_apply_analysis = data[i].link.applyAnalyze.slice(2);
           job_info.link_company = data[i].link.cust.slice(2);
-
           goJobPage(`https://${job_info.link_job}`, Number(`${page}${i}`)).then(data => {
-            console.log(`${data}\n`);
-            job_info.amount = data;
+            console.log(data.people, data.picture);
+            console.log('\n');
 
-            db.query(`INSERT INTO job_104(job_name,salary_low,salary_high,apply_amount,location,address,job_description,company_name,company_scale,link_job,link_apply_analysis,link_company,appear_date,require_amount)
+            job_info.amount = data.people;
+            job_info.picture = data.picture;
+
+            db.query(`INSERT INTO job_104(job_name,salary_low,salary_high,apply_amount,location,address,job_description,company_name,company_scale,link_job,link_apply_analysis,link_company,appear_date,require_amount,picture,job_id)
             VALUE ('${job_info.job_name}','${job_info.salary_low}','${job_info.salary_high}','${
               job_info.apply_amount
             }','${job_info.location}','${job_info.address}','${job_info.job_description}','${job_info.company_name}','${
               job_info.company_scale
             }','${job_info.link_job}','${job_info.link_apply_analysis}','${job_info.link_company}','${
               job_info.appear_date
-            }','${job_info.amount}');`);
+            }','${job_info.amount}','${job_info.picture}','${job_info.job_id}');`);
           });
         }
       });

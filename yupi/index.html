@@ -5,18 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-  </head>
-  <body>
-    <script>
-      let a = 1;
-
-      function bb() {
-        // let c = 5;
-        a = 10;
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
       }
 
-      bb();
-      console.log(a);
+      .cc {
+        width: 100px;
+        height: 100px;
+      }
+
+      .cc {
+        background-color: #123455;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cc"></div>
+    <script>
+      document.querySelector('.cc').addEventListener('click', e => {
+        console.log(e);
+
+        console.log(e.offsetX, e.offsetY);
+        this.addEventListener('mousemove', mousemove => {
+          console.log(mousemove);
+        });
+      });
+
+      let obj = { a: 1, b: 2 };
+      console.log(obj.key);
     </script>
   </body>
 </html>

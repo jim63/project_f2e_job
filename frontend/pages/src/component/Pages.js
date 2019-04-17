@@ -6,13 +6,15 @@ class Pages extends Component {
     console.log('rrr', this.props);
 
     return (
-      <div
-        className='PageButton'
-        onClick={() => {
-          this.props.changePage(this.props.page);
-        }}
-      >
-        <div className='pageButton'> {this.props.page}</div>
+      <div className='PageButton'>
+        <div
+          className='pageButton'
+          onClick={() => {
+            this.props.changePage(this.props.page);
+          }}
+        >
+          {this.props.page}
+        </div>
       </div>
     );
   }

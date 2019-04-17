@@ -14,9 +14,13 @@
   color: black;
   display: flex;
   height: 100%;
+  box-shadow: 2px 2px 5px 6px rgba(150, 150, 150, 0.3);
 }
 
 .jobCard:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 5px 5px 10px 10px rgba(170, 170, 170, 0.3);
+  cursor: pointer;
 }
 
 .jobCard p {
