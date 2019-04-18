@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 
 import './ButtonCompany.css';
 class ButtonCompany extends Component {
-  //!test
-  redirect = () => {
-    // window.location.href = 'http://stackoverflow.com';
-  };
-
   render() {
     return (
-      <div className='buttonCompanyContainer'>
-        <div className='buttonCompany' style={{}} onClick={this.redirect}>
-          <p className='buttonCompanyText' style={{ display: 'block', lineHeight: '50px' }}>
-            {this.props.company}
-          </p>
-        </div>
+      <div
+        className={`buttonCompanyContainer${
+          this.props.current_logo == undefined ? ' not_current_logo' : ` ${this.props.current_logo}`
+        } ${this.props.className} down_to_buttom`}
+      >
+        <img src={this.props.imgSRC} className={`logo`} style={{ pointerEvents: 'none' }} />
       </div>
     );
   }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="http://localhost:3306/signUp" method="post" onsubmit="signUp">
+      <label for="name">name:</label> <input type="name" id="name" /><br />
+      <label for="email">email:</label> <input type="email" id="name" /><br />
+      <label for="password">password:</label> <input type="password" id="name" /><br />
+      <input type="submit" name="SB" value="送出表單" />
+    </form>
+
+    <script>
+      const signUp = () => {
+        fetch('http://localhost:3306/signIn', {
+          credentials: 'include',
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify({ name: '123', email: '456123@gmail.commmm', password: 'qaz123' }), // data can be `string` or {object}!
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }).then(response => {
+          response.json().then(e => {
+            console.log(e);
+          });
+        });
+      };
+      signUp();
+    </script>
+  </body>
+</html>

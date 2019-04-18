@@ -1,16 +1,25 @@
 .jobsContainer {
-  /* for footer */
-  /* end */
-
+  flex-grow: 1;
   display: flex;
-
-  justify-content: space-between;
-
-  margin-top: 20px;
+  justify-content: center;
+  margin: 0px auto 0px auto;
+  padding-top: 20px;
 }
 
 .page {
   display: flex;
   justify-content: center;
   padding: 20px 0px;
+}
+
+@media screen and (min-width: 1000px) {
+  .jobsContainer {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1360px) {
+  .jobsContainer {
+    justify-content: flex-start;
+  }
 }

@@ -1,7 +1,7 @@
 .cardJobContainer {
   width: 90%;
   max-width: 480px;
-  margin: 10px auto;
+  margin: 10px;
 }
 
 .jobCard {
@@ -38,7 +38,7 @@
 }
 
 .jobCardImgContainer {
-  background-color: orange;
+  /* background-color: orange; */
   width: 30%;
   height: 100%;
 }

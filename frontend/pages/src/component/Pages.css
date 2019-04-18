@@ -13,7 +13,7 @@
   margin-right: 10px;
   border-radius: 50%;
 }
-
+.pageButton.onThisPage,
 .pageButton:hover {
   background-color: #443a42;
   color: #eee;
