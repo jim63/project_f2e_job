@@ -13,7 +13,6 @@ export const fetch_jobs = ({ page, source }) => async dispatch => {
     });
     dispatch({ type: 'FETCH_JOBDATA', payload: response });
   } else if (source === '104') {
-    console.log('aadha');
     dispatch({
       type: 'FETCH_JOBDATA',
       payload: {

@@ -3,8 +3,6 @@ import './Pages.css';
 
 class Pages extends Component {
   render() {
-    console.log('rrr', this.props);
-
     return (
       <div className='PageButtonContainer'>
         <div

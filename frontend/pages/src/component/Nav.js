@@ -21,8 +21,6 @@ class Nav extends Component {
   // };
 
   render() {
-    console.log('aaaa', this.props);
-
     let current_logo = '';
     if (this.props.jobs_data.source.length > 1) {
       switch (this.props.jobs_data.source) {

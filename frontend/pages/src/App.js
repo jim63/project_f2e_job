@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './component/Header';
 import Banner from './component/Banner';
 import Nav from './component/Nav';
 import Contents from './component/Contents';
 import Footer from './component/Footer';
+import Login from './component/Login';
 import { connect } from 'react-redux';
 import { fetch_jobs } from './action/index';
 
 class App extends Component {
   logo_click = e => {
-    console.log(e.target.className);
+    console.log('\n');
     if (e.target.className.indexOf('current_logo') != -1 && e.target.className.indexOf('not_current_logo') == -1) {
       let not_current_logo = document.querySelectorAll('.not_current_logo');
       not_current_logo.forEach(e => {
@@ -30,21 +31,30 @@ class App extends Component {
           e.classList.toggle('down_to_buttom');
         }
       });
+      if (e.target.className.indexOf('login_button') != -1) {
+        document.querySelector('.login_background').style.display = 'flex';
+      } else if (e.target.className.indexOf('login_background') != -1) {
+        document.querySelector('.login_background').style.display = 'none';
+      }
     }
   };
 
   render() {
     return (
-      // <div onClick={this.logo_click}>
-      <div onClick={this.logo_click} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Header />
-        <Banner />
-        <div className='contentsContainer' style={{}}>
-          <Nav />
-          <Contents />
+      <BrowserRouter>
+        <div onClick={this.logo_click} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Login />
+          <div className='react_container'>
+            <Header />
+            <Banner />
+            <div className='contentsContainer' style={{}}>
+              <Nav />
+              <Contents />
+            </div>
+            <Footer />
+          </div>
         </div>
-        <Footer />
-      </div>
+      </BrowserRouter>
     );
   }
 }

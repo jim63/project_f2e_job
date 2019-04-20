@@ -13,4 +13,10 @@ code {
 
 html {
   scroll-behavior: smooth;
+  position: relative;
+}
+
+input:focus,
+textarea {
+  outline: none !important;
 }

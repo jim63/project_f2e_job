@@ -19,31 +19,17 @@ const jobs = (
   return jobs_data;
 };
 
-// const logo_click = (init = '', action = '') => {
-//   return e => {
-//     if (e.target.className.indexOf('current_logo') != -1 && e.target.className.indexOf('not_current_logo') == -1) {
-//       let not_current_logo = document.querySelectorAll('.not_current_logo');
-//       not_current_logo.forEach(e => {
-//         e.classList.toggle('down_to_buttom');
-//       });
-//     } else if (e.target.className.indexOf('yourator') != -1) {
-//       console.log('yourator', e.target.className);
-//     } else if (e.target.className.indexOf('104') != -1) {
-//       console.log('104', e.target.className);
-//     } else if (e.target.className.indexOf('meetjobs') != -1) {
-//       console.log('meetjobs', e.target.className);
-//     } else {
-//       let not_current_logo = document.querySelectorAll('.not_current_logo');
-//       not_current_logo.forEach(e => {
-//         if (e.className.indexOf('down_to_buttom') == -1) {
-//           e.classList.toggle('down_to_buttom');
-//         }
-//       });
-//     }
-//   };
-// };
+const login_status = (status = 0, action = '') => {
+  //! status: 0 for not login, 1 for login
+  if (action.type === 'LOGIN_SUCCESS') {
+    status = 1;
+  } else if (action.type === 'LOGIN_FAIL') {
+    status = 0;
+  }
+  return status;
+};
 
 export default combineReducers({
-  jobs: jobs
-  // logo_click: logo_click
+  jobs: jobs,
+  login_status: login_status
 });

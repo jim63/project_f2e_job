@@ -9,16 +9,15 @@ import { log } from 'util';
 class Contents extends Component {
   componentDidMount() {
     this.props.fetch_jobs({ source: 'yourator', page: 1 });
-    // this.props.fetch_jobs({ source: '104', page: 1 });
   }
 
   componentDidUpdate() {
-    // this.scrollToBottom();
-    window.scrollTo(0, 0);
+    // document.getElementById('jobsContainer').scrollIntoView();
   }
 
   changePage = (page, source) => {
     this.props.fetch_jobs({ page: page, source: source });
+    document.getElementById('jobsContainer').scrollIntoView();
   };
 
   render() {
@@ -28,10 +27,8 @@ class Contents extends Component {
           <div className='jobsContainer' id='jobsContainer' style={{}}>
             <div>loading</div>
           </div>
-          {/* <div className='page'>{pageArea}</div> */}
         </>
       );
-      // cardJobAll = this.props.jobs.yourator.map(e => {});
     } else {
       let allJobs = this.props.jobs_data.jobs.job_list.map(e => {
         return (

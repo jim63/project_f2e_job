@@ -5,6 +5,7 @@
   background-color: #443a42;
   max-height: 50px;
   display: flex;
+  justify-content: space-between;
 }
 
 .header_logo {
@@ -20,4 +21,22 @@
 }
 .header_logo p {
   text-align: center;
+}
+
+.login_button {
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.login_button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.login_button p {
+  color: #fff;
+  font-size: 20px;
 }

@@ -3,8 +3,6 @@ import './Banner.css';
 
 class Banner extends Component {
   render() {
-    console.log('123', this.props);
-
     return (
       <div className='banner' style={{}}>
         <div className='bannerText' style={{}}>

@@ -12,16 +12,25 @@
       }
 
       .cc {
-        width: 100px;
+        width: 100%;
         height: 100px;
       }
 
       .cc {
         background-color: #123455;
       }
+      .class {
+        margin-right: 200px;
+        background-color: #f10;
+      }
     </style>
   </head>
   <body>
+    <div>
+      The following span is an <span class="class">inline element</span>; its background has been colored to display
+      both the beginning and end of the inline element's influence.
+    </div>
+
     <div class="cc"></div>
     <script>
       document.querySelector('.cc').addEventListener('click', e => {

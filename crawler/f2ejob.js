@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 
 const request = require('request');
-const cheerio = require('cheerio');
 const db = require('./db');
 
 app.set('view engine', 'pug');
@@ -20,7 +19,8 @@ app.use(cookieParser());
 
 app.use(function(req, res, next) {
   // res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Origin', 'http://localhost:7000');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
 
@@ -87,16 +87,12 @@ app.post('/signIn', (req, res) => {
       bcrypt.compare(password, password_hash).then(function(result) {
         if (result) {
           bcrypt.hash(password, saltRounds).then(function(session_id) {
-            console.log(session_id);
-
             db.query(
               `UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`,
               (err, result, fields) => {
                 if (err) {
                   res.json({ signIn: 'try_again' });
                 } else {
-                  console.log(session_id);
-
                   res.cookie('session_id', session_id);
                   res.json({ signIn: 'success' });
                 }

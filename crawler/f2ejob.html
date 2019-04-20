@@ -7,15 +7,11 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="http://localhost:3306/signUp" method="post" onsubmit="signUp">
-      <label for="name">name:</label> <input type="name" id="name" /><br />
-      <label for="email">email:</label> <input type="email" id="name" /><br />
-      <label for="password">password:</label> <input type="password" id="name" /><br />
-      <input type="submit" name="SB" value="送出表單" />
-    </form>
-
+    <p onclick="signUp">2123</p>
     <script>
-      const signUp = () => {
+      document.querySelector('p').addEventListener('click', signUp);
+
+      function signUp() {
         fetch('http://localhost:3306/signIn', {
           credentials: 'include',
           method: 'POST', // or 'PUT'
@@ -28,7 +24,7 @@
             console.log(e);
           });
         });
-      };
+      }
       signUp();
     </script>
   </body>
