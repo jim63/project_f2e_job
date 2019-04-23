@@ -1,11 +1,47 @@
+.banner_container {
+  position: relative;
+}
+
+.not_current_banner {
+  position: absolute;
+  top: 0px;
+  animation-name: oxxo;
+  animation-duration: 2s;
+  transform: translate(2000px, 0);
+}
+
+.current_banner {
+  animation-name: oxxo_2;
+  animation-duration: 2s;
+}
+
 .banner {
   background-color: #654321;
   display: flex;
-  /* margin-top: 50px; */
   /* background-image: url('../img/banner-18.png'); */
   background-size: 100% auto;
   align-items: center;
   position: relative;
+  height: 605px;
+  overflow: hidden;
+}
+
+@keyframes oxxo {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-100%, 0px);
+  }
+}
+
+@keyframes oxxo_2 {
+  from {
+    transform: translate(100%, 0);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
 }
 
 .banner::after {

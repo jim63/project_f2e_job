@@ -7,64 +7,132 @@ import Nav from './component/Nav';
 import Contents from './component/Contents';
 import Footer from './component/Footer';
 import Login from './component/Login';
+import Logout from './component/Logout';
+import Banner_favo from './component/Banner_favo';
 import { connect } from 'react-redux';
-import { fetch_jobs } from './action/index';
+import { fetch_jobs, login_check_success, login_check_fail } from './action/index';
 
 class App extends Component {
   logo_click = e => {
-    console.log('\n');
-    if (e.target.className.indexOf('current_logo') != -1 && e.target.className.indexOf('not_current_logo') == -1) {
-      let not_current_logo = document.querySelectorAll('.not_current_logo');
-      not_current_logo.forEach(e => {
-        e.classList.toggle('down_to_buttom');
-      });
-    } else if (e.target.className.indexOf('yourator') != -1) {
-      this.props.fetch_jobs({ page: 1, source: 'yourator' });
-    } else if (e.target.className.indexOf('104') != -1) {
-      this.props.fetch_jobs({ page: 1, source: '104' });
-    } else if (e.target.className.indexOf('meetjobs') != -1) {
-      console.log('meetjobs', e.target.className);
-    } else {
-      let not_current_logo = document.querySelectorAll('.not_current_logo');
-      not_current_logo.forEach(e => {
-        if (e.className.indexOf('down_to_buttom') == -1) {
-          e.classList.toggle('down_to_buttom');
+    if (window.location.href.indexOf('fav') === -1) {
+      if (this.props.user_status.status === 'login') {
+        if (
+          e.target.className.indexOf('welcome_button') == -1 &&
+          e.target.className.indexOf('log_out_container') == -1 &&
+          e.target.className.indexOf('check_favorite') == -1 &&
+          e.target.className.indexOf('logout_check') == -1
+        ) {
+          document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
         }
-      });
-      if (e.target.className.indexOf('login_button') != -1) {
-        document.querySelector('.login_background').style.display = 'flex';
-      } else if (e.target.className.indexOf('login_background') != -1) {
-        document.querySelector('.login_background').style.display = 'none';
+      }
+
+      if (e.target.className.indexOf('current_logo') != -1 && e.target.className.indexOf('not_current_logo') == -1) {
+        let not_current_logo = document.querySelectorAll('.not_current_logo');
+        not_current_logo.forEach(e => {
+          e.classList.toggle('down_to_buttom');
+        });
+      } else if (e.target.className.indexOf('yourator') != -1) {
+        this.props.fetch_jobs({ page: 1, source: 'yourator' });
+      } else if (e.target.className.indexOf('104') != -1) {
+        this.props.fetch_jobs({ page: 1, source: '104' });
+      } else if (e.target.className.indexOf('meetjobs') != -1) {
+        this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
+      } else {
+        let not_current_logo = document.querySelectorAll('.not_current_logo');
+        not_current_logo.forEach(e => {
+          if (e.className.indexOf('down_to_buttom') == -1) {
+            e.classList.toggle('down_to_buttom');
+          }
+        });
+        if (e.target.className.indexOf('login_button') != -1) {
+          document.querySelector('.login_background').style.display = 'flex';
+        } else if (e.target.className.indexOf('login_background') != -1) {
+          document.querySelector('.login_background').style.display = 'none';
+          document.querySelector('.password_alert').style.visibility = 'hidden';
+          document.querySelector('.email_alert').style.visibility = 'hidden';
+          document.querySelector('#email_login').value = '';
+        }
+      }
+    } else {
+      if (this.props.user_status.status === 'login') {
+        if (
+          e.target.className.indexOf('welcome_button') == -1 &&
+          e.target.className.indexOf('log_out_container') == -1 &&
+          e.target.className.indexOf('check_favorite') == -1 &&
+          e.target.className.indexOf('logout_check') == -1
+        ) {
+          document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
+        }
       }
     }
   };
 
+  componentDidMount() {
+    function getCookie(name) {
+      var value = '; ' + document.cookie;
+      var parts = value.split('; ' + name + '=');
+      if (parts.length == 2)
+        return parts
+          .pop()
+          .split(';')
+          .shift();
+    }
+    let session_id = getCookie('session_id');
+    console.log('cooke', session_id);
+    if (session_id) {
+      fetch('http://localhost:3306/checkSessionID', {
+        credentials: 'include',
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }).then(response => {
+        response.json().then(e => {
+          if (e.result === 'found') {
+            this.props.login_check_success({
+              status: 'login',
+              email: e.email,
+              name: e.name,
+              favorite_job: e.favorite_job,
+              session_id: session_id
+            });
+          } else {
+            this.props.login_check_fail();
+          }
+        });
+      });
+    }
+  }
+
   render() {
+    let top_right;
+    if (this.props.user_status.status === 'unknown') {
+      top_right = <Login />;
+    }
     return (
-      <BrowserRouter>
-        <div onClick={this.logo_click} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Login />
-          <div className='react_container'>
-            <Header />
-            <Banner />
-            <div className='contentsContainer' style={{}}>
-              <Nav />
-              <Contents />
-            </div>
-            <Footer />
+      <div onClick={this.logo_click} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        {top_right}
+        <div className='react_container'>
+          <Header />
+          <Banner_favo />
+          <div className='contentsContainer' style={{}}>
+            <Route path='/' exact component={Nav} />
+            <Route path='/' exact component={Contents} />
           </div>
+          <Footer />
         </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }
 const mapStateToProps = state => {
-  return { jobs_data: state.jobs };
+  return { jobs_data: state.jobs, user_status: state.user_status };
 };
 
 // export default Contents;
 
 export default connect(
   mapStateToProps,
-  { fetch_jobs: fetch_jobs }
+  { fetch_jobs: fetch_jobs, login_check_success: login_check_success, login_check_fail: login_check_fail }
 )(App);

@@ -63,6 +63,20 @@
   font-size: 12px;
   text-align: justify;
 }
+.addToFavo {
+  background-color: #443a42;
+  color: white;
+  text-align: center;
+  padding: 1px;
+  transition: background-color 1s;
+}
+
+.removeFavo {
+  background-color: #ffeacc;
+  text-align: center;
+  padding: 1px;
+  transition: background-color 1s;
+}
 
 @media screen and (min-width: 720px) {
   .cardJobContainer {

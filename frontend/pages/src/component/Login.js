@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { login_check_success } from '../action';
+
 import './Login.css';
 
 class Login extends Component {
@@ -27,11 +29,31 @@ class Login extends Component {
     }).then(response => {
       response.json().then(e => {
         console.log(e.signIn);
+        document.querySelector('#password_login').value = '';
         if (e.signIn == 'wrong_password') {
-          // login_message = 6;
+          document.querySelector('.password_alert').style.visibility = 'visible';
+        } else if (e.signIn == 'email_not_found') {
+          document.querySelector('.email_alert').style.visibility = 'visible';
+        } else if (e.signIn == 'success') {
+          console.log('sign', e);
+          this.props.login_check_success({
+            status: 'login',
+            email: e.email,
+            name: e.name,
+            favorite_job: JSON.parse(e.favorite_job)
+          });
+          window.alert('登入成功');
         }
       });
     });
+  };
+
+  hidden_email_alert = () => {
+    document.querySelector('.email_alert').style.visibility = 'hidden';
+  };
+
+  hidden_password_alert = () => {
+    document.querySelector('.password_alert').style.visibility = 'hidden';
   };
 
   render() {
@@ -44,13 +66,27 @@ class Login extends Component {
             <form onSubmit={this.login_submit}>
               <label htmlFor='email_login'>E-mail</label>
               <br />
-              <input type='email' id='email_login' placeholder='jim123@gmail.com' required />
-              <p className='email_alert'>此 email 尚未註冊</p>
+              <input
+                type='email'
+                id='email_login'
+                placeholder='jim123@gmail.com'
+                required
+                onChange={this.hidden_email_alert}
+              />
+              <p className='email_alert'>email 尚未註冊</p>
               <br />
               <label htmlFor='password_login'>Password</label>
               <br />
-              <input type='password' id='password_login' placeholder='●●●●●●●●' required minlength='4' maxlength='16' />
-              <p className='password_alert'>密碼錯誤</p>
+              <input
+                type='password'
+                id='password_login'
+                placeholder='●●●●●●●●'
+                required
+                minLength='4'
+                maxLength='16'
+                onChange={this.hidden_password_alert}
+              />
+              <p className='password_alert'>密碼錯誤，請重新輸入</p>
               <br />
               <button type='submit' className='login_submit'>
                 登入
@@ -67,7 +103,7 @@ class Login extends Component {
             <form>
               <label htmlFor='name_signup'>Name</label>
               <br />
-              <input type='name' id='name_signup' placeholder='jimjim' required />
+              <input type='name' id='name_signup' placeholder='jimjim' required minLength='4' maxLength='16' />
               <br />
               <label htmlFor='email_signup'>E-mail</label>
               <br />
@@ -75,7 +111,14 @@ class Login extends Component {
               <br />
               <label htmlFor='password_signup'>Password</label>
               <br />
-              <input type='password' id='password_signup' placeholder='●●●●●●●●' required />
+              <input
+                type='password'
+                id='password_signup'
+                placeholder='●●●●●●●●'
+                required
+                minLength='4'
+                maxLength='16'
+              />
               <br />
               <button type='submit' className='signup_submit'>
                 註冊
@@ -99,5 +142,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { login_check_success: login_check_success }
 )(Login);

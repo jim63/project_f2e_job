@@ -30,16 +30,18 @@ class Contents extends Component {
         </>
       );
     } else {
-      let allJobs = this.props.jobs_data.jobs.job_list.map(e => {
+      let allJobs = this.props.jobs_data.jobs.job_list.map((e, id) => {
         return (
           <CardJob
-            key={e.id}
+            key={id}
             imgSRC={e.company_picture}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
             salary={e.salary}
             description={e.skill_tag}
+            jobID={e.job_id}
+            source={e.job_source}
           />
         );
       });
@@ -47,11 +49,23 @@ class Contents extends Component {
       for (let i = 1; i <= this.props.jobs_data.jobs.total_page; i++) {
         if (this.props.jobs_data.jobs.current_page == i) {
           pageArea.push(
-            <Pages page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={true} />
+            <Pages
+              key={i}
+              page={`${i}`}
+              source={this.props.jobs_data.jobs.source}
+              changePage={this.changePage}
+              focus={true}
+            />
           );
         } else {
           pageArea.push(
-            <Pages page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={false} />
+            <Pages
+              key={i}
+              page={`${i}`}
+              source={this.props.jobs_data.jobs.source}
+              changePage={this.changePage}
+              focus={false}
+            />
           );
         }
       }

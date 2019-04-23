@@ -4,7 +4,7 @@
   position: fixed;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 3;
-  display: flex;
+  display: none;
 }
 .signup_prompt,
 .login_prompt {
@@ -101,4 +101,5 @@
 .email_alert {
   padding-left: 20px;
   color: red;
+  visibility: hidden;
 }

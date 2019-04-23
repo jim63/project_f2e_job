@@ -1,3 +1,7 @@
+.link_home {
+  display: inline-flex;
+}
+
 .header {
   /* position: fixed; */
   top: 0px;
@@ -19,23 +23,27 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .header_logo p {
   text-align: center;
 }
 
+.welcome_button,
 .login_button {
   margin-right: 20px;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 5px 10px;
+  padding: 0px 10px;
   border-radius: 20px;
 }
 
+.welcome_button:hover,
 .login_button:hover {
   cursor: pointer;
   transform: scale(1.2);
 }
 
+.welcome_button p,
 .login_button p {
   color: #fff;
   font-size: 20px;

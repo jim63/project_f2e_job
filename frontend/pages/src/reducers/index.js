@@ -19,17 +19,35 @@ const jobs = (
   return jobs_data;
 };
 
-const login_status = (status = 0, action = '') => {
-  //! status: 0 for not login, 1 for login
-  if (action.type === 'LOGIN_SUCCESS') {
-    status = 1;
-  } else if (action.type === 'LOGIN_FAIL') {
-    status = 0;
+const user_status = (status = { status: 'unknown' }, action = '') => {
+  if (action.type === 'INITIAL_CHECK_LOGIN_STATUS') {
+  } else if (action.type === 'LOGIN_CHECK_SUCCESS') {
+    return action.payload;
+  } else if (action.type === 'LOGIN_CHECK_FAIL') {
+    return { status: 'unknown' };
+  } else if (action.type === 'LOGOUT') {
+    return { status: 'unknown' };
+  } else if (action.type === 'ADD_FAVO') {
+    let all_favo = action.payload;
+    return { ...status, favorite_job: action.payload };
+  } else if (action.type === 'REMOVE_FAVO') {
+    let all_favo = action.payload;
+    return { ...status, favorite_job: action.payload };
   }
+
+  return status;
+};
+
+const banner_status = (status = 1, action = '') => {
+  if (action.type === 'CHANGE_BANNER') {
+    status++;
+    return status % 2;
+  }
+
   return status;
 };
 
 export default combineReducers({
   jobs: jobs,
-  login_status: login_status
+  user_status: user_status
 });
