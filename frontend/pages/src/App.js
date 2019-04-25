@@ -8,34 +8,35 @@ import Contents from './component/Contents';
 import Footer from './component/Footer';
 import Login from './component/Login';
 import Logout from './component/Logout';
+import Favo from './component/Favo';
 import Banner_favo from './component/Banner_favo';
 import { connect } from 'react-redux';
 import { fetch_jobs, login_check_success, login_check_fail } from './action/index';
 
 class App extends Component {
   logo_click = e => {
-    if (window.location.href.indexOf('fav') === -1) {
+    if (window.location.href.indexOf('favo') === -1) {
       if (this.props.user_status.status === 'login') {
         if (
           e.target.className.indexOf('welcome_button') == -1 &&
           e.target.className.indexOf('log_out_container') == -1 &&
-          e.target.className.indexOf('check_favorite') == -1 &&
+          // e.target.className.indexOf('check_favorite') == -1 &&
           e.target.className.indexOf('logout_check') == -1
         ) {
           document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
         }
       }
 
-      if (e.target.className.indexOf('current_logo') != -1 && e.target.className.indexOf('not_current_logo') == -1) {
+      if (e.target.className.indexOf('current_logo') !== -1 && e.target.className.indexOf('not_current_logo') === -1) {
         let not_current_logo = document.querySelectorAll('.not_current_logo');
         not_current_logo.forEach(e => {
           e.classList.toggle('down_to_buttom');
         });
-      } else if (e.target.className.indexOf('yourator') != -1) {
+      } else if (e.target.className.indexOf('yourator') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'yourator' });
-      } else if (e.target.className.indexOf('104') != -1) {
+      } else if (e.target.className.indexOf('104') !== -1) {
         this.props.fetch_jobs({ page: 1, source: '104' });
-      } else if (e.target.className.indexOf('meetjobs') != -1) {
+      } else if (e.target.className.indexOf('meetjobs') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
       } else {
         let not_current_logo = document.querySelectorAll('.not_current_logo');
@@ -56,10 +57,10 @@ class App extends Component {
     } else {
       if (this.props.user_status.status === 'login') {
         if (
-          e.target.className.indexOf('welcome_button') == -1 &&
-          e.target.className.indexOf('log_out_container') == -1 &&
-          e.target.className.indexOf('check_favorite') == -1 &&
-          e.target.className.indexOf('logout_check') == -1
+          e.target.className.indexOf('welcome_button') === -1 &&
+          e.target.className.indexOf('log_out_container') === -1 &&
+          // e.target.className.indexOf('check_favorite') == -1 &&
+          e.target.className.indexOf('logout_check') === -1
         ) {
           document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
         }
@@ -71,7 +72,7 @@ class App extends Component {
     function getCookie(name) {
       var value = '; ' + document.cookie;
       var parts = value.split('; ' + name + '=');
-      if (parts.length == 2)
+      if (parts.length === 2)
         return parts
           .pop()
           .split(';')
@@ -119,6 +120,7 @@ class App extends Component {
           <div className='contentsContainer' style={{}}>
             <Route path='/' exact component={Nav} />
             <Route path='/' exact component={Contents} />
+            <Route path='/favo' component={Favo} />
           </div>
           <Footer />
         </div>

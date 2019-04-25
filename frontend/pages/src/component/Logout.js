@@ -27,6 +27,7 @@ class Logout extends Component {
     });
     document.cookie = 'session_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     window.alert('登出成功');
+    window.location = '/';
   };
 
   render() {

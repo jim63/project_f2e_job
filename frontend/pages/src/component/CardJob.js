@@ -43,8 +43,11 @@ class CardJob extends Component {
     let jobid = this.props.jobID;
     let isFavo;
     if (this.props.user_status.favorite_job) {
-      console.log('cardjob', this.props.user_status.favorite_job[source]);
-      if (this.props.user_status.favorite_job[source].indexOf(Number(jobid)) === -1) {
+      console.log('qweeq', this.props.user_status.favorite_job);
+      console.log(22222, source);
+      console.log('123445', this.props.user_status.favorite_job[`${source}`]);
+
+      if (this.props.user_status.favorite_job[`${source}`].indexOf(Number(jobid)) === -1) {
         isFavo = (
           <div className='addToFavo' jobid={this.props.jobID} source={this.props.source} onClick={this.add_to_favo}>
             <p style={{ pointerEvents: 'none' }}>加入收藏</p>
@@ -71,14 +74,14 @@ class CardJob extends Component {
                 {this.props.company.length > 15 ? `${this.props.company.slice(0, 15)}...` : this.props.company}
               </span>
               <span className='jobTitleSpan'>
-                {this.props.jobTitle.length > 15 ? `${this.props.jobTitle.slice(0, 15)}...` : this.props.jobTitle}
+                {this.props.jobTitle.length > 10 ? `${this.props.jobTitle.slice(0, 10)}...` : this.props.jobTitle}
               </span>
             </p>
             <p className='company'>
               {this.props.company.length > 30 ? `${this.props.company.slice(0, 30)}...` : this.props.company}
             </p>
             <p className='jobTitle'>
-              {this.props.jobTitle.length > 30 ? `${this.props.jobTitle.slice(0, 30)}...` : this.props.jobTitle}
+              {this.props.jobTitle.length > 20 ? `${this.props.jobTitle.slice(0, 20)}...` : this.props.jobTitle}
             </p>
             <p className='salary'>
               {this.props.salary.length > 30 ? `${this.props.salary.slice(0, 30)}...` : this.props.salary}
@@ -86,14 +89,11 @@ class CardJob extends Component {
             <p className='location'>
               {this.props.location.length > 20 ? `${this.props.location.slice(0, 20)}...` : this.props.location}
             </p>
-            <p className='description'>
-              {this.props.description.length > 40
-                ? `${this.props.description.slice(0, 40)}...`
-                : this.props.description}
-            </p>
             <p className='description_wide'>
-              {this.props.description.length > 80
-                ? `${this.props.description.slice(0, 80)}...`
+              {this.props.description.length < 2
+                ? '無'
+                : this.props.description.length > 30
+                ? `${this.props.description.slice(0, 30)}...`
                 : this.props.description}
             </p>
             {isFavo}

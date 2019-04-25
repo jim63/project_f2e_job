@@ -34,20 +34,27 @@ const user_status = (status = { status: 'unknown' }, action = '') => {
     let all_favo = action.payload;
     return { ...status, favorite_job: action.payload };
   }
-
   return status;
 };
 
-const banner_status = (status = 1, action = '') => {
+const banner_status = (status = 2, action = '') => {
   if (action.type === 'CHANGE_BANNER') {
     status++;
-    return status % 2;
+    return status % 3;
   }
-
   return status;
+};
+
+const favo_job = (job = '', action = '') => {
+  if (action.type === 'UPDATE_FAVO') {
+    return action.payload;
+  }
+  return job;
 };
 
 export default combineReducers({
   jobs: jobs,
-  user_status: user_status
+  user_status: user_status,
+  banner_status: banner_status,
+  favo_job: favo_job
 });

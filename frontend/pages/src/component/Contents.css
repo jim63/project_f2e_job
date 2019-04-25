@@ -4,6 +4,12 @@
   justify-content: center;
   margin: 0px auto 0px auto;
   padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contentsContainer {
+  background-color: #ffffff;
 }
 
 .page {
@@ -12,9 +18,9 @@
   padding: 20px 0px;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 760px) {
   .jobsContainer {
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 

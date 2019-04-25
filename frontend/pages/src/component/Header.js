@@ -6,6 +6,7 @@ import logo from '../img/logo-1.svg';
 
 class Header extends Component {
   welcome_button_click = () => {
+    document.querySelector('.log_out_container').style.display = 'block';
     document.querySelector('.log_out_container').classList.toggle('log_out_container_disappear');
   };
 

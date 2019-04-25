@@ -15,15 +15,20 @@
   animation-duration: 2s;
 }
 
+.not_default_banner,
+.default_banner {
+  animation-duration: 0s;
+}
+
 .banner {
   background-color: #654321;
   display: flex;
-  /* background-image: url('../img/banner-18.png'); */
   background-size: 100% auto;
   align-items: center;
   position: relative;
-  height: 605px;
   overflow: hidden;
+  height: 53.6vw;
+  max-height: 612px;
 }
 
 @keyframes oxxo {

@@ -24,7 +24,7 @@ class Contents extends Component {
     if (this.props.jobs_data.jobs.job_list.length < 1) {
       return (
         <>
-          <div className='jobsContainer' id='jobsContainer' style={{}}>
+          <div className='jobsContainer' id='jobsContainer'>
             <div>loading</div>
           </div>
         </>
@@ -34,12 +34,12 @@ class Contents extends Component {
         return (
           <CardJob
             key={id}
-            imgSRC={e.company_picture}
+            imgSRC={e.company_picture || e.picture}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
             salary={e.salary}
-            description={e.skill_tag}
+            description={e.skill_tag || e.job_description}
             jobID={e.job_id}
             source={e.job_source}
           />
@@ -71,11 +71,7 @@ class Contents extends Component {
       }
       return (
         <>
-          <div
-            className='jobsContainer'
-            id='jobsContainer'
-            style={{ backgroundColor: '#ffffff', display: 'flex', flexWrap: 'wrap' }}
-          >
+          <div className='jobsContainer' id='jobsContainer' style={{}}>
             {allJobs}
           </div>
           <div className='page'>{pageArea}</div>

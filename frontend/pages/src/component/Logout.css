@@ -5,6 +5,9 @@
   right: 0px;
   top: 0px;
   z-index: 6;
+  animation-name: log_out_container_show;
+  animation-duration: 1s;
+  display: none;
 }
 
 .log_out_container div {
@@ -22,5 +25,25 @@
 }
 
 .log_out_container_disappear {
+  animation-name: log_out_container_show_no_show;
+  animation-duration: 1s;
+
   transform: translate(300px, 0);
+}
+
+@keyframes log_out_container_show_no_show {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(100%, 0px);
+  }
+}
+@keyframes log_out_container_show {
+  from {
+    transform: translate(100%, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
 }

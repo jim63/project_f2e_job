@@ -41,6 +41,33 @@ app.get('/yourator', (req, res) => {
   });
 });
 
+app.get('/104', (req, res) => {
+  let page = req.query.page || 1;
+  db.query(`SELECT COUNT (id) FROM job_104;`, (err, result, fields) => {
+    let totalPage = Math.ceil(result[0]['COUNT (id)'] / 18);
+    db.query(`SELECT * FROM job_104 LIMIT ${(Number(page) - 1) * 18}, 18`, (err, result, fields) => {
+      result.forEach(e => {
+        let digit_low = e.salary_low.split('').findIndex(val => val > 0);
+        let salary_low = e.salary_low
+          .slice(digit_low)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        console.log('\n');
+        let digit_high = e.salary_high.split('').findIndex(val => val > 0);
+        let salary_high = e.salary_high
+          .slice(digit_high)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
+        console.log(`NT$ ${salary_low} - ${salary_high} (月薪)`);
+      });
+
+      res.json({ jobs: result, totalPage: totalPage });
+    });
+  });
+});
+
 app.post('/signUp', (req, res) => {
   const saltRounds = 10;
   let name = req.body.name;
@@ -53,14 +80,17 @@ app.post('/signUp', (req, res) => {
         res.json({ signUp: 'err1' });
       }
       if (result.length == 0) {
-        db.query(`INSERT INTO member(name,email,password_hash,session_id) VALUE ('${name}','${email}','${password_hash}','${password_hash}');`, (err, result, fields) => {
-          if (err) {
-            res.json({ signUp: 'err2' });
-          } else {
-            res.cookie('session_id', password_hash);
-            res.json({ signUp: 'success' });
+        db.query(
+          `INSERT INTO member(name,email,password_hash,session_id) VALUE ('${name}','${email}','${password_hash}','${password_hash}');`,
+          (err, result, fields) => {
+            if (err) {
+              res.json({ signUp: 'err2' });
+            } else {
+              res.cookie('session_id', password_hash);
+              res.json({ signUp: 'success' });
+            }
           }
-        });
+        );
       } else {
         res.json({ signUp: 'already_singUp' });
       }
@@ -85,14 +115,17 @@ app.post('/signIn', (req, res) => {
       bcrypt.compare(password, password_hash).then(function(result) {
         if (result) {
           bcrypt.hash(password, saltRounds).then(function(session_id) {
-            db.query(`UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`, (err, result, fields) => {
-              if (err) {
-                res.json({ signIn: 'try_again' });
-              } else {
-                res.cookie('session_id', session_id);
-                res.json({ signIn: 'success', name: name, email: email, favorite_job: favorite_job });
+            db.query(
+              `UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`,
+              (err, result, fields) => {
+                if (err) {
+                  res.json({ signIn: 'try_again' });
+                } else {
+                  res.cookie('session_id', session_id);
+                  res.json({ signIn: 'success', name: name, email: email, favorite_job: favorite_job });
+                }
               }
-            });
+            );
           });
         } else {
           res.json({ signIn: 'wrong_password' });
@@ -145,12 +178,15 @@ app.post('/addFavo', (req, res) => {
       favo_list[source].push(jobid);
       console.log('new', favo_list);
       let favo_list_str = JSON.stringify(favo_list);
-      db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
-        if (err) {
-          res.json({ favo_list: JSON.stringify(favo_list) });
+      db.query(
+        `UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`,
+        (err, result, fields) => {
+          if (err) {
+            res.json({ favo_list: JSON.stringify(favo_list) });
+          }
+          res.json({ favo_list: favo_list_str });
         }
-        res.json({ favo_list: favo_list_str });
-      });
+      );
     } else {
       res.json({ favo_list: JSON.stringify(favo_list) });
     }
@@ -175,17 +211,107 @@ app.post('/removeFavo', (req, res) => {
       console.log('new', favo_list);
 
       let favo_list_str = JSON.stringify(favo_list);
-      db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
-        if (err) {
-          res.json({ favo_list: JSON.stringify(favo_list) });
+      db.query(
+        `UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`,
+        (err, result, fields) => {
+          if (err) {
+            res.json({ favo_list: JSON.stringify(favo_list) });
+          }
+          res.json({ favo_list: favo_list_str });
         }
-        res.json({ favo_list: favo_list_str });
-      });
+      );
     } else {
       res.json({ favo_list: JSON.stringify(favo_list) });
     }
   });
 });
+
+app.post('/favo', (req, res) => {
+  let favo = req.body.favo;
+  console.log('favo', favo);
+
+  let favo_104 = { '104': favo['104'] };
+  let favo_yourator = { yourator: favo['yourator'] };
+  let favo_meetjobs = { meetjobs: favo['meetjobs'] };
+
+  let query_favo = obj => {
+    let source = Object.keys(obj)[0];
+    let id = obj[source];
+
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT * FROM job_${source} where job_id IN (${id.map(ele => {
+          return "'" + ele + "'";
+        })});`,
+        (err, result, fields) => {
+          if (err) {
+            resolve(err);
+          }
+          if (source == 104) {
+            result.forEach(e => {
+              let digit_low = e.salary_low.split('').findIndex(val => val > 0);
+              let salary_low = e.salary_low
+                .slice(digit_low)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+              console.log('\n');
+              let digit_high = e.salary_high.split('').findIndex(val => val > 0);
+              let salary_high = e.salary_high
+                .slice(digit_high)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
+              console.log(`NT$ ${salary_low} - ${salary_high} (月薪)`);
+            });
+          }
+          resolve(result);
+        }
+      );
+    });
+  };
+
+  // let query_yourator = query_favo(favo_yourator);
+  // let query_104 = query_favo(favo_104);
+  // let query_result = Promise.all({ yourator: query_favo(favo_yourator), '104': query_favo(favo_104) });
+  let query_result = Promise.all([query_favo(favo_yourator), query_favo(favo_104)]).then(data => {
+    let data_yourator = data[0];
+    let data_104 = data[1];
+    res.json({ data: { yourator: data_yourator, '104': data_104 } });
+  });
+  // console.log(query_result);
+
+  // let query_meetjobs = query_favo(favo_meetjobs);
+});
+
+// async function querySQL(source, id) {
+//   let a = await db1;
+//   return a;
+// }
+
+let query_favo = async (source, id) => {
+  let gg = await new Promise((resolve, reject) => {
+    console.log(
+      `SELECT job_name FROM job_${source} where job_id IN (${id.map(ele => {
+        return "'" + ele + "'";
+      })});`
+    );
+
+    db.query(
+      `SELECT job_id FROM job_${source} where job_id IN (${id.map(ele => {
+        return "'" + ele + "'";
+      })});`,
+      (err, result, fields) => {
+        if (err) {
+          resolve(err);
+        }
+        resolve(result);
+      }
+    );
+  });
+};
+
+query_favo('yourator', [6955, 6986, 5836, 2835, 5430, 3320, 6889, 4920, 7262, 1143, 5115, 7161, 4788]);
 
 const saltRounds = 10;
 const myPassword = '123';
