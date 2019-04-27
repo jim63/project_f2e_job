@@ -48,6 +48,67 @@ class Login extends Component {
     });
   };
 
+  signup_submit = e => {
+    e.preventDefault();
+
+    let name = document.querySelector('#name_signup').value;
+    let email = document.querySelector('#email_signup').value;
+    let password = document.querySelector('#password_signup').value;
+    fetch('http://localhost:3306/signup', {
+      credentials: 'include',
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify({ name: name, email: email, password: password }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(response => {
+      response.json().then(e => {
+        console.log(e.signIn);
+        document.querySelector('#password_login').value = '';
+        if (e.signUp === 'already_singUp') {
+          document.querySelector('.password_alert').style.visibility = 'visible';
+        } else if (e.signUp == 'success') {
+          function getCookie(name) {
+            var value = '; ' + document.cookie;
+            var parts = value.split('; ' + name + '=');
+            if (parts.length === 2)
+              return parts
+                .pop()
+                .split(';')
+                .shift();
+          }
+          let session_id = getCookie('session_id');
+          console.log('cooke', session_id);
+          if (session_id) {
+            fetch('http://localhost:3306/checkSessionID', {
+              credentials: 'include',
+              method: 'POST', // or 'PUT'
+              body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!
+              headers: new Headers({
+                'Content-Type': 'application/json'
+              })
+            }).then(response => {
+              response.json().then(e => {
+                if (e.result === 'found') {
+                  this.props.login_check_success({
+                    status: 'login',
+                    email: e.email,
+                    name: e.name,
+                    favorite_job: e.favorite_job,
+                    session_id: session_id
+                  });
+                  window.alert('註冊成功');
+                }
+              });
+            });
+          }
+        } else {
+          window.alert(e.signUp);
+        }
+      });
+    });
+  };
+
   hidden_email_alert = () => {
     document.querySelector('.email_alert').style.visibility = 'hidden';
   };
@@ -100,7 +161,7 @@ class Login extends Component {
         </div>
         <div className='signup_prompt'>
           <div className='signup_prompt_container'>
-            <form>
+            <form onSubmit={this.signup_submit}>
               <label htmlFor='name_signup'>Name</label>
               <br />
               <input type='name' id='name_signup' placeholder='jimjim' required minLength='4' maxLength='16' />

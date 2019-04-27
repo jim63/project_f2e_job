@@ -68,6 +68,16 @@ app.get('/104', (req, res) => {
   });
 });
 
+app.get('/meetjobs', (req, res) => {
+  let page = req.query.page || 1;
+  db.query(`SELECT COUNT (id) FROM job_meetjobs;`, (err, result, fields) => {
+    let totalPage = Math.ceil(result[0]['COUNT (id)'] / 18);
+    db.query(`SELECT * FROM job_meetjobs LIMIT ${(Number(page) - 1) * 18}, 18`, (err, result, fields) => {
+      res.json({ jobs: result, totalPage: totalPage });
+    });
+  });
+});
+
 app.post('/signUp', (req, res) => {
   const saltRounds = 10;
   let name = req.body.name;
@@ -77,14 +87,16 @@ app.post('/signUp', (req, res) => {
     password_hash = hash;
     db.query(`SELECT * FROM member where email = '${email}';`, (err, result, fields) => {
       if (err) {
-        res.json({ signUp: 'err1' });
+        res.json({ signUp: err });
       }
       if (result.length == 0) {
         db.query(
-          `INSERT INTO member(name,email,password_hash,session_id) VALUE ('${name}','${email}','${password_hash}','${password_hash}');`,
+          `INSERT INTO member(name,email,password_hash,session_id,favorite_job) VALUE ('${name}','${email}','${password_hash}','${password_hash}','{"yourator":[],"104":[],"meetjobs":[]}');`,
           (err, result, fields) => {
             if (err) {
-              res.json({ signUp: 'err2' });
+              console.log(err);
+
+              res.json({ signUp: 'err1' });
             } else {
               res.cookie('session_id', password_hash);
               res.json({ signUp: 'success' });
@@ -165,6 +177,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/addFavo', (req, res) => {
+  console.log('reqqqq', req.body);
   let session_id = req.cookies.session_id;
   let source = req.body.source;
   let jobid = req.body.jobid;
@@ -238,56 +251,53 @@ app.post('/favo', (req, res) => {
     let source = Object.keys(obj)[0];
     let id = obj[source];
 
-    return new Promise((resolve, reject) => {
-      db.query(
-        `SELECT * FROM job_${source} where job_id IN (${id.map(ele => {
-          return "'" + ele + "'";
-        })});`,
-        (err, result, fields) => {
-          if (err) {
-            resolve(err);
+    console.log(source, id);
+    if (id.length !== 0) {
+      return new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * FROM job_${source} where job_id IN (${id.map(ele => {
+            return "'" + ele + "'";
+          })});`,
+          (err, result, fields) => {
+            if (err) {
+              resolve(err);
+            }
+            if (source == 104) {
+              result.forEach(e => {
+                let digit_low = e.salary_low.split('').findIndex(val => val > 0);
+                let salary_low = e.salary_low
+                  .slice(digit_low)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                console.log('\n');
+                let digit_high = e.salary_high.split('').findIndex(val => val > 0);
+                let salary_high = e.salary_high
+                  .slice(digit_high)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
+              });
+            }
+            resolve(result);
           }
-          if (source == 104) {
-            result.forEach(e => {
-              let digit_low = e.salary_low.split('').findIndex(val => val > 0);
-              let salary_low = e.salary_low
-                .slice(digit_low)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-              console.log('\n');
-              let digit_high = e.salary_high.split('').findIndex(val => val > 0);
-              let salary_high = e.salary_high
-                .slice(digit_high)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-              e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
-              console.log(`NT$ ${salary_low} - ${salary_high} (月薪)`);
-            });
-          }
-          resolve(result);
-        }
-      );
-    });
+        );
+      });
+    } else {
+      return new Promise(resolve => {
+        resolve([]);
+      });
+    }
   };
 
-  // let query_yourator = query_favo(favo_yourator);
-  // let query_104 = query_favo(favo_104);
-  // let query_result = Promise.all({ yourator: query_favo(favo_yourator), '104': query_favo(favo_104) });
-  let query_result = Promise.all([query_favo(favo_yourator), query_favo(favo_104)]).then(data => {
-    let data_yourator = data[0];
-    let data_104 = data[1];
-    res.json({ data: { yourator: data_yourator, '104': data_104 } });
-  });
-  // console.log(query_result);
-
-  // let query_meetjobs = query_favo(favo_meetjobs);
+  let query_result = Promise.all([query_favo(favo_yourator), query_favo(favo_104), query_favo(favo_meetjobs)]).then(
+    data => {
+      let data_yourator = data[0];
+      let data_104 = data[1];
+      let data_meetjobs = data[2];
+      res.json({ data: { yourator: data_yourator, '104': data_104, meetjobs: data_meetjobs } });
+    }
+  );
 });
-
-// async function querySQL(source, id) {
-//   let a = await db1;
-//   return a;
-// }
 
 let query_favo = async (source, id) => {
   let gg = await new Promise((resolve, reject) => {

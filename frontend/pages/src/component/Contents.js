@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { fetch_jobs } from '../action/index';
 import Pages from './Pages';
 import { log } from 'util';
+import default_104 from '../img/default_104.png';
+import default_yourator from '../img/default_yourator.png';
 
 class Contents extends Component {
   componentDidMount() {
@@ -25,7 +27,12 @@ class Contents extends Component {
       return (
         <>
           <div className='jobsContainer' id='jobsContainer'>
-            <div>loading</div>
+            {/* <div>loading</div> */}
+            <div className='bouncing-loader'>
+              <div />
+              <div />
+              <div />
+            </div>
           </div>
         </>
       );
@@ -34,7 +41,10 @@ class Contents extends Component {
         return (
           <CardJob
             key={id}
-            imgSRC={e.company_picture || e.picture}
+            imgSRC={
+              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
+              (e.picture !== 'undefined' ? e.picture : default_104)
+            }
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}

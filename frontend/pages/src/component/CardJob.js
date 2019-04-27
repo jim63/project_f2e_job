@@ -43,10 +43,6 @@ class CardJob extends Component {
     let jobid = this.props.jobID;
     let isFavo;
     if (this.props.user_status.favorite_job) {
-      console.log('qweeq', this.props.user_status.favorite_job);
-      console.log(22222, source);
-      console.log('123445', this.props.user_status.favorite_job[`${source}`]);
-
       if (this.props.user_status.favorite_job[`${source}`].indexOf(Number(jobid)) === -1) {
         isFavo = (
           <div className='addToFavo' jobid={this.props.jobID} source={this.props.source} onClick={this.add_to_favo}>
@@ -64,9 +60,9 @@ class CardJob extends Component {
 
     return (
       <div className='cardJobContainer'>
-        <div className='jobCard' style={{}}>
+        <div className='jobCard'>
           <div className='jobCardImgContainer'>
-            <img src={this.props.imgSRC} className='jobCardImg' width='100%' height='100%' alt='' />
+            <img src={this.props.imgSRC} className='jobCardImg' width='100%' height='auto' alt='' />
           </div>
           <div className='jobCardText'>
             <p className='companyJobTitle'>

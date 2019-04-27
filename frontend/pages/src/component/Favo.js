@@ -4,6 +4,8 @@ import './Favo.css';
 import { connect } from 'react-redux';
 import { fetch_jobs, update_favo } from '../action/index';
 import Pages from './Pages';
+import default_104 from '../img/default_104.png';
+import default_yourator from '../img/default_yourator.png';
 
 class Favo extends Component {
   componentDidMount() {
@@ -17,6 +19,7 @@ class Favo extends Component {
           'Content-Type': 'application/json'
         })
       }).then(response => {
+        console.log('rrrrr', response);
         response.json().then(e => {
           this.props.update_favo(e.data);
         });
@@ -35,6 +38,7 @@ class Favo extends Component {
           'Content-Type': 'application/json'
         })
       }).then(response => {
+        console.log('eeeee', response);
         response.json().then(e => {
           this.props.update_favo(e.data);
         });
@@ -80,11 +84,42 @@ class Favo extends Component {
     let length_favo_104 = 0;
     if (this.props.favo_job) {
       length_favo_104 = this.props.favo_job['104'].length;
+      console.log('104', this.props.favo_job['104']);
+
       favo_104 = this.props.favo_job['104'].map(e => {
         return (
           <CardJob
             key={e.id}
-            imgSRC={e.company_picture || e.picture}
+            imgSRC={
+              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
+              (e.picture !== 'undefined' ? e.picture : default_104)
+            }
+            company={e.company_name}
+            jobTitle={e.job_name}
+            location={e.location}
+            salary={e.salary}
+            description={e.skill_tag || e.job_description}
+            jobID={e.job_id}
+            source={e.job_source}
+          />
+        );
+      });
+    }
+
+    let favo_meetjobs = '';
+    let length_favo_meetjobs = 0;
+    if (this.props.favo_job) {
+      length_favo_meetjobs = this.props.favo_job['meetjobs'].length;
+      console.log('meetjobs', this.props.favo_job['meetjobs']);
+
+      favo_meetjobs = this.props.favo_job['meetjobs'].map(e => {
+        return (
+          <CardJob
+            key={e.id}
+            imgSRC={
+              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
+              (e.picture !== 'undefined' ? e.picture : default_104)
+            }
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
@@ -102,6 +137,7 @@ class Favo extends Component {
         className='favo_container_all'
         onClick={e => {
           this.toggle_expand(e);
+          console.log(e);
         }}
       >
         <div className='favo_yourator_container favo_container'>
@@ -118,14 +154,9 @@ class Favo extends Component {
         </div>
         <div className='favo_meetjobs_container favo_container'>
           <div className='favo_title'>
-            <p>meetjobs</p>
+            <p>meetjobs ({length_favo_meetjobs})</p>
           </div>
-          <div className='favo_job'>
-            <div className='jobsssss' style={{ width: '30%', height: '300px', border: '1px solid orange' }} />
-            <div className='jobsssss' style={{ width: '30%', height: '300px', border: '1px solid orange' }} />
-            <div className='jobsssss' style={{ width: '30%', height: '300px', border: '1px solid orange' }} />
-            <div className='jobsssss' style={{ width: '30%', height: '300px', border: '1px solid orange' }} />
-          </div>
+          <div className='favo_job'>{favo_meetjobs} </div>
         </div>
       </div>
     );

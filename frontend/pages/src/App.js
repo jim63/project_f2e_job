@@ -34,10 +34,13 @@ class App extends Component {
         });
       } else if (e.target.className.indexOf('yourator') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'yourator' });
+        document.getElementById('jobsContainer').scrollIntoView();
       } else if (e.target.className.indexOf('104') !== -1) {
         this.props.fetch_jobs({ page: 1, source: '104' });
+        document.getElementById('jobsContainer').scrollIntoView();
       } else if (e.target.className.indexOf('meetjobs') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
+        document.getElementById('jobsContainer').scrollIntoView();
       } else {
         let not_current_logo = document.querySelectorAll('.not_current_logo');
         not_current_logo.forEach(e => {
@@ -95,7 +98,7 @@ class App extends Component {
               status: 'login',
               email: e.email,
               name: e.name,
-              favorite_job: e.favorite_job,
+              favorite_job: e.favorite_job || { 104: [], yourator: [], meetjobs: [] },
               session_id: session_id
             });
           } else {
