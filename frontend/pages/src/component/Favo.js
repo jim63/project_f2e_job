@@ -11,7 +11,7 @@ class Favo extends Component {
   componentDidMount() {
     if (this.props.favo) {
       let favo = this.props.favo;
-      fetch('http://localhost:3306/favo', {
+      fetch('http://localhost:3006/favo', {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ favo: favo }),
@@ -30,7 +30,7 @@ class Favo extends Component {
   componentDidUpdate() {
     if (this.props.favo_job.length === 0) {
       let favo = this.props.favo;
-      fetch('http://localhost:3306/favo', {
+      fetch('http://localhost:3006/favo', {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ favo: favo }),

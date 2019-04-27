@@ -7,7 +7,7 @@ class CardJob extends Component {
   add_to_favo = e => {
     let source = e.target.getAttribute('source');
     let jobid = Number(e.target.getAttribute('jobid'));
-    fetch('http://localhost:3306/addFavo', {
+    fetch('http://localhost:3006/addFavo', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ source: source, jobid: jobid }), // data can be `string` or {object}!
@@ -24,7 +24,7 @@ class CardJob extends Component {
   remove_favo = e => {
     let source = e.target.getAttribute('source');
     let jobid = Number(e.target.getAttribute('jobid'));
-    fetch('http://localhost:3306/removeFavo', {
+    fetch('http://localhost:3006/removeFavo', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ source: source, jobid: jobid }), // data can be `string` or {object}!
