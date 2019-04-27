@@ -69,8 +69,8 @@ getTotalPage().then(totalPages => {
           job_info.appear_date = data[i].published_at;
           //   job_info.apply_amount = data[i].applyDesc;
           job_info.location = data[i].address.handwriting_city;
-          job_info.address = data[i].address.handwriting_street.replace(`'`, `''`);
-          job_info.job_description = data[i].description.replace(`'`, `''`);
+          job_info.address = data[i].address.handwriting_street.replace(/'/g, "''");
+          job_info.job_description = data[i].description.replace(/'/g, "''");
           job_info.company_name = data[i].employer.name;
           job_info.company_scale = data[i].employer.company_size;
           job_info.link_job = `https://meet.jobs/jobs/${data[i].id}`;
@@ -118,12 +118,19 @@ getTotalPage().then(totalPages => {
           //     job_info.link_job
           //   }','${job_info.link_company}','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}');`);
 
-          db.query(`INSERT INTO job_meetjobs(job_name,salary,location,address,job_description,company_name,company_scale,link_job,link_company,appear_date,picture,job_id)
+          db.query(
+            `INSERT INTO job_meetjobs(job_name,salary,location,address,job_description,company_name,company_scale,link_job,link_company,appear_date,picture,job_id)
             VALUE ('${job_info.job_name}','${job_info.salary}','${job_info.location}','${job_info.address}','${
-            job_info.job_description
-          }','${job_info.company_name}','${job_info.company_scale}','${job_info.link_job}','${
-            job_info.link_company
-          }','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}');`);
+              job_info.job_description
+            }','${job_info.company_name}','${job_info.company_scale}','${job_info.link_job}','${
+              job_info.link_company
+            }','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}');`,
+            (err, body, results) => {
+              if (err) {
+                console.log('11111111', err.sql);
+              }
+            }
+          );
         }
       });
     }
