@@ -19,7 +19,7 @@ class Login extends Component {
     e.preventDefault();
     let email = document.querySelector('#email_login').value;
     let password = document.querySelector('#password_login').value;
-    fetch('http://localhost:3006/signIn', {
+    fetch('http://3.18.93.25:3006/signIn', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ email: email, password: password }), // data can be `string` or {object}!
@@ -54,7 +54,7 @@ class Login extends Component {
     let name = document.querySelector('#name_signup').value;
     let email = document.querySelector('#email_signup').value;
     let password = document.querySelector('#password_signup').value;
-    fetch('http://localhost:3006/signup', {
+    fetch('http://3.18.93.25:3006/signup', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ name: name, email: email, password: password }),
@@ -80,7 +80,7 @@ class Login extends Component {
           let session_id = getCookie('session_id');
           console.log('cooke', session_id);
           if (session_id) {
-            fetch('http://localhost:3006/checkSessionID', {
+            fetch('http://3.18.93.25:3006/checkSessionID', {
               credentials: 'include',
               method: 'POST', // or 'PUT'
               body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!

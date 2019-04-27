@@ -84,7 +84,7 @@ class App extends Component {
     let session_id = getCookie('session_id');
     console.log('cooke', session_id);
     if (session_id) {
-      fetch('http://localhost:3006/checkSessionID', {
+      fetch('http://3.18.93.25:3006/checkSessionID', {
         credentials: 'include',
         method: 'POST', // or 'PUT'
         body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!
