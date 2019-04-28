@@ -10,7 +10,7 @@ class Logout extends Component {
     let session_id = this.props.login_status.session_id;
 
     console.log(this.props.login_status.session_id);
-    fetch('http://3.18.93.25:3006/logout', {
+    fetch('/logout', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
       body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!

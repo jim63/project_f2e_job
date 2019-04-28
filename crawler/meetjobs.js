@@ -79,9 +79,15 @@ getTotalPage().then(totalPages => {
           job_info.picture = data[i].employer.logo.url;
           job_info.skill_tag = (() => {
             let skill_tag = [];
+
             for (j of data[i].required_skills) {
+              console.log('jj', j.name);
+
               skill_tag.push(j.name);
             }
+            console.log('skill_tag', skill_tag);
+            console.log(String(skill_tag));
+
             return String(skill_tag);
           })();
 
@@ -119,12 +125,12 @@ getTotalPage().then(totalPages => {
           //   }','${job_info.link_company}','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}');`);
 
           db.query(
-            `INSERT INTO job_meetjobs(job_name,salary,location,address,job_description,company_name,company_scale,link_job,link_company,appear_date,picture,job_id)
+            `INSERT INTO job_meetjobs(job_name,salary,location,address,job_description,company_name,company_scale,link_job,link_company,appear_date,picture,job_id,skill_tag)
             VALUE ('${job_info.job_name}','${job_info.salary}','${job_info.location}','${job_info.address}','${
               job_info.job_description
             }','${job_info.company_name}','${job_info.company_scale}','${job_info.link_job}','${
               job_info.link_company
-            }','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}');`,
+            }','${job_info.appear_date}','${job_info.picture}','${job_info.job_id}','${job_info.skill_tag}');`,
             (err, body, results) => {
               if (err) {
                 console.log('11111111', err.sql);

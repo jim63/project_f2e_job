@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-let port = 3006;
+let port = 80;
 app.listen(port, () => {
   console.log(`the app is running on localhost:${port}`);
 });
