@@ -1,0 +1,85 @@
+.favo_container_all {
+  padding: 30px 0px;
+}
+
+.favo_container {
+  /* border: 2px solid #999; */
+  border-radius: 10px;
+}
+
+.favo_container:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.favo_title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  display: flex;
+  /* justify-content: center; */
+  margin-left: 40px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.favo_title p {
+  pointer-events: none;
+  border-bottom: 3px solid black;
+}
+
+.favo_job {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  max-height: 0;
+  animation-name: shrink;
+  animation-duration: 1s;
+}
+
+.favo_job_expand {
+  animation-name: expand;
+  animation-duration: 1s;
+  max-height: 1000px;
+  overflow: scroll;
+}
+
+@keyframes expand {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 1000px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    max-height: 1000px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+
+.jobsssss {
+  margin: 1.666%;
+}
+
+.favo_job_expand {
+  justify-content: center;
+}
+
+@media screen and (min-width: 760px) {
+  .favo_job_expand {
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .favo_job_expand {
+    justify-content: flex-start;
+  }
+  .cardJobContainer {
+    margin: 10px 10px;
+  }
+}

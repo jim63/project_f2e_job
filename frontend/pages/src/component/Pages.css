@@ -1,0 +1,20 @@
+.page {
+  background-color: #fff;
+}
+
+.pageButton {
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  color: #443a42;
+  line-height: 30px;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.pageButton.onThisPage,
+.pageButton:hover {
+  background-color: #443a42;
+  color: #eee;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      String.prototype.lengthOfLongestSubstring = function() {
+        let s = this;
+        if (s.length === 0) {
+          return 0;
+        }
+
+        if (s.length === 1) {
+          return 1;
+        }
+        let array = s.split('');
+        let temp = [];
+        let current = [];
+        for (let j = 0; j < array.length - 1; j++) {
+          if (temp.length > array.length - j) {
+            return temp.length;
+          }
+          let current = [];
+          for (let i = j; i < array.length; i++) {
+            if (current.indexOf(array[i]) === -1) {
+              current.push(array[i]);
+            } else {
+              if (temp.length < current.length) {
+                temp = current;
+              }
+              break;
+            }
+            if (temp.length < current.length) {
+              temp = current;
+            }
+          }
+        }
+        return temp.length;
+      };
+    </script>
+  </body>
+</html>

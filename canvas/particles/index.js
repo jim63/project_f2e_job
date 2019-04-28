@@ -186,7 +186,7 @@ function update() {
       return new Particle({
         p: mousePos.clone(),
         v: new Vec2(Math.random() * controls.v - controls.v / 2, Math.random() * controls.v - controls.v / 2),
-        r: Math.random() * 30,
+        r: Math.random() * 20,
         color: `rgb(255,${parseInt(Math.random() * 255)}, ${parseInt(Math.random() * 150)})`
       });
     })
