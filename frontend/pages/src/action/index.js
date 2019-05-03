@@ -4,8 +4,8 @@ import axios from 'axios';
 export const fetch_jobs = ({ page, source }) => async dispatch => {
   if (source === 'yourator') {
     const response = await axios
-      .get(`http://localhost:80/yourator?page=${page}`, { withCredentials: true })
-      // .get(`/yourator?page=${page}`, { withCredentials: true })
+      // .get(`http://localhost:80/yourator?page=${page}`, { withCredentials: true })
+      .get(`/yourator?page=${page}`, { withCredentials: true })
       .then(e => {
         return {
           source: 'yourator',
@@ -17,8 +17,8 @@ export const fetch_jobs = ({ page, source }) => async dispatch => {
     dispatch({ type: 'FETCH_JOBDATA', payload: response });
   } else if (source === '104') {
     // const response = await axios.get(`http://localhost:3006/104?page=${page}`, { withCredentials: true }).then(e => {
-    const response = await axios.get(`http://localhost:80/104?page=${page}`, { withCredentials: true }).then(e => {
-      // const response = await axios.get(`/104?page=${page}`, { withCredentials: true }).then(e => {
+    // const response = await axios.get(`http://localhost:80/104?page=${page}`, { withCredentials: true }).then(e => {
+    const response = await axios.get(`/104?page=${page}`, { withCredentials: true }).then(e => {
       return {
         source: '104',
         job_list: e.data.jobs,
@@ -28,6 +28,7 @@ export const fetch_jobs = ({ page, source }) => async dispatch => {
     });
     dispatch({ type: 'FETCH_JOBDATA', payload: response });
   } else if (source === 'meetjobs') {
+    // const response = await axios.get(`http://localhost:80/meetjobs?page=${page}`, { withCredentials: true }).then(e => {
     const response = await axios.get(`/meetjobs?page=${page}`, { withCredentials: true }).then(e => {
       return {
         source: 'meetjobs',

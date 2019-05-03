@@ -1,5 +1,5 @@
 .banner_container {
-  position: relative;
+  overflow: hidden;
 }
 
 .not_current_banner {

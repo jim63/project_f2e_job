@@ -296,9 +296,105 @@ class Detail extends Component {
             </div>
           </div>
         );
+      } else if (this.props.detail.job_source === 'meetjobs') {
+        content = (
+          <div className='detail_inside'>
+            <div className='detail_link_t'>
+              <p>公司資訊</p>
+            </div>
+
+            <div className='detail_meetjobs_top'>
+              <div className='detail_meetjobs_img_container'>
+                <div className='detail_meetjobs_img'>
+                  <img src={this.props.detail.picture} alt='' srcset='' />
+                </div>
+              </div>
+              <div className='detail_yourator_text'>
+                <div className='detail_company_name detail_s_block'>
+                  <div className='detail_s_block_title'>
+                    <p>公司名稱：</p>
+                  </div>
+                  <p className='detail_s_block_c'>{this.props.detail.company_name}</p>
+                </div>
+                <div className='detail_job_addr detail_s_block'>
+                  <div className='detail_s_block_title'>
+                    <p>公司地址：</p>
+                  </div>
+                  <p className='detail_s_block_c'>{this.props.detail.address}</p>
+                </div>
+
+                <div className='detail_job_scale detail_s_block'>
+                  <div className='detail_s_block_title'>
+                    <p>公司規模：</p>
+                  </div>
+                  <p className='detail_s_block_c'>
+                    {' '}
+                    {this.props.detail.company_scale === 'null'
+                      ? '未提供'
+                      : this.props.detail.company_scale.indexOf('not') === -1
+                      ? this.props.detail.company_scale + ' 人'
+                      : '未提供'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className='detail_link_t'>
+              <p>職缺資訊</p>
+            </div>
+            <div className='detail_job_scale detail_s_block'>
+              <div className='detail_s_block_title'>
+                <p>職缺名稱：</p>
+              </div>
+              <p className='detail_s_block_c'>{this.props.detail.job_name}</p>
+            </div>
+
+            <div className='detail_job_scale detail_s_block'>
+              <div className='detail_s_block_title'>
+                <p>職缺介紹：</p>
+              </div>
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.job_description }} />
+            </div>
+
+            <div className='detail_job_scale detail_s_block'>
+              <div className='detail_s_block_title'>
+                <p>技能標籤：</p>
+              </div>
+              <p className='detail_s_block_c'>{this.props.detail.skill_tag ? this.props.detail.skill_tag : '未提供'}</p>
+            </div>
+            <div className='detail_job_scale detail_s_block'>
+              <div className='detail_s_block_title'>
+                <p>薪資範圍：</p>
+              </div>
+              <p className='detail_s_block_c'>{this.props.detail.salary}</p>
+            </div>
+            <div className='detail_job_scale detail_s_block'>
+              <div className='detail_s_block_title'>
+                <p>更新日期：</p>
+              </div>
+              <p className='detail_s_block_c'>{this.props.detail.appear_date.slice(0, 10)}</p>
+            </div>
+
+            <div className='map_area' />
+
+            <iframe
+              className='detail_google_maps'
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCHKoH-wKQEpEMniWfRrxcBblm0OEowDU0&q=${this.props.detail.address}${
+                this.props.detail.address.toString().match(/[\u3400-\u9FBF]/) ? '&language=zh-TW' : ''
+              }`}
+            />
+            <div className='detail_link_block'>
+              <a href={this.props.detail.link_job} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
+                <div className='detail_link'>到 meetjobs 看工作</div>
+              </a>
+              <a href={this.props.detail.link_company} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
+                <div className='detail_link'>到 meetjobs 看公司</div>
+              </a>
+            </div>
+          </div>
+        );
       }
     }
-
     return <div className='detail_container'>{content}</div>;
   }
 }

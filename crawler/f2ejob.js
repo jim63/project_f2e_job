@@ -121,6 +121,16 @@ app.get('/find', (req, res) => {
         res.json({ data: r });
       }
     });
+  } else if (source === 'meetjobs') {
+    db.query(`SELECT * FROM job_meetjobs where job_id=${id}`, (e, r, b) => {
+      if (e) {
+        return e;
+      }
+      if (r.length > 0) {
+        console.log(r);
+        res.json({ data: r });
+      }
+    });
   }
 });
 

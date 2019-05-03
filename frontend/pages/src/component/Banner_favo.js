@@ -28,7 +28,7 @@ class Banner extends Component {
   };
 
   componentDidMount() {
-    this.interval1 = setInterval(this.banner_change, 3000);
+    this.interval1 = setInterval(this.banner_change, 10000);
   }
 
   componentWillUnmount() {

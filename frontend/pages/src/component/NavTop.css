@@ -1,0 +1,48 @@
+.nav_top {
+  width: 100%;
+  max-width: 1146px;
+  margin: 20px auto 0px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  position: relative;
+}
+
+.nav_top_option {
+  width: 20%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 18px;
+  /* border: 2px solid red; */
+  border-radius: 15px 15px 0px 0px;
+  color: white;
+}
+
+.nav_top_yourator {
+  background-image: linear-gradient(-45deg, #6b73ff, #000dff);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_104 {
+  background-image: linear-gradient(-45deg, #fccf31, #f55555);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_meetjobs {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_not_selected {
+  background-image: none;
+  background-color: #eee;
+  color: #888;
+}
+
+.nav_top_selected {
+  box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7);
+  z-index: 10;
+}

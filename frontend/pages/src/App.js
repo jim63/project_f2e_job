@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './component/Header';
 import Banner from './component/Banner';
 import Nav from './component/Nav';
+import NavTop from './component/NavTop';
 import Contents from './component/Contents';
 import Footer from './component/Footer';
 import Login from './component/Login';
@@ -28,27 +29,28 @@ class App extends Component {
         }
       }
 
-      if (e.target.className.indexOf('current_logo') !== -1 && e.target.className.indexOf('not_current_logo') === -1) {
-        let not_current_logo = document.querySelectorAll('.not_current_logo');
-        not_current_logo.forEach(e => {
-          e.classList.toggle('down_to_buttom');
-        });
-      } else if (e.target.className.indexOf('yourator') !== -1) {
+      // if (e.target.className.indexOf('current_logo') !== -1 && e.target.className.indexOf('not_current_logo') === -1) {
+      //   let not_current_logo = document.querySelectorAll('.not_current_logo');
+      //   not_current_logo.forEach(e => {
+      //     e.classList.toggle('down_to_buttom');
+      //   });
+      // } else
+      if (e.target.className.indexOf('nav_top_yourator') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'yourator' });
-        document.getElementById('jobsContainer').scrollIntoView();
-      } else if (e.target.className.indexOf('104') !== -1) {
+        // document.getElementById('jobsContainer').scrollIntoView();
+      } else if (e.target.className.indexOf('nav_top_104') !== -1) {
         this.props.fetch_jobs({ page: 1, source: '104' });
-        document.getElementById('jobsContainer').scrollIntoView();
-      } else if (e.target.className.indexOf('meetjobs') !== -1) {
+        // document.getElementById('jobsContainer').scrollIntoView();
+      } else if (e.target.className.indexOf('nav_top_meetjobs') !== -1) {
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
-        document.getElementById('jobsContainer').scrollIntoView();
+        // document.getElementById('jobsContainer').scrollIntoView();
       } else {
-        let not_current_logo = document.querySelectorAll('.not_current_logo');
-        not_current_logo.forEach(e => {
-          if (e.className.indexOf('down_to_buttom') == -1) {
-            e.classList.toggle('down_to_buttom');
-          }
-        });
+        // let not_current_logo = document.querySelectorAll('.not_current_logo');
+        // not_current_logo.forEach(e => {
+        //   if (e.className.indexOf('down_to_buttom') == -1) {
+        //     e.classList.toggle('down_to_buttom');
+        //   }
+        // });
         if (e.target.className.indexOf('login_button') != -1) {
           document.querySelector('.login_background').style.display = 'flex';
         } else if (e.target.className.indexOf('login_background') != -1) {
@@ -63,7 +65,6 @@ class App extends Component {
         if (
           e.target.className.indexOf('welcome_button') === -1 &&
           e.target.className.indexOf('log_out_container') === -1 &&
-          // e.target.className.indexOf('check_favorite') == -1 &&
           e.target.className.indexOf('logout_check') === -1
         ) {
           document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
@@ -72,7 +73,7 @@ class App extends Component {
     }
   };
 
-  qqqqcomponentDidMount() {
+  componentDidMount() {
     function getCookie(name) {
       var value = '; ' + document.cookie;
       var parts = value.split('; ' + name + '=');
@@ -118,9 +119,10 @@ class App extends Component {
     return (
       <div onClick={this.logo_click} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {top_right}
+        <Header />
+        <Route path='/' exact component={Banner_favo} />
+        <Route path='/' exact component={NavTop} />
         <div className='react_container'>
-          <Header />
-          <Route path='/' exact component={Banner_favo} />
           <div className='contentsContainer'>
             <Route
               path='/jobs/:source/:id'
@@ -128,12 +130,12 @@ class App extends Component {
                 return <Detail source={match.params.source} id={match.params.id} loading={true} />;
               }}
             />
-            <Route path='/' exact component={Nav} />
+            {/* <Route path='/' exact component={Nav} /> */}
             <Route path='/' exact component={Contents} />
             <Route path='/favo' component={Favo} />
           </div>
-          <Footer />
         </div>
+        <Footer />
       </div>
     );
   }

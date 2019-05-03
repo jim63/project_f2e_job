@@ -81,5 +81,6 @@
   }
   .cardJobContainer {
     margin: 10px 10px;
+    width: 360px;
   }
 }

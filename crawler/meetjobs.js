@@ -20,8 +20,9 @@ function getTotalPage() {
   return new Promise(function(resolve, reject) {
     request(
       {
-        //! meetjobs  前端 台北 正職
-        url: `https://api.meet.jobs/api/v1/jobs?page=1&work_types=full_time&order=match&q=%E5%89%8D%E7%AB%AF&place=%E5%8F%B0%E5%8C%97&include=required_skills&external_job=true`,
+        //! meetjobs  前端 台灣 正職
+        url: `https://api.meet.jobs/api/v1/jobs?page=1&work_types=full_time&order=match&q=%E5%89%8D%E7%AB%AF&place=taiwan&include=required_skills&external_job=true`,
+        // url: `https://api.meet.jobs/api/v1/jobs?page=1&work_types=full_time&order=match&q=%E5%89%8D%E7%AB%AF&place=%E5%8F%B0%E5%8C%97&include=required_skills&external_job=true`,
         method: 'GET',
         'Content-Type': 'application/json;charset=UTF-8'
       },

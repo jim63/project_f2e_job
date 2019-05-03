@@ -11,11 +11,12 @@
   margin-left: auto;
   max-width: 1200px;
   flex-grow: 1;
+  position: relative;
 }
 
 .react_container {
   width: 100%;
-  max-width: 1140px;
+  max-width: 1146px;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -25,5 +26,5 @@
 }
 
 body {
-  background-color: #eee;
+  /* background-color: #eee; */
 }
