@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 5px 5px 1px 1px rgba(150, 150, 150, 0.1);
+  /* box-shadow: 5px 5px 1px 1px rgba(150, 150, 150, 0.1); */
 }
 
 .jobCard:hover {
@@ -115,19 +115,19 @@
 .jobsContainer {
   background-color: #fff;
   position: relative;
-  z-index: 100;
+  z-index: 5;
 }
 
 .jobsContainer_yourator {
-  border: 3px solid #0056a1;
+  border-top: 3px solid #000dff;
   border-radius: 0px 0px 10px 10px;
 }
 .jobsContainer_104 {
-  border: 3px solid #e8a829;
+  border-top: 3px solid #f55555;
   border-radius: 0px 0px 10px 10px;
 }
 .jobsContainer_meetjobs {
-  border: 3px solid #08d7e9;
+  border-top: 3px solid #52e5e7;
   border-radius: 0px 0px 10px 10px;
 }
 

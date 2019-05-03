@@ -44,7 +44,7 @@ class Banner extends Component {
 
     let banner_condition = (
       <div className='banner_container'>
-        {top_right}
+        {/* {top_right} */}
         <div style={{ position: 'relative' }}>
           <div className='current_banner banner_control default_banner banner_1'>
             <div className='banner'>

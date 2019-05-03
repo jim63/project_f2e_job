@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../img/logo-1.svg';
+import Logout from './Logout';
 
 class Header extends Component {
   welcome_button_click = () => {
@@ -11,6 +12,11 @@ class Header extends Component {
   };
 
   render() {
+    let top_right;
+    if (this.props.user_status.status === 'login') {
+      top_right = <Logout />;
+    }
+
     let login_block;
     if (this.props.user_status.status === 'unknown') {
       login_block = (
@@ -34,6 +40,7 @@ class Header extends Component {
           </span>
         </Link>
         {login_block}
+        {top_right}
       </header>
     );
   }

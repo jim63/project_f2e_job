@@ -7,13 +7,13 @@ import banner from '../img/banner-18.png';
 
 class Banner extends Component {
   render() {
-    let top_right;
-    if (this.props.user_status.status === 'login') {
-      top_right = <Logout />;
-    }
+    // let top_right;
+    // if (this.props.user_status.status === 'login') {
+    //   top_right = <Logout />;
+    // }
     return (
       <div className='banner' style={{ backgroundImage: `url(${banner})` }}>
-        {top_right}
+        {/* {top_right} */}
         <div className='bannerText' style={{}}>
           <p>WORK LIFE BALANCE</p>
           <p>ARE YOU READY?</p>

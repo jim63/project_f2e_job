@@ -81,6 +81,7 @@ class Login extends Component {
           console.log('cooke', session_id);
           if (session_id) {
             fetch('/checkSessionID', {
+              // fetch('http://localhost:80/checkSessionID', {
               credentials: 'include',
               method: 'POST', // or 'PUT'
               body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!
@@ -127,26 +128,12 @@ class Login extends Component {
             <form onSubmit={this.login_submit}>
               <label htmlFor='email_login'>E-mail</label>
               <br />
-              <input
-                type='email'
-                id='email_login'
-                placeholder='jim123@gmail.com'
-                required
-                onChange={this.hidden_email_alert}
-              />
+              <input type='email' id='email_login' placeholder='jim123@gmail.com' required onChange={this.hidden_email_alert} />
               <p className='email_alert'>email 尚未註冊</p>
               <br />
               <label htmlFor='password_login'>Password</label>
               <br />
-              <input
-                type='password'
-                id='password_login'
-                placeholder='●●●●●●●●'
-                required
-                minLength='4'
-                maxLength='16'
-                onChange={this.hidden_password_alert}
-              />
+              <input type='password' id='password_login' placeholder='●●●●●●●●' required minLength='4' maxLength='16' onChange={this.hidden_password_alert} />
               <p className='password_alert'>密碼錯誤，請重新輸入</p>
               <br />
               <button type='submit' className='login_submit'>
@@ -172,14 +159,7 @@ class Login extends Component {
               <br />
               <label htmlFor='password_signup'>Password</label>
               <br />
-              <input
-                type='password'
-                id='password_signup'
-                placeholder='●●●●●●●●'
-                required
-                minLength='4'
-                maxLength='16'
-              />
+              <input type='password' id='password_signup' placeholder='●●●●●●●●' required minLength='4' maxLength='16' />
               <br />
               <button type='submit' className='signup_submit'>
                 註冊

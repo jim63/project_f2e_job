@@ -33,7 +33,7 @@ class Logout extends Component {
   render() {
     return (
       <div className='log_out_container log_out_container_disappear'>
-        <Link to='/favo'>
+        <Link to='/favo' className='check_favorite_div'>
           <div className='check_favorite'>查看收藏</div>
         </Link>
         <div className='logout_check' onClick={this.logout_button_click}>

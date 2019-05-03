@@ -1,4 +1,5 @@
 node_modules/ 
 db.js
-
-
+ca_bundle.crt
+certificate.crt
+private.key

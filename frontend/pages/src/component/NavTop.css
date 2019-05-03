@@ -44,5 +44,5 @@
 
 .nav_top_selected {
   box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7);
-  z-index: 10;
+  z-index: 5;
 }

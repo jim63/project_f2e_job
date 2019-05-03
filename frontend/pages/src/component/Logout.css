@@ -3,8 +3,8 @@
   padding: 20px 20px;
   background-color: #443a42;
   right: 0px;
-  top: 0px;
-  z-index: 6;
+  top: 50px;
+  z-index: 5;
   animation-name: log_out_container_show;
   animation-duration: 1s;
   display: none;
@@ -29,6 +29,10 @@
   animation-duration: 1s;
 
   transform: translate(300px, 0);
+}
+.check_favorite_div,
+.check_favorite {
+  text-decoration: none;
 }
 
 @keyframes log_out_container_show_no_show {

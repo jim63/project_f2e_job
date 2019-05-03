@@ -4,9 +4,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const cheerio = require('cheerio');
+const fs = require('fs');
+const https = require('https');
 
 const request = require('request');
 const db = require('./db');
+
+var privateKey = fs.readFileSync('./ssl/private.key');
+var certificate = fs.readFileSync('./ssl/certificate.crt');
+var credentials = { key: privateKey, cert: certificate };
 
 app.set('view engine', 'pug');
 app.use(express.static('public'));
@@ -29,9 +35,12 @@ app.use(function(req, res, next) {
 });
 
 let port = 80;
-app.listen(port, () => {
-  console.log(`the app is running on localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`the app is running on localhost:${port}`);
+// });
+
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443);
 
 app.get('/favo', (req, res) => {
   res.status(301).redirect('/');
@@ -230,15 +239,16 @@ app.post('/logout', (req, res) => {
 });
 
 app.post('/addFavo', (req, res) => {
-  console.log('reqqqq', req.body);
   let session_id = req.cookies.session_id;
   let source = req.body.source;
   let jobid = req.body.jobid;
-
-  console.log(session_id, source, jobid);
-
   db.query(`SELECT * FROM member where session_id = '${session_id}'`, (err, result, fields) => {
+    console.log('rrr', result);
+
     let favo_list = JSON.parse(result[0].favorite_job);
+
+    console.log('list', favo_list);
+
     if (favo_list[source].indexOf(jobid) === -1) {
       console.log('prev', favo_list);
       favo_list[source].push(jobid);
@@ -342,6 +352,12 @@ app.post('/favo', (req, res) => {
     let data_meetjobs = data[2];
     res.json({ data: { yourator: data_yourator, '104': data_104, meetjobs: data_meetjobs } });
   });
+});
+
+app.get('/jobs/:source/:id', (req, res) => {
+  console.log(21321312);
+
+  res.sendfile('./public/index.html');
 });
 
 let query_favo = async (source, id) => {

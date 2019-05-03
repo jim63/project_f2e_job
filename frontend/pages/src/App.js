@@ -87,6 +87,7 @@ class App extends Component {
     console.log('cooke', session_id);
     if (session_id) {
       fetch('/checkSessionID', {
+        // fetch('http://localhost:80/checkSessionID', {
         credentials: 'include',
         method: 'POST', // or 'PUT'
         body: JSON.stringify({ session_id: session_id }), // data can be `string` or {object}!
