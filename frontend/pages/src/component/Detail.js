@@ -16,7 +16,6 @@ class Detail extends Component {
     let source = this.props.source;
     let id = this.props.id;
 
-    // fetch(`http://localhost:80/find?source=${source}&id=${id}`)
     fetch(`/find?source=${source}&id=${id}`)
       .then(response => response.json())
       .then(e => {
