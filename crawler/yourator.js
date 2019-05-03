@@ -45,45 +45,26 @@ axios.get(`https://www.yourator.co/api/v2/jobs?category[]=7&position[]=1&page=1`
           job_info.location = job.company.area;
           job_info.company_picture = job.company.banner;
           //todo job_description
-
           goJobPage(`${job_info.link_job}`).then(data => {
-            job_info.job_description = data[0];
-            job_info.requirements = data[1];
-            job_info.benefits = data[2];
-
-            console.log(`INSERT INTO job_yourator(job_id,job_name,skill_tag,salary,location,company_name,company_tag,company_picture,link_job,link_company,job_description,requirements,benefits)
-          VALUE ('${job_info.job_id}','${job_info.job_name}','${job_info.skill_tag}','${job_info.salary}','${
-              job_info.location
-            }','${job_info.company_name}','${job_info.company_tag}','${job_info.company_picture}','${
-              job_info.link_job
-            }','${job_info.link_company}','${job_info.job_description}','${job_info.requirements}','${
-              job_info.benefits
-            }');`);
+            job_info.job_description = data.jd[0];
+            job_info.requirements = data.jd[1];
+            job_info.benefits = data.jd[2];
+            job_info.address = data.info.addr;
+            job_info.company_scale = data.info.scale;
+            job_info.company_description = data.info.company_desc;
 
             db.query(
-              `INSERT INTO job_yourator(job_id,job_name,skill_tag,salary,location,company_name,company_tag,company_picture,link_job,link_company,job_description,requirements,benefits)
-          VALUE ('${job_info.job_id}','${job_info.job_name}','${job_info.skill_tag}','${job_info.salary}','${
-                job_info.location
-              }','${job_info.company_name}','${job_info.company_tag}','${job_info.company_picture}','${
-                job_info.link_job
-              }','${job_info.link_company}','${job_info.job_description}','${job_info.requirements}','${
-                job_info.benefits
-              }');`,
+              `INSERT INTO job_yourator(job_id,job_name,skill_tag,salary,location,company_name,company_tag,company_picture,link_job,link_company,job_description,requirements,benefits,company_scale,address,company_description)
+            VALUE ('${job_info.job_id}','${job_info.job_name}','${job_info.skill_tag}','${job_info.salary}','${job_info.location}','${
+                job_info.company_name
+              }','${job_info.company_tag}','${job_info.company_picture}','${job_info.link_job}','${job_info.link_company}','${job_info.job_description}','${
+                job_info.requirements
+              }','${job_info.benefits}','${job_info.company_scale}','${job_info.address}','${job_info.company_description}');`,
               () => {
                 console.log('ok');
               }
             );
           });
-
-          //todo company_scale
-          // console.log(job_info);
-          // console.log(`INSERT INTO job_yourator(job_id,job_name,skill_tag,salary,location,company_name,company_tag,company_picture,link_job,link_company)
-          // VALUE ('${job_info.job_id}','${job_info.job_name}','${job_info.skill_tag}','${job_info.salary}','${
-          //   job_info.location
-          // }','${job_info.company_name}','${job_info.company_tag}','${job_info.company_picture}','${job_info.link_job}','${
-          //   job_info.link_company
-          // }');`);
-          // console.log(`\n`);
         }
       });
     }
@@ -106,9 +87,46 @@ function goJobPage(url_job_page, time = 0) {
           let $ = cheerio.load(b);
           let jd = [];
           $('.col-md-10 article').each((i, elem) => {
-            jd.push($(elem).text());
+            jd.push($(elem).text()) || '';
           });
-          resolve(jd);
+
+          info = {};
+          $('.basic-info-text').each((i, elem) => {
+            if (
+              $(elem)
+                .text()
+                .indexOf('地址') !== -1
+            ) {
+              // info.addr = $('span', elem).data('original-title');
+
+              if (
+                $('span', elem)
+                  .text()
+                  .indexOf('...') !== -1
+              ) {
+                info.addr = $('span', elem).attr('title');
+              } else {
+                info.addr = $('span', elem).text();
+              }
+            } else if (
+              $(elem)
+                .text()
+                .indexOf('規模') !== -1
+            ) {
+              info.scale =
+                $(elem).text().length > 5
+                  ? $(elem)
+                      .text()
+                      .slice(5)
+                  : '';
+            }
+          });
+
+          console.log(info.scale);
+
+          info.company_desc = $('.company-description').text();
+
+          resolve({ jd: jd, info: info });
         }
       );
     }, time * 2000);

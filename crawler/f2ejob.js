@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+const cheerio = require('cheerio');
 
 const request = require('request');
 const db = require('./db');
@@ -19,7 +20,7 @@ app.use(cookieParser());
 
 app.use(function(req, res, next) {
   // res.header('Access-Control-Allow-Origin', '*');
-  // res.header('Access-Control-Allow-Origin', 'http://localhost:3006');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   // res.header('Access-Control-Allow-Origin', 'http://3.18.93.25:3006');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -30,6 +31,10 @@ app.use(function(req, res, next) {
 let port = 80;
 app.listen(port, () => {
   console.log(`the app is running on localhost:${port}`);
+});
+
+app.get('/favo', (req, res) => {
+  res.status(301).redirect('/');
 });
 
 app.get('/yourator', (req, res) => {
@@ -61,7 +66,6 @@ app.get('/104', (req, res) => {
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
-        console.log(`NT$ ${salary_low} - ${salary_high} (月薪)`);
       });
 
       res.json({ jobs: result, totalPage: totalPage });
@@ -77,6 +81,47 @@ app.get('/meetjobs', (req, res) => {
       res.json({ jobs: result, totalPage: totalPage });
     });
   });
+});
+
+app.get('/find', (req, res) => {
+  console.log(req.query);
+  let source = req.query.source;
+  let id = req.query.id;
+  if (source === '104') {
+    db.query(`SELECT * FROM job_104 where job_id=${id}`, (e, r, b) => {
+      if (e) {
+        return e;
+      }
+      if (r.length > 0) {
+        r.forEach(e => {
+          let digit_low = e.salary_low.split('').findIndex(val => val > 0);
+          let salary_low = e.salary_low
+            .slice(digit_low)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+          console.log('\n');
+          let digit_high = e.salary_high.split('').findIndex(val => val > 0);
+          let salary_high = e.salary_high
+            .slice(digit_high)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
+        });
+      }
+      res.json({ data: r });
+    });
+  } else if (source === 'yourator') {
+    db.query(`SELECT * FROM job_yourator where job_id=${id}`, (e, r, b) => {
+      if (e) {
+        return e;
+      }
+      if (r.length > 0) {
+        console.log(r);
+        res.json({ data: r });
+      }
+    });
+  }
 });
 
 app.post('/signUp', (req, res) => {
@@ -128,17 +173,14 @@ app.post('/signIn', (req, res) => {
       bcrypt.compare(password, password_hash).then(function(result) {
         if (result) {
           bcrypt.hash(password, saltRounds).then(function(session_id) {
-            db.query(
-              `UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`,
-              (err, result, fields) => {
-                if (err) {
-                  res.json({ signIn: 'try_again' });
-                } else {
-                  res.cookie('session_id', session_id);
-                  res.json({ signIn: 'success', name: name, email: email, favorite_job: favorite_job });
-                }
+            db.query(`UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`, (err, result, fields) => {
+              if (err) {
+                res.json({ signIn: 'try_again' });
+              } else {
+                res.cookie('session_id', session_id);
+                res.json({ signIn: 'success', name: name, email: email, favorite_job: favorite_job });
               }
-            );
+            });
           });
         } else {
           res.json({ signIn: 'wrong_password' });
@@ -192,15 +234,12 @@ app.post('/addFavo', (req, res) => {
       favo_list[source].push(jobid);
       console.log('new', favo_list);
       let favo_list_str = JSON.stringify(favo_list);
-      db.query(
-        `UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`,
-        (err, result, fields) => {
-          if (err) {
-            res.json({ favo_list: JSON.stringify(favo_list) });
-          }
-          res.json({ favo_list: favo_list_str });
+      db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
+        if (err) {
+          res.json({ favo_list: JSON.stringify(favo_list) });
         }
-      );
+        res.json({ favo_list: favo_list_str });
+      });
     } else {
       res.json({ favo_list: JSON.stringify(favo_list) });
     }
@@ -225,15 +264,12 @@ app.post('/removeFavo', (req, res) => {
       console.log('new', favo_list);
 
       let favo_list_str = JSON.stringify(favo_list);
-      db.query(
-        `UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`,
-        (err, result, fields) => {
-          if (err) {
-            res.json({ favo_list: JSON.stringify(favo_list) });
-          }
-          res.json({ favo_list: favo_list_str });
+      db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
+        if (err) {
+          res.json({ favo_list: JSON.stringify(favo_list) });
         }
-      );
+        res.json({ favo_list: favo_list_str });
+      });
     } else {
       res.json({ favo_list: JSON.stringify(favo_list) });
     }
@@ -290,14 +326,12 @@ app.post('/favo', (req, res) => {
     }
   };
 
-  let query_result = Promise.all([query_favo(favo_yourator), query_favo(favo_104), query_favo(favo_meetjobs)]).then(
-    data => {
-      let data_yourator = data[0];
-      let data_104 = data[1];
-      let data_meetjobs = data[2];
-      res.json({ data: { yourator: data_yourator, '104': data_104, meetjobs: data_meetjobs } });
-    }
-  );
+  let query_result = Promise.all([query_favo(favo_yourator), query_favo(favo_104), query_favo(favo_meetjobs)]).then(data => {
+    let data_yourator = data[0];
+    let data_104 = data[1];
+    let data_meetjobs = data[2];
+    res.json({ data: { yourator: data_yourator, '104': data_104, meetjobs: data_meetjobs } });
+  });
 });
 
 let query_favo = async (source, id) => {

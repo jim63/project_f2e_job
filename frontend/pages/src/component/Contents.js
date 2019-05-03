@@ -27,7 +27,6 @@ class Contents extends Component {
       return (
         <>
           <div className='jobsContainer' id='jobsContainer'>
-            {/* <div>loading</div> */}
             <div className='bouncing-loader'>
               <div />
               <div />
@@ -41,42 +40,39 @@ class Contents extends Component {
         return (
           <CardJob
             key={id}
-            imgSRC={
-              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
-              (e.picture !== 'undefined' ? e.picture : default_104)
-            }
+            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
             salary={e.salary}
-            description={e.skill_tag || e.job_description}
+            description={e.skill_tag || e.skill || e.job_description}
             jobID={e.job_id}
             source={e.job_source}
+            link_job={e.link_job}
           />
         );
       });
       let pageArea = [];
-      for (let i = 1; i <= this.props.jobs_data.jobs.total_page; i++) {
-        if (this.props.jobs_data.jobs.current_page == i) {
-          pageArea.push(
-            <Pages
-              key={i}
-              page={`${i}`}
-              source={this.props.jobs_data.jobs.source}
-              changePage={this.changePage}
-              focus={true}
-            />
-          );
-        } else {
-          pageArea.push(
-            <Pages
-              key={i}
-              page={`${i}`}
-              source={this.props.jobs_data.jobs.source}
-              changePage={this.changePage}
-              focus={false}
-            />
-          );
+      if (this.props.jobs_data.jobs.total_page <= 9) {
+        for (let i = 1; i <= this.props.jobs_data.jobs.total_page; i++) {
+          if (this.props.jobs_data.jobs.current_page == i) {
+            pageArea.push(<Pages key={i} page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={true} />);
+          } else {
+            pageArea.push(<Pages key={i} page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={false} />);
+          }
+        }
+      } else {
+        for (let i = this.props.jobs_data.jobs.current_page - 4; i <= this.props.jobs_data.jobs.total_page; i++) {
+          if (i > 0) {
+            if (this.props.jobs_data.jobs.current_page == i) {
+              pageArea.push(<Pages key={i} page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={true} />);
+            } else {
+              pageArea.push(<Pages key={i} page={`${i}`} source={this.props.jobs_data.jobs.source} changePage={this.changePage} focus={false} />);
+            }
+          }
+          if (pageArea.length >= 9) {
+            break;
+          }
         }
       }
       return (

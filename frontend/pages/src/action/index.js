@@ -4,8 +4,8 @@ import axios from 'axios';
 export const fetch_jobs = ({ page, source }) => async dispatch => {
   if (source === 'yourator') {
     const response = await axios
-      // .get(`http://3.18.93.25:3006/yourator?page=${page}`, { withCredentials: true })
-      .get(`/yourator?page=${page}`, { withCredentials: true })
+      .get(`http://localhost:80/yourator?page=${page}`, { withCredentials: true })
+      // .get(`/yourator?page=${page}`, { withCredentials: true })
       .then(e => {
         return {
           source: 'yourator',
@@ -17,7 +17,8 @@ export const fetch_jobs = ({ page, source }) => async dispatch => {
     dispatch({ type: 'FETCH_JOBDATA', payload: response });
   } else if (source === '104') {
     // const response = await axios.get(`http://localhost:3006/104?page=${page}`, { withCredentials: true }).then(e => {
-    const response = await axios.get(`/104?page=${page}`, { withCredentials: true }).then(e => {
+    const response = await axios.get(`http://localhost:80/104?page=${page}`, { withCredentials: true }).then(e => {
+      // const response = await axios.get(`/104?page=${page}`, { withCredentials: true }).then(e => {
       return {
         source: '104',
         job_list: e.data.jobs,
@@ -67,6 +68,14 @@ export const change_banner = () => {
   return { type: 'CHANGE_BANNER' };
 };
 
+export const change_banner_default = () => {
+  return { type: 'CHANGE_BANNER_DEFAULT' };
+};
+
 export const update_favo = obj => {
   return { type: 'UPDATE_FAVO', payload: obj };
+};
+
+export const update_detail = obj => {
+  return { type: 'UPDATE_DETAIL', payload: obj };
 };

@@ -41,6 +41,8 @@ const banner_status = (status = 2, action = '') => {
   if (action.type === 'CHANGE_BANNER') {
     status++;
     return status % 3;
+  } else if (action.type === 'CHANGE_BANNER_DEFAULT') {
+    return 2;
   }
   return status;
 };
@@ -52,9 +54,17 @@ const favo_job = (job = '', action = '') => {
   return job;
 };
 
+const detail = (detail = '', action = '') => {
+  if (action.type === 'UPDATE_DETAIL') {
+    return action.payload;
+  }
+  return detail;
+};
+
 export default combineReducers({
   jobs: jobs,
   user_status: user_status,
   banner_status: banner_status,
-  favo_job: favo_job
+  favo_job: favo_job,
+  detail: detail
 });

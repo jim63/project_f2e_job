@@ -9,13 +9,14 @@ import Footer from './component/Footer';
 import Login from './component/Login';
 import Logout from './component/Logout';
 import Favo from './component/Favo';
+import Detail from './component/Detail';
 import Banner_favo from './component/Banner_favo';
 import { connect } from 'react-redux';
 import { fetch_jobs, login_check_success, login_check_fail } from './action/index';
-
+import './main.css';
 class App extends Component {
   logo_click = e => {
-    if (window.location.href.indexOf('favo') === -1) {
+    if (window.location.href.indexOf('favo') === -1 && window.location.href.indexOf('jobs') === -1) {
       if (this.props.user_status.status === 'login') {
         if (
           e.target.className.indexOf('welcome_button') == -1 &&
@@ -71,7 +72,7 @@ class App extends Component {
     }
   };
 
-  componentDidMount() {
+  qqqqcomponentDidMount() {
     function getCookie(name) {
       var value = '; ' + document.cookie;
       var parts = value.split('; ' + name + '=');
@@ -119,8 +120,14 @@ class App extends Component {
         {top_right}
         <div className='react_container'>
           <Header />
-          <Banner_favo />
-          <div className='contentsContainer' style={{}}>
+          <Route path='/' exact component={Banner_favo} />
+          <div className='contentsContainer'>
+            <Route
+              path='/jobs/:source/:id'
+              component={({ match }) => {
+                return <Detail source={match.params.source} id={match.params.id} loading={true} />;
+              }}
+            />
             <Route path='/' exact component={Nav} />
             <Route path='/' exact component={Contents} />
             <Route path='/favo' component={Favo} />
