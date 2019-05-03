@@ -16,7 +16,7 @@ class Detail extends Component {
     let source = this.props.source;
     let id = this.props.id;
 
-    fetch(`https://oledu.tw/findsssss?source=${source}&id=${id}`)
+    fetch(`/find?source=${source}&id=${id}`)
       .then(response => response.json())
       .then(e => {
         this.props.update_detail(e.data[0]);
