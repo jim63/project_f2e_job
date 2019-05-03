@@ -20,7 +20,8 @@
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
-  min-height: 100vh;
+  flex-grow: 1;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
 }

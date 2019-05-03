@@ -9,6 +9,7 @@
 
 .contentsContainer {
   background-color: #ffffff;
+  flex-grow: 1;
 }
 
 .page {
