@@ -35,9 +35,9 @@ app.use(function(req, res, next) {
 });
 
 let port = 80;
-// app.listen(port, () => {
-//   console.log(`the app is running on localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`the app is running on localhost:${port}`);
+});
 
 var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
