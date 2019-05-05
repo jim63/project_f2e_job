@@ -31,15 +31,18 @@ class App extends Component {
       if (e.target.className.indexOf('nav_top_yourator') !== -1) {
         // this.props.fetch_jobs({ page: 'pending', source: 'yourator' });
         this.props.fetch_jobs({ page: 1, source: 'yourator' });
-        document.getElementById('jobsContainer').scrollIntoView();
+        // document.getElementById('jobsContainer').scrollIntoView();
+        document.querySelector('.nav_top').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_104') !== -1) {
         // this.props.fetch_jobs({ page: 'pending', source: '104' });
         this.props.fetch_jobs({ page: 1, source: '104' });
-        document.getElementById('jobsContainer').scrollIntoView();
+        // document.getElementById('jobsContainer').scrollIntoView();
+        document.querySelector('.nav_top').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_meetjobs') !== -1) {
         // this.props.fetch_jobs({ page: 'pending', source: 'meetjobs' });
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
-        document.getElementById('jobsContainer').scrollIntoView();
+        // document.getElementById('jobsContainer').scrollIntoView();
+        document.querySelector('.nav_top').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_search') !== -1) {
         this.props.fetch_jobs({ page: 'pending', source: 'search' });
       } else {
