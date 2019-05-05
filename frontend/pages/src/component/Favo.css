@@ -16,15 +16,37 @@
   line-height: 40px;
   font-size: 20px;
   display: flex;
-  /* justify-content: center; */
+  flex-wrap: wrap;
   margin-left: 40px;
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 .favo_title p {
   pointer-events: none;
-  border-bottom: 3px solid black;
+  flex-shrink: 0;
+  width: 300px;
+  /* border-bottom: 3px solid black; */
+}
+
+.favo_title_meetjobs {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+}
+.favo_title_104 {
+  background-image: linear-gradient(-45deg, #fccf31, #f55555);
+}
+.favo_title_yourator {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+}
+
+.favo_title_meetjobs,
+.favo_title_104,
+.favo_title_yourator {
+  border-radius: 50%;
+  width: calc(100%-80px);
+  max-width: 1146px;
+  height: 3px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
 .favo_job {
@@ -34,13 +56,14 @@
   max-height: 0;
   animation-name: shrink;
   animation-duration: 1s;
+  justify-content: center;
 }
 
 .favo_job_expand {
   animation-name: expand;
   animation-duration: 1s;
-  max-height: 1000px;
-  overflow: scroll;
+  max-height: 10000px;
+  /* justify-content: center; */
 }
 
 @keyframes expand {
@@ -65,18 +88,21 @@
   margin: 1.666%;
 }
 
-.favo_job_expand {
-  justify-content: center;
-}
-
 @media screen and (min-width: 760px) {
   .favo_job_expand {
+    justify-content: flex-start;
+  }
+  .favo_job {
     justify-content: flex-start;
   }
 }
 
 @media screen and (min-width: 1140px) {
   .favo_job_expand {
+    justify-content: flex-start;
+  }
+
+  .favo_job {
     justify-content: flex-start;
   }
   .cardJobContainer {

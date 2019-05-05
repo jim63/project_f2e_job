@@ -120,15 +120,18 @@
 
 .jobsContainer_yourator {
   border-top: 3px solid #000dff;
-  border-radius: 0px 0px 10px 10px;
+  border-bottom: 3px solid #000dff;
+  /* border-radius: 0px 0px 10px 10px; */
 }
 .jobsContainer_104 {
   border-top: 3px solid #f55555;
-  border-radius: 0px 0px 10px 10px;
+  border-bottom: 3px solid #f55555;
+  /* border-radius: 0px 0px 10px 10px; */
 }
 .jobsContainer_meetjobs {
   border-top: 3px solid #52e5e7;
-  border-radius: 0px 0px 10px 10px;
+  border-bottom: 3px solid #52e5e7;
+  /* border-radius: 0px 0px 10px 10px; */
 }
 
 @media screen and (min-width: 760px) {

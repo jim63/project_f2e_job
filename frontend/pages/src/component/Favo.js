@@ -90,10 +90,7 @@ class Favo extends Component {
         return (
           <CardJob
             key={e.id}
-            imgSRC={
-              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
-              (e.picture !== 'undefined' ? e.picture : default_104)
-            }
+            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
@@ -116,10 +113,7 @@ class Favo extends Component {
         return (
           <CardJob
             key={e.id}
-            imgSRC={
-              (e.company_picture !== 'undefined' ? e.company_picture : default_yourator) ||
-              (e.picture !== 'undefined' ? e.picture : default_104)
-            }
+            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
@@ -143,20 +137,23 @@ class Favo extends Component {
         <div className='favo_yourator_container favo_container'>
           <div className='favo_title'>
             <p>yourator ({length_favo_yourator})</p>
+            <div className='favo_title_yourator' />
           </div>
-          <div className='favo_job'>{favo_yourator} </div>
+          <div className='favo_job favo_job_expand'>{favo_yourator} </div>
         </div>
         <div className='favo_104_container favo_container'>
           <div className='favo_title'>
             <p>104 ({length_favo_104})</p>
+            <div className='favo_title_104' />
           </div>
-          <div className='favo_job'>{favo_104}</div>
+          <div className='favo_job favo_job_expand'>{favo_104}</div>
         </div>
         <div className='favo_meetjobs_container favo_container'>
           <div className='favo_title'>
             <p>meetjobs ({length_favo_meetjobs})</p>
+            <div className='favo_title_meetjobs' />
           </div>
-          <div className='favo_job'>{favo_meetjobs} </div>
+          <div className='favo_job favo_job_expand'>{favo_meetjobs} </div>
         </div>
       </div>
     );

@@ -76,7 +76,7 @@ function goJobPage(url_job_page, time) {
           if (e) {
             console.log('err', e);
           }
-          let $ = cheerio.load(b);
+          let $ = cheerio.load(b, { decodeEntities: false });
           let target_dt = [];
           $('dt').each(function(i, elem) {
             if (
@@ -103,7 +103,13 @@ function goJobPage(url_job_page, time) {
                 .text()
                 .indexOf('公司福利') !== -1
             ) {
-              info.benefits = $('.content p', ele).text();
+              info.benefits = `<p>${$('.content p', ele).html()}</p>`;
+            } else if (
+              $('h2', ele)
+                .text()
+                .indexOf('工作內容') !== -1
+            ) {
+              info.desc = `<p>${$('.content p', ele).html()}</p>`;
             }
           });
 
@@ -243,7 +249,7 @@ function goComPage(url_job_page, time) {
         if (e) {
           console.log('err', e);
         }
-        let $ = cheerio.load(b);
+        let $ = cheerio.load(b, { decodeEntities: false });
         $('h2').each((i, elem) => {
           if (
             $(elem)
@@ -284,7 +290,7 @@ getTotalPage().then(totalPages => {
             job_info.apply_amount = data[i].applyDesc;
             job_info.location = data[i].jobAddrNoDesc;
             // job_info.address = data[i].jobAddress;
-            job_info.job_description = data[i].description;
+            // job_info.job_description = data[i].description;
             job_info.company_name = data[i].custNameRaw;
             job_info.company_scale = data[i].tags[0];
             job_info.link_job = data[i].link.job.slice(2);
@@ -307,6 +313,7 @@ getTotalPage().then(totalPages => {
               job_info.trip = info.detail.trip;
               job_info.type = info.detail.type;
               job_info.benefit = info.benefits;
+              job_info.job_description = info.desc;
               job_info.update_date = info.date;
 
               let info_s = JSON.stringify(info).replace(/\B(?=(\d{3})+(?!\d))/g, ',');

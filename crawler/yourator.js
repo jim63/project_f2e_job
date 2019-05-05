@@ -84,10 +84,10 @@ function goJobPage(url_job_page, time = 0) {
           if (e) {
             console.log('err', e);
           }
-          let $ = cheerio.load(b);
+          let $ = cheerio.load(b, { decodeEntities: false });
           let jd = [];
           $('.col-md-10 article').each((i, elem) => {
-            jd.push($(elem).text()) || '';
+            jd.push($(elem).html()) || '';
           });
 
           info = {};

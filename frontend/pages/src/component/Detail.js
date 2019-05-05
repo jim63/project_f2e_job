@@ -20,9 +20,7 @@ class Detail extends Component {
       .then(response => response.json())
       .then(e => {
         this.props.update_detail(e.data[0]);
-        setTimeout(() => {
-          this.setState({ loading: false });
-        }, 1000);
+        this.setState({ loading: false });
       });
   }
   render() {
@@ -133,7 +131,8 @@ class Detail extends Component {
               <div className='detail_s_block_title'>
                 <p>職缺介紹：</p>
               </div>
-              <p className='detail_s_block_c'>{this.props.detail.job_description}</p>
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.job_description }} />
+              {/* <p className='detail_s_block_c'>{this.props.detail.job_description}</p> */}
             </div>
             <div className='detail_job_scale detail_s_block'>
               <div className='detail_s_block_title'>
@@ -145,7 +144,8 @@ class Detail extends Component {
               <div className='detail_s_block_title'>
                 <p>福利政策：</p>
               </div>
-              <p className='detail_s_block_c'>{this.props.detail.benefit}</p>
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.benefit }} />
+              {/* <p className='detail_s_block_c'>{this.props.detail.benefit}</p> */}
             </div>
             <div className='detail_job_scale detail_s_block'>
               <div className='detail_s_block_title'>
@@ -256,21 +256,24 @@ class Detail extends Component {
               <div className='detail_s_block_title'>
                 <p>條件要求：</p>
               </div>
-              <p className='detail_s_block_c'>{this.props.detail.requirements}</p>
+              {/* <p className='detail_s_block_c'>{this.props.detail.requirements}</p> */}
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.requirements }} />
             </div>
 
             <div className='detail_job_scale detail_s_block'>
               <div className='detail_s_block_title'>
                 <p>職缺介紹：</p>
               </div>
-              <p className='detail_s_block_c'>{this.props.detail.job_description}</p>
+              {/* <p className='detail_s_block_c'>{this.props.detail.job_description}</p> */}
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.job_description }} />
             </div>
 
             <div className='detail_job_scale detail_s_block'>
               <div className='detail_s_block_title'>
                 <p>福利政策：</p>
               </div>
-              <p className='detail_s_block_c'>{this.props.detail.benefits}</p>
+              {/* <p className='detail_s_block_c'>{this.props.detail.benefits}</p> */}
+              <p className='detail_s_block_c' dangerouslySetInnerHTML={{ __html: this.props.detail.benefits }} />
             </div>
 
             <div className='detail_job_scale detail_s_block'>

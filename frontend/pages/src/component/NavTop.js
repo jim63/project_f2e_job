@@ -35,9 +35,21 @@ class Nav extends Component {
   render() {
     return (
       <nav className='nav_top'>
-        <div className='nav_top_yourator nav_top_option nav_top_not_selected'> yourator</div>
-        <div className='nav_top_meetjobs nav_top_option nav_top_not_selected'>meetjobs</div>
-        <div className='nav_top_104 nav_top_option nav_top_not_selected'>104</div>
+        <div className='nav_top_yourator nav_top_option nav_top_not_selected'>
+          <div className='nav_top_option_p' style={{ pointerEvents: 'none' }}>
+            yourator
+          </div>
+        </div>
+        <div className='nav_top_meetjobs nav_top_option nav_top_not_selected'>
+          <div className='nav_top_option_p' style={{ pointerEvents: 'none' }}>
+            meetjobs
+          </div>
+        </div>
+        <div className='nav_top_104 nav_top_option nav_top_not_selected'>
+          <div className='nav_top_option_p' style={{ pointerEvents: 'none' }}>
+            104
+          </div>
+        </div>
       </nav>
     );
   }

@@ -43,7 +43,14 @@ var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
 
 app.get('/favo', (req, res) => {
-  res.status(301).redirect('/');
+  let session_id = req.cookies.session_id;
+  db.query(`SELECT * FROM member where session_id= '${session_id}'`, (err, result, fields) => {
+    if (result.length === 0) {
+      res.status(301).redirect('/');
+    } else {
+      res.sendfile('./public/index.html');
+    }
+  });
 });
 
 app.get('/yourator', (req, res) => {
