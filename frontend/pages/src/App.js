@@ -28,22 +28,20 @@ class App extends Component {
           document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
         }
       }
-
-      // if (e.target.className.indexOf('current_logo') !== -1 && e.target.className.indexOf('not_current_logo') === -1) {
-      //   let not_current_logo = document.querySelectorAll('.not_current_logo');
-      //   not_current_logo.forEach(e => {
-      //     e.classList.toggle('down_to_buttom');
-      //   });
-      // } else
       if (e.target.className.indexOf('nav_top_yourator') !== -1) {
+        // this.props.fetch_jobs({ page: 'pending', source: 'yourator' });
         this.props.fetch_jobs({ page: 1, source: 'yourator' });
-        // document.getElementById('jobsContainer').scrollIntoView();
+        document.getElementById('jobsContainer').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_104') !== -1) {
+        // this.props.fetch_jobs({ page: 'pending', source: '104' });
         this.props.fetch_jobs({ page: 1, source: '104' });
-        // document.getElementById('jobsContainer').scrollIntoView();
+        document.getElementById('jobsContainer').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_meetjobs') !== -1) {
+        // this.props.fetch_jobs({ page: 'pending', source: 'meetjobs' });
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
-        // document.getElementById('jobsContainer').scrollIntoView();
+        document.getElementById('jobsContainer').scrollIntoView();
+      } else if (e.target.className.indexOf('nav_top_search') !== -1) {
+        this.props.fetch_jobs({ page: 'pending', source: 'search' });
       } else {
         // let not_current_logo = document.querySelectorAll('.not_current_logo');
         // not_current_logo.forEach(e => {

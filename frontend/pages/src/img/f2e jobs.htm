@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>f2e jobs</title>
+  <style type="text/css">body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+input:focus,
+textarea {
+  outline: none !important;
+}
+</style><style type="text/css">.link_home {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+
+.header {
+  /* position: fixed; */
+  top: 0px;
+  width: 100%;
+  background-color: #443a42;
+  height: 50px;
+  max-height: 50px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+
+.header_logo {
+  -webkit-align-content: center;
+          align-content: center;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.header_logo_img {
+  height: 70%;
+  margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header_logo p {
+  text-align: center;
+}
+
+.welcome_button,
+.login_button {
+  margin-right: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0px 10px;
+  border-radius: 20px;
+}
+
+.welcome_button:hover,
+.login_button:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.welcome_button p,
+.login_button p {
+  color: #fff;
+  font-size: 20px;
+}
+</style><style type="text/css">.log_out_container {
+  position: absolute;
+  padding: 20px 20px;
+  background-color: #443a42;
+  right: 0px;
+  top: 50px;
+  z-index: 5;
+  -webkit-animation-name: log_out_container_show;
+          animation-name: log_out_container_show;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  display: none;
+}
+
+.log_out_container div {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: orange;
+  color: #443a42;
+  cursor: pointer;
+}
+
+.logout_check {
+  margin-top: 20px;
+}
+
+.log_out_container_disappear {
+  -webkit-animation-name: log_out_container_show_no_show;
+          animation-name: log_out_container_show_no_show;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+
+  -webkit-transform: translate(300px, 0);
+
+          transform: translate(300px, 0);
+}
+.check_favorite_div,
+.check_favorite {
+  text-decoration: none;
+}
+
+@-webkit-keyframes log_out_container_show_no_show {
+  from {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  to {
+    -webkit-transform: translate(100%, 0px);
+            transform: translate(100%, 0px);
+  }
+}
+
+@keyframes log_out_container_show_no_show {
+  from {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  to {
+    -webkit-transform: translate(100%, 0px);
+            transform: translate(100%, 0px);
+  }
+}
+@-webkit-keyframes log_out_container_show {
+  from {
+    -webkit-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+  }
+  to {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+}
+@keyframes log_out_container_show {
+  from {
+    -webkit-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+  }
+  to {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+}
+</style><style type="text/css">.buttonCompanyContainer {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.logo {
+  display: inline-block;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #aaa;
+}
+
+.current_logo {
+  position: relative;
+  z-index: 1;
+}
+.logo_1 {
+  position: absolute;
+  bottom: 60px;
+}
+
+.logo_2 {
+  position: absolute;
+  bottom: 120px;
+}
+
+.down_to_buttom {
+  position: absolute;
+  bottom: 0px;
+}
+</style><style type="text/css">.navbar {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  /* width: 50px; */
+  z-index: 2;
+  width: 50px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+</style><style type="text/css">.nav_top {
+  width: 100%;
+  max-width: 1146px;
+  margin: 20px auto 0px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  text-align: center;
+  position: relative;
+}
+
+.nav_top_option {
+  position: relative;
+  width: 25%;
+  max-width: 200px;
+  font-size: 18px;
+  height: 5vw;
+  max-height: 50px;
+  min-height: 22px;
+  border-radius: 15px 15px 0px 0px;
+  color: white;
+}
+
+.nav_top_option_p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.nav_top_yourator {
+  background-image: linear-gradient(-45deg, #6b73ff, #000dff);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_104 {
+  background-image: linear-gradient(-45deg, #fccf31, #f55555);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_meetjobs {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_search {
+  background-image: linear-gradient(-45deg, #eeeeee, #443a42);
+  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
+  /* z-index: 10; */
+}
+
+.nav_top_not_selected {
+  background-image: none;
+  background-color: #eee;
+  color: #888;
+}
+
+.nav_top_selected {
+  box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7);
+  z-index: 5;
+}
+</style><style type="text/css">.company,
+.jobTitle {
+  display: none;
+  line-height: 22px;
+}
+
+.location {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.salary {
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.description,
+.description_wide {
+  display: none;
+  color: #666;
+  font-size: 12px;
+  text-align: justify;
+}
+.addToFavo {
+  background-color: #443a42;
+  color: white;
+  text-align: center;
+  padding: 1px;
+  transition: background-color 1s;
+}
+
+.removeFavo {
+  background-color: #ffeacc;
+  text-align: center;
+  padding: 1px;
+  transition: background-color 1s;
+}
+
+.cardJobContainer {
+  width: 420px;
+  margin: 10px;
+}
+
+.jobCard {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  /* box-shadow: 5px 5px 1px 1px rgba(150, 150, 150, 0.1); */
+}
+
+.jobCard:hover {
+  -webkit-transform: translate(-5px, -5px);
+          transform: translate(-5px, -5px);
+  box-shadow: 5px 5px 2px 2px rgba(170, 170, 170, 0.3);
+  cursor: pointer;
+}
+
+.jobCard p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.companyJobTitle {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.companyJobTitle {
+  display: none;
+}
+
+.company,
+.jobTitle {
+  display: block;
+}
+
+.jobCardImgContainer {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.jobCardImgContainer img {
+  /* display: block;
+  margin: 0px auto; */
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+}
+
+.jobCardText {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  padding: 10px;
+}
+
+.jobCardText {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.description {
+  display: none;
+}
+
+.description_wide {
+  display: block;
+}
+
+.jobsContainer {
+  background-color: #fff;
+  position: relative;
+  z-index: 5;
+}
+
+.jobsContainer_yourator {
+  border-top: 3px solid #000dff;
+  border-bottom: 3px solid #000dff;
+  /* border-radius: 0px 0px 10px 10px; */
+}
+.jobsContainer_104 {
+  border-top: 3px solid #f55555;
+  border-bottom: 3px solid #f55555;
+  /* border-radius: 0px 0px 10px 10px; */
+}
+.jobsContainer_meetjobs {
+  border-top: 3px solid #52e5e7;
+  border-bottom: 3px solid #52e5e7;
+  /* border-radius: 0px 0px 10px 10px; */
+}
+
+.jobsContainer_search {
+  border-top: 3px solid #443a42;
+  border-bottom: 3px solid #443a42;
+  /* border-radius: 0px 0px 10px 10px; */
+}
+
+@media screen and (min-width: 760px) {
+  .jobsContainer {
+    padding: 0%;
+  }
+  .cardJobContainer {
+    width: 360px;
+    margin-left: calc((25% - 180px));
+    margin-right: calc((25% - 180px));
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 840px) {
+  .jobsContainer {
+    padding: 5%;
+  }
+  .cardJobContainer {
+    width: 360px;
+    margin-left: calc((25% - 180px));
+    margin-right: calc((25% - 180px));
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .jobsContainer {
+    padding: 0%;
+  }
+  .cardJobContainer {
+    width: 360px;
+    margin: 10px;
+  }
+}
+</style><style type="text/css">.jobsContainer {
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: 0px auto 0px auto;
+  padding-top: 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.contentsContainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  background-color: #ffffff;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+}
+
+.page {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  padding: 20px 0px;
+}
+
+@media screen and (min-width: 760px) {
+  .jobsContainer {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+}
+
+@media screen and (min-width: 1360px) {
+  .jobsContainer {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+}
+
+/* loading */
+@-webkit-keyframes bouncing-loader {
+  to {
+    opacity: 0.1;
+    -webkit-transform: translate3d(0, -1rem, 0);
+            transform: translate3d(0, -1rem, 0);
+  }
+}
+@keyframes bouncing-loader {
+  to {
+    opacity: 0.1;
+    -webkit-transform: translate3d(0, -1rem, 0);
+            transform: translate3d(0, -1rem, 0);
+  }
+}
+.bouncing-loader {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin: auto;
+}
+.bouncing-loader > div {
+  width: 1rem;
+  height: 1rem;
+  margin: 3rem 0.2rem;
+  background: #8385aa;
+  border-radius: 50%;
+  -webkit-animation: bouncing-loader 0.6s infinite alternate;
+          animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader > div:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+.bouncing-loader > div:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+</style><style type="text/css">.page {
+  background-color: #fff;
+}
+
+.pageButton {
+  width: 30px;
+  height: 30px;
+  background-color: #eee;
+  color: #443a42;
+  line-height: 30px;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.pageButton.onThisPage,
+.pageButton:hover {
+  background-color: #443a42;
+  color: #eee;
+}
+</style><style type="text/css">.footer {
+  background-color: #443a42;
+  /* height: 50px; */
+  color: white;
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+.footer * {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.footer p {
+  /* line-height: 50px; */
+  text-align: center;
+}
+</style><style type="text/css">.login_background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 9;
+  display: none;
+}
+.signup_prompt,
+.login_prompt {
+  width: 70%;
+  height: 70%;
+  max-width: 400px;
+  max-height: 400px;
+  background-color: #fff;
+  margin: auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  border-radius: 20px;
+}
+
+.signup_prompt {
+  display: none;
+}
+
+.signup_prompt_container,
+.login_prompt_container {
+  margin: 20px auto auto;
+  width: 80%;
+  padding: 10px;
+}
+
+.signup_prompt_container form input,
+.login_prompt_container form input {
+  margin-top: 5px;
+  /* margin-bottom: 25px; */
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-color: #eee;
+  border: 1px solid #aaa;
+}
+
+.signup_prompt_container form input {
+  margin-bottom: 25px;
+}
+
+.signup_prompt_container form input:focus,
+.login_prompt_container form input:focus {
+  border: transparent;
+  border-color: transparent;
+  background-color: #eee;
+}
+
+.signup_prompt_container form label,
+.login_prompt_container form label {
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.signup_bottom_text,
+.login_bottom_text {
+  margin: auto auto 20px auto;
+}
+
+.signup_bottom_text p,
+.login_bottom_text p {
+  pointer-events: none;
+}
+
+.signup_submit,
+.login_submit {
+  outline: none !important;
+  border-radius: 10px;
+  border: 5px solid transparent;
+  background-color: #ffc107;
+  font-size: 20px;
+  padding: 5px 35px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+
+.signup_submit:hover,
+.login_submit:hover {
+  border: 5px solid transparent;
+  background-color: #dba504;
+  transition: 0.1s;
+}
+.signup_submit:focus,
+.login_submit:focus {
+  box-shadow: 0 0 10px #ffc107;
+  background-color: #c19101;
+  transition: 0.1s;
+}
+
+.password_alert,
+.email_alert {
+  padding-left: 20px;
+  color: red;
+  visibility: hidden;
+}
+</style><style type="text/css">.favo_container_all {
+  padding: 30px 0px;
+}
+
+.favo_container {
+  /* border: 2px solid #999; */
+  border-radius: 10px;
+}
+
+.favo_container:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.favo_title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.favo_title p {
+  pointer-events: none;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  width: 300px;
+  /* border-bottom: 3px solid black; */
+}
+
+.favo_title_meetjobs {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+}
+.favo_title_104 {
+  background-image: linear-gradient(-45deg, #fccf31, #f55555);
+}
+.favo_title_yourator {
+  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+}
+
+.favo_title_meetjobs,
+.favo_title_104,
+.favo_title_yourator {
+  border-radius: 50%;
+  width: calc(100%-80px);
+  max-width: 1146px;
+  height: 3px;
+  margin-bottom: 10px;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+
+.favo_job {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  overflow: hidden;
+  max-height: 0;
+  -webkit-animation-name: shrink;
+          animation-name: shrink;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+.favo_job_expand {
+  -webkit-animation-name: expand;
+          animation-name: expand;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  max-height: 10000px;
+  /* justify-content: center; */
+}
+
+@-webkit-keyframes expand {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 1000px;
+  }
+}
+
+@keyframes expand {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 1000px;
+  }
+}
+
+@-webkit-keyframes shrink {
+  from {
+    max-height: 1000px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    max-height: 1000px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+
+.jobsssss {
+  margin: 1.666%;
+}
+
+@media screen and (min-width: 760px) {
+  .favo_job_expand {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+  .favo_job {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .favo_job_expand {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+
+  .favo_job {
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+  }
+  .cardJobContainer {
+    margin: 10px 10px;
+    width: 360px;
+  }
+}
+</style><style type="text/css">.detail_container .bouncing-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.detail_container .bouncing-loader > div {
+  width: 1rem;
+  height: 1rem;
+  margin: 3rem 0.2rem;
+  background: #8385aa;
+  border-radius: 50%;
+  -webkit-animation: bouncing-loader 0.6s infinite alternate;
+          animation: bouncing-loader 0.6s infinite alternate;
+}
+.detail_container .bouncing-loader > div:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+.detail_container .bouncing-loader > div:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.detail_container {
+  transition: none;
+}
+
+.detail_inside {
+  transition: none;
+  border: 1px solid #aaa;
+  padding: 30px;
+}
+
+.detail_inside * {
+  transition: none;
+}
+.detail_meetjobs_top,
+.detail_yourator_top {
+  margin-top: 20px;
+}
+
+.detail_yourator_img {
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.detail_meetjobs_img {
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100px;
+  /* height: 100px; */
+}
+
+.detail_yourator_img img {
+  width: 100%;
+}
+
+.detail_meetjobs_img img {
+  width: 100px;
+  /* height: 100px; */
+}
+
+.detail_link_t {
+  margin-top: 30px;
+  font-size: 18px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #443a42;
+  background-color: #443a42;
+  color: white;
+}
+
+.detail_link_block_none {
+  height: 0px;
+  overflow: hidden;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.map_area {
+  width: 100px;
+  max-width: 760px;
+  background-color: #00f;
+}
+
+.detail_s_block {
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.detail_s_block_title {
+  width: 100px;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  color: #3a443c;
+}
+.detail_s_block_title p {
+  line-height: 1.8em;
+}
+
+.detail_s_block p {
+  text-align: justify;
+}
+
+a {
+  color: white;
+}
+
+.detail_link {
+  width: 100%;
+  height: 50px;
+  background-color: #e5710f;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.detail_link_block a {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.detail_link_block {
+  margin-top: 20px;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+
+.detail_s_block_c {
+  color: #444;
+  line-height: 1.8em;
+}
+
+.detail_s_block_title {
+  font-weight: 500;
+}
+.detail_google_maps {
+  width: 100%;
+  height: 30vw;
+  border: 0px;
+}
+
+@media screen and (max-width: 760px) {
+  .detail_inside {
+    padding: 30px 10px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .detail_yourator_text {
+  }
+  .detail_meetjobs_top,
+  .detail_yourator_top {
+    margin-top: 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-evenly;
+            justify-content: space-evenly;
+  }
+
+  .detail_yourator_img_container {
+    position: relative;
+    -webkit-flex-shrink: 0;
+            flex-shrink: 0;
+    width: 30%;
+    padding: 10px;
+  }
+
+  .detail_meetjobs_img {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+
+  .detail_yourator_img {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+
+  .detail_yourator_img img {
+    width: 100%;
+  }
+}
+</style><style type="text/css">.banner_container {
+  overflow: hidden;
+}
+
+.not_current_banner {
+  position: absolute;
+  top: 0px;
+  -webkit-animation-name: oxxo;
+          animation-name: oxxo;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-transform: translate(2000px, 0);
+          transform: translate(2000px, 0);
+}
+
+.current_banner {
+  -webkit-animation-name: oxxo_2;
+          animation-name: oxxo_2;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+.not_default_banner,
+.default_banner {
+  -webkit-animation-duration: 0s;
+          animation-duration: 0s;
+}
+
+.banner {
+  background-color: #654321;
+  display: -webkit-flex;
+  display: flex;
+  background-size: 100% auto;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 53.6vw;
+  max-height: 612px;
+}
+
+@-webkit-keyframes oxxo {
+  from {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  to {
+    -webkit-transform: translate(-100%, 0px);
+            transform: translate(-100%, 0px);
+  }
+}
+
+@keyframes oxxo {
+  from {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  to {
+    -webkit-transform: translate(-100%, 0px);
+            transform: translate(-100%, 0px);
+  }
+}
+
+@-webkit-keyframes oxxo_2 {
+  from {
+    -webkit-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+}
+
+@keyframes oxxo_2 {
+  from {
+    -webkit-transform: translate(100%, 0);
+            transform: translate(100%, 0);
+  }
+  to {
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+  }
+}
+
+.banner::after {
+  /* content: '';
+  padding-top: 53.74%; */
+}
+
+.bannerText {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  /* background-color: white; */
+  color: #444;
+  -webkit-align-content: center;
+          align-content: center;
+  font-size: 14px;
+}
+
+.bannerLogo {
+  width: 15.6vw;
+  height: 6.24vw;
+  margin-top: 20px;
+  margin-left: 20px;
+  /* background-color: #fff; */
+}
+
+.bannerText p {
+  text-align: center;
+  margin-bottom: 2vw;
+  margin: 0;
+}
+
+@media screen and (min-width: 720px) {
+  .bannerText {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .bannerText {
+    font-size: 28px;
+  }
+}
+</style><style type="text/css">* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s;
+}
+
+.contentsContainer {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  position: relative;
+}
+
+.react_container {
+  width: 100%;
+  max-width: 1146px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  /* min-height: 100vh; */
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+body {
+  /* background-color: #eee; */
+}
+</style></head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"><div style="display: flex; flex-direction: column; min-height: 100vh;"><div class="login_background"><div class="login_prompt"><div class="login_prompt_container"><form><label for="email_login">E-mail</label><br><input type="email" id="email_login" placeholder="jim123@gmail.com" required=""><p class="email_alert" style="visibility: hidden;">email 尚未註冊</p><br><label for="password_login">Password</label><br><input type="password" id="password_login" placeholder="●●●●●●●●" required="" minlength="4" maxlength="16"><p class="password_alert" style="visibility: hidden;">密碼錯誤，請重新輸入</p><br><button type="submit" class="login_submit">登入</button><br></form></div><div class="login_bottom_text"><p>還沒有帳號？按這裡註冊</p></div></div><div class="signup_prompt"><div class="signup_prompt_container"><form><label for="name_signup">Name</label><br><input type="name" id="name_signup" placeholder="jimjim" required="" minlength="4" maxlength="16"><br><label for="email_signup">E-mail</label><br><input type="email" id="email_signup" placeholder="jim123@gmail.com" required=""><br><label for="password_signup">Password</label><br><input type="password" id="password_signup" placeholder="●●●●●●●●" required="" minlength="4" maxlength="16"><br><button type="submit" class="signup_submit">註冊</button><br></form></div><div class="signup_bottom_text"><p>已經有帳號？按這裡登入</p></div></div></div><header class="header"><a class="link_home" href="http://localhost:3000/"><span class="header_logo"><img class="header_logo_img" src="./f2e jobs_files/logo-1.4246f79d.svg" alt=""></span></a><div class="login_button"><p style="pointer-events: none;">登入</p> </div></header><div class="banner_container"><div style="position: relative;"><div class="banner_control banner_1 not_current_banner"><div class="banner"><img src="./f2e jobs_files/banner-18.8ab76751.png" class="banner_ani_2" style="width: 100%; height: auto; overflow: hidden;"><div class="bannerText"><p>WORK LIFE BALANCE</p><p>ARE YOU READY?</p></div></div></div><div class="banner_control banner_2 not_current_banner"><div class="banner"><img src="./f2e jobs_files/banner2.b04b2ce4.jpeg" class="banner_ani_2" style="width: 100%; height: auto; overflow: hidden;"><div class="bannerText" style="color: white;"><p>STUCK IN LIFE </p><p>OR</p><p>STUCK IN EVENT-LOOP</p></div></div></div><div class="banner_control banner_3 current_banner"><div class="banner"><img src="./f2e jobs_files/banner3.6dedf6a6.jpeg" class="banner_ani_2" style="width: 100%; height: auto; overflow: hidden;"><div class="bannerText" style="color: white;"><p>STUCK IN LIFE </p><p>OR</p><p>STUCK IN EVENT-LOOP</p></div></div></div></div></div><nav class="nav_top"><div class="nav_top_yourator nav_top_option nav_top_selected"><div class="nav_top_option_p" style="pointer-events: none;">yourator</div></div><div class="nav_top_meetjobs nav_top_option nav_top_not_selected"><div class="nav_top_option_p" style="pointer-events: none;">meetjobs</div></div><div class="nav_top_104 nav_top_option nav_top_not_selected"><div class="nav_top_option_p" style="pointer-events: none;">104</div></div><div class="nav_top_search nav_top_option  nav_top_selected"><div class="nav_top_option_p"><form action="http://localhost:3000/"><input type="text" style="height: 100%; width: 200px; "></form></div></div></nav><div class="react_container"><div class="contentsContainer"><div class="jobsContainer" id="jobsContainer"><div class="bouncing-loader"><div></div><div></div><div></div></div></div></div></div><footer class="footer"><img src="./f2e jobs_files/logo-2.edc4ee33.svg" alt="" width="50px"><p>©2019 ALL RIGHT RESERVED. </p></footer></div></div>
+    <!-- 
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script src="./f2e jobs_files/bundle.js"></script><script src="./f2e jobs_files/0.chunk.js"></script><script src="./f2e jobs_files/main.chunk.js"></script><script src="./f2e jobs_files/main.5db95eddb43ca57d19e7.hot-update.js"></script>
+
+</body><div></div><div></div></html>

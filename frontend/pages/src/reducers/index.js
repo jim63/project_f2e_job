@@ -9,6 +9,7 @@ const jobs = (
   },
   action = ''
 ) => {
+  console.log('reducer', action);
   if (action.type === 'FETCH_JOBDATA') {
     return action.payload;
   }

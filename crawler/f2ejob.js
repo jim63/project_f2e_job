@@ -150,6 +150,82 @@ app.get('/find', (req, res) => {
   }
 });
 
+app.get('/search', (req, res) => {
+  let keywords = req.query.keyword;
+  console.log(keywords);
+
+  function splitStr(sChars) {
+    var str = '';
+    for (var i = 0; (schar = sChars.charAt(i)); i++) {
+      if (typeof schar == 'undefined' || typeof sChars.charAt(i + 1) == 'undefined') break;
+      str += schar;
+      if (getStrLength(schar) != getStrLength(sChars.charAt(i + 1))) {
+        str += ',';
+      }
+    }
+    // return str;
+    return str.trim().split(',');
+  }
+
+  function getStrLength(str) {
+    var cArr = str.match(/[^\x00-\xff]/gi);
+    return str.length + (cArr == null ? 0 : cArr.length);
+  }
+  let keywords_split = splitStr(keywords).slice(0, splitStr(keywords).length - 1);
+  let keywords_use = keywords_split.length > 4 ? keywords_split.slice(0, 4) : keywords_split;
+  let query = '';
+  let search = (keyword, source) => {
+    let query_arr = [];
+    keyword.map(e => {
+      let each_string = '(';
+      let e_length = e.length;
+      e.split('').map((w, i) => {
+        if (i !== e_length - 1) {
+          each_string += `company_name like '%${w}%' and `;
+        } else {
+          each_string += `company_name like '%${w}%'`;
+        }
+      });
+      each_string += ')';
+      query_arr.push(each_string);
+      query = query_arr.join(' or ');
+      console.log(query);
+    });
+
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT * FROM job_${source} where ${query}`, (err, result, fields) => {
+        if (err) {
+          resolve(err);
+        }
+        if (source == 104) {
+          result.forEach(e => {
+            let digit_low = e.salary_low.split('').findIndex(val => val > 0);
+            let salary_low = e.salary_low
+              .slice(digit_low)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            console.log('\n');
+            let digit_high = e.salary_high.split('').findIndex(val => val > 0);
+            let salary_high = e.salary_high
+              .slice(digit_high)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            e.salary = `NT$ ${salary_low} - ${salary_high} (月薪)`;
+          });
+        }
+        resolve(result);
+      });
+    });
+  };
+
+  let query_result = Promise.all([search(keywords_use, 'yourator'), search(keywords_use, '104'), search(keywords_use, 'meetjobs')]).then(data => {
+    let data_yourator = data[0];
+    let data_104 = data[1];
+    let data_meetjobs = data[2];
+    res.json({ data: { yourator: data_yourator, '104': data_104, meetjobs: data_meetjobs } });
+  });
+});
+
 app.post('/signUp', (req, res) => {
   const saltRounds = 10;
   let name = req.body.name;
