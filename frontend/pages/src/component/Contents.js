@@ -73,6 +73,17 @@ class Contents extends Component {
 
           favo_104 = this.props.jobs_data.jobs.job_list['104'].map(e => {
             return (
+              // <CardJob
+              //   key={e.id}
+              //   imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
+              //   company={e.company_name}
+              //   jobTitle={e.job_name}
+              //   location={e.location}
+              //   salary={e.salary}
+              //   description={e.skill_tag || e.job_description}
+              //   jobID={e.job_id}
+              //   source={e.job_source}
+              // />
               <CardJob
                 key={e.id}
                 imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
@@ -80,9 +91,10 @@ class Contents extends Component {
                 jobTitle={e.job_name}
                 location={e.location}
                 salary={e.salary}
-                description={e.skill_tag || e.job_description}
+                description={e.skill_tag || e.skill || e.job_description}
                 jobID={e.job_id}
                 source={e.job_source}
+                link_job={e.link_job}
               />
             );
           });

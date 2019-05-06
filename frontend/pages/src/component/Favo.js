@@ -129,7 +129,7 @@ class Favo extends Component {
     return (
       <div
         className='favo_container_all'
-        onClick={e => {
+        onClick={e => { 
           this.toggle_expand(e);
           console.log(e);
         }}
