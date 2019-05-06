@@ -107,27 +107,56 @@ class Contents extends Component {
             );
           });
 
-          allJobs = (
-            <>
-              <div className='search_title'>
-                <p>yourator ({length_favo_yourator})</p>
-                <div className='search_title_yourator' />
-              </div>
-              {favo_yourator}
+          let search_y =
+            length_favo_yourator === 0 ? (
+              ''
+            ) : (
+              <>
+                <div className='search_title'>
+                  <p>yourator ({length_favo_yourator})</p>
+                  <div className='search_title_yourator' />
+                </div>
+                {favo_yourator}
+              </>
+            );
 
-              <div className='search_title'>
-                <p>104 ({length_favo_104})</p>
-                <div className='search_title_104' />
-              </div>
-              {favo_104}
+          let search_1 =
+            length_favo_104 === 0 ? (
+              ''
+            ) : (
+              <>
+                <div className='search_title'>
+                  <p>104 ({length_favo_104})</p>
+                  <div className='search_title_104' />
+                </div>
+                {favo_104}
+              </>
+            );
 
-              <div className='search_title'>
-                <p>meetjobs ({length_favo_meetjobs})</p>
-                <div className='search_title_meetjobs' />
-              </div>
-              {favo_meetjobs}
-            </>
-          );
+          let search_m =
+            length_favo_meetjobs === 0 ? (
+              ''
+            ) : (
+              <>
+                <div className='search_title'>
+                  <p>meetjobs ({length_favo_meetjobs})</p>
+                  <div className='search_title_meetjobs' />
+                </div>
+                {favo_meetjobs}
+              </>
+            );
+
+          if (length_favo_yourator === 0 && length_favo_meetjobs === 0 && length_favo_104 === 0) {
+            allJobs = <div className='search_t'>沒有符合的結果</div>;
+          } else {
+            allJobs = (
+              <>
+                {search_y}
+                {search_1}
+                {search_m}
+              </>
+            );
+          }
         }
       } else {
         allJobs = this.props.jobs_data.jobs.job_list.map((e, id) => {

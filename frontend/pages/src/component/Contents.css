@@ -87,12 +87,15 @@
 
 .search_title_meetjobs {
   background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+  margin-top: 10px;
 }
 .search_title_104 {
   background-image: linear-gradient(-45deg, #fccf31, #f55555);
+  margin-top: 10px;
 }
 .search_title_yourator {
   background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+  margin-top: 10px;
 }
 
 .search_title_meetjobs,
@@ -109,4 +112,12 @@
 .search_title {
   font-size: 20px;
   width: 100%;
+}
+
+.search_t {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  font-size: 20px;
+  color: #666;
 }
