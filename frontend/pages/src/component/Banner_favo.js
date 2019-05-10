@@ -28,7 +28,7 @@ class Banner extends Component {
   };
 
   componentDidMount() {
-    this.interval1 = setInterval(this.banner_change, 10000);
+    this.interval1 = setInterval(this.banner_change, 7000);
   }
 
   componentWillUnmount() {
@@ -44,7 +44,6 @@ class Banner extends Component {
 
     let banner_condition = (
       <div className='banner_container'>
-        {/* {top_right} */}
         <div style={{ position: 'relative' }}>
           <div className='current_banner banner_control default_banner banner_1'>
             <div className='banner'>
@@ -57,8 +56,8 @@ class Banner extends Component {
           </div>
           <div className='not_current_banner banner_control not_default_banner banner_2'>
             <div className='banner'>
-              <img src={banner2} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden' }} />
-              <div className='bannerText' style={{ color: 'white' }}>
+              <img src={banner2} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.8' }} />
+              <div className='bannerText' style={{ color: 'white', textShadow: '2px 2px #443a42' }}>
                 <p>STUCK IN LIFE </p>
                 <p>OR</p>
                 <p>STUCK IN EVENT-LOOP</p>
@@ -67,11 +66,9 @@ class Banner extends Component {
           </div>
           <div className='not_current_banner banner_control not_default_banner banner_3'>
             <div className='banner'>
-              <img src={banner3} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden' }} />
-              <div className='bannerText' style={{ color: 'white' }}>
-                <p>STUCK IN LIFE </p>
-                <p>OR</p>
-                <p>STUCK IN EVENT-LOOP</p>
+              <img src={banner3} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.7' }} />
+              <div className='bannerText' style={{ color: 'rgba(255,0,0,0.7)', textShadow: '1px 1px #443a42' }}>
+                <p>Java is to JavaScript what Car is to Carpet.</p>
               </div>
             </div>
           </div>

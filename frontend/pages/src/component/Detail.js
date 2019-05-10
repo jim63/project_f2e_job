@@ -24,7 +24,6 @@ class Detail extends Component {
       });
   }
   render() {
-    console.log(this.props);
     let content;
     if (this.state.loading) {
       content = (

@@ -28,14 +28,12 @@ class Login extends Component {
       })
     }).then(response => {
       response.json().then(e => {
-        console.log(e.signIn);
         document.querySelector('#password_login').value = '';
         if (e.signIn == 'wrong_password') {
           document.querySelector('.password_alert').style.visibility = 'visible';
         } else if (e.signIn == 'email_not_found') {
           document.querySelector('.email_alert').style.visibility = 'visible';
         } else if (e.signIn == 'success') {
-          console.log('sign', e);
           this.props.login_check_success({
             status: 'login',
             email: e.email,
@@ -63,7 +61,6 @@ class Login extends Component {
       })
     }).then(response => {
       response.json().then(e => {
-        console.log(e.signIn);
         document.querySelector('#password_login').value = '';
         if (e.signUp === 'already_singUp') {
           document.querySelector('.password_alert').style.visibility = 'visible';
@@ -78,7 +75,6 @@ class Login extends Component {
                 .shift();
           }
           let session_id = getCookie('session_id');
-          console.log('cooke', session_id);
           if (session_id) {
             fetch('/checkSessionID', {
               // fetch('http://localhost:80/checkSessionID', {

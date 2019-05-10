@@ -42,8 +42,6 @@ class Contents extends Component {
       let allJobs = [];
       let pageArea = [];
       if (this.props.jobs_data.jobs.source === 'search') {
-        console.log('1111qqq', this.props.jobs_data.jobs.job_list);
-        //!search yourator
         let favo_yourator = '';
         let length_favo_yourator = 0;
         let favo_104 = '';
@@ -51,6 +49,7 @@ class Contents extends Component {
         let favo_meetjobs = '';
         let length_favo_meetjobs = 0;
 
+        //!search yourator
         if (this.props.jobs_data.jobs.job_list) {
           length_favo_yourator = this.props.jobs_data.jobs.job_list['yourator'].length;
           favo_yourator = this.props.jobs_data.jobs.job_list['yourator'].map(e => {
@@ -73,17 +72,6 @@ class Contents extends Component {
 
           favo_104 = this.props.jobs_data.jobs.job_list['104'].map(e => {
             return (
-              // <CardJob
-              //   key={e.id}
-              //   imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
-              //   company={e.company_name}
-              //   jobTitle={e.job_name}
-              //   location={e.location}
-              //   salary={e.salary}
-              //   description={e.skill_tag || e.job_description}
-              //   jobID={e.job_id}
-              //   source={e.job_source}
-              // />
               <CardJob
                 key={e.id}
                 imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
@@ -101,8 +89,6 @@ class Contents extends Component {
 
           //!search meetjobs
           length_favo_meetjobs = this.props.jobs_data.jobs.job_list['meetjobs'].length;
-          console.log('meetjobs', this.props.jobs_data.jobs.job_list['meetjobs']);
-
           favo_meetjobs = this.props.jobs_data.jobs.job_list['meetjobs'].map(e => {
             return (
               <CardJob
@@ -125,7 +111,7 @@ class Contents extends Component {
             ) : (
               <>
                 <div className='search_title'>
-                  <p>yourator ({length_favo_yourator})</p>
+                  <p>Yourator ({length_favo_yourator})</p>
                   <div className='search_title_yourator' />
                 </div>
                 {favo_yourator}
@@ -151,7 +137,7 @@ class Contents extends Component {
             ) : (
               <>
                 <div className='search_title'>
-                  <p>meetjobs ({length_favo_meetjobs})</p>
+                  <p>Meet.jobs ({length_favo_meetjobs})</p>
                   <div className='search_title_meetjobs' />
                 </div>
                 {favo_meetjobs}

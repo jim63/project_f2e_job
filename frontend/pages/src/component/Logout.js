@@ -9,7 +9,6 @@ class Logout extends Component {
   logout_button_click = () => {
     let session_id = this.props.login_status.session_id;
 
-    console.log(this.props.login_status.session_id);
     fetch('/logout', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
@@ -19,7 +18,6 @@ class Logout extends Component {
       })
     }).then(response => {
       response.json().then(e => {
-        console.log(e);
         if (e.result === 'success') {
           this.props.logout();
         }

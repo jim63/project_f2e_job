@@ -41,8 +41,6 @@ class CardJob extends Component {
 
   show_iframe = e => {
     if (e.target.className.indexOf('removeFavo') === -1 && e.target.className.indexOf('addToFavo') === -1) {
-      console.log('eeeee', e.target.className);
-
       window.open(`/jobs/${this.props.source}/${this.props.jobID}`, 'f2e_jobs', 'height=1000,width=800');
     }
   };

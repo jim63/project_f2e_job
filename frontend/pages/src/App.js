@@ -85,7 +85,6 @@ class App extends Component {
           .shift();
     }
     let session_id = getCookie('session_id');
-    console.log('cooke', session_id);
     if (session_id) {
       fetch('/checkSessionID', {
         // fetch('http://localhost:80/checkSessionID', {

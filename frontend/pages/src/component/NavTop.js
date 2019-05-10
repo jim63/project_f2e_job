@@ -23,7 +23,6 @@ class Nav extends Component {
   on_search_submit = e => {
     e.preventDefault();
     let keyword = document.querySelector('.nav_top_search_input').value;
-    console.log(keyword);
     this.props.fetch_jobs({ page: 1, source: 'search', keyword: keyword });
     document.querySelector('.nav_top_search_input').blur();
   };
@@ -35,7 +34,6 @@ class Nav extends Component {
 
   componentDidUpdate() {
     let current_source = this.props.jobs_data.source || 'yourator';
-    console.log('curr', current_source);
 
     document.querySelectorAll('.nav_top_option').forEach(ele => {
       ele.classList.remove('nav_top_selected');
@@ -53,12 +51,12 @@ class Nav extends Component {
       <nav className='nav_top'>
         <div className='nav_top_yourator nav_top_option nav_top_not_selected'>
           <div className='nav_top_option_p' style={{ pointerEvents: 'none' }}>
-            yourator
+            Yourator
           </div>
         </div>
         <div className='nav_top_meetjobs nav_top_option nav_top_not_selected'>
           <div className='nav_top_option_p' style={{ pointerEvents: 'none' }}>
-            meetjobs
+            Meet.jobs
           </div>
         </div>
         <div className='nav_top_104 nav_top_option nav_top_not_selected'>

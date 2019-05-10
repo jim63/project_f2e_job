@@ -19,7 +19,6 @@ class Favo extends Component {
           'Content-Type': 'application/json'
         })
       }).then(response => {
-        console.log('rrrrr', response);
         response.json().then(e => {
           this.props.update_favo(e.data);
         });
@@ -38,7 +37,6 @@ class Favo extends Component {
           'Content-Type': 'application/json'
         })
       }).then(response => {
-        console.log('eeeee', response);
         response.json().then(e => {
           this.props.update_favo(e.data);
         });
@@ -84,7 +82,6 @@ class Favo extends Component {
     let length_favo_104 = 0;
     if (this.props.favo_job) {
       length_favo_104 = this.props.favo_job['104'].length;
-      console.log('104', this.props.favo_job['104']);
 
       favo_104 = this.props.favo_job['104'].map(e => {
         return (
@@ -107,7 +104,6 @@ class Favo extends Component {
     let length_favo_meetjobs = 0;
     if (this.props.favo_job) {
       length_favo_meetjobs = this.props.favo_job['meetjobs'].length;
-      console.log('meetjobs', this.props.favo_job['meetjobs']);
 
       favo_meetjobs = this.props.favo_job['meetjobs'].map(e => {
         return (
@@ -129,9 +125,8 @@ class Favo extends Component {
     return (
       <div
         className='favo_container_all'
-        onClick={e => { 
+        onClick={e => {
           this.toggle_expand(e);
-          console.log(e);
         }}
       >
         <div className='favo_yourator_container favo_container'>

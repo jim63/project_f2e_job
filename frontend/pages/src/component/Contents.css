@@ -21,28 +21,26 @@
 }
 
 .contentsContainer_border {
+  position: relative;
+  z-index: 50;
   flex-grow: 1;
 }
 
 .contentsContainer_border_yourator {
   border-top: 3px solid #000dff;
-  border-bottom: 3px solid #000dff;
   /* border-radius: 0px 0px 10px 10px; */
 }
 .contentsContainer_border_104 {
   border-top: 3px solid #f55555;
-  border-bottom: 3px solid #f55555;
   /* border-radius: 0px 0px 10px 10px; */
 }
 .contentsContainer_border_meetjobs {
   border-top: 3px solid #52e5e7;
-  border-bottom: 3px solid #52e5e7;
   /* border-radius: 0px 0px 10px 10px; */
 }
 
 .contentsContainer_border_search {
   border-top: 3px solid #443a42;
-  border-bottom: 3px solid #443a42;
   /* border-radius: 0px 0px 10px 10px; */
 }
 

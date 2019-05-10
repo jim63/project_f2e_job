@@ -44,8 +44,6 @@ export const fetch_jobs = ({ page, source, keyword = '' }) => async dispatch => 
     } else if (source === 'search') {
       // const response = await axios.get(`http://localhost:80/search?keyword=${keyword}`, { withCredentials: true }).then(e => {
       const response = await axios.get(`/search?keyword=${keyword}`, { withCredentials: true }).then(e => {
-        console.log('eee', e);
-
         return {
           source: 'search',
           job_list: e.data.data,
