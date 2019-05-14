@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login_check_success } from '../action';
+import { login_check_success, change_login_prompt_status } from '../action';
 
 import './Login.css';
 
 class Login extends Component {
+  state = {
+    login_propmt: 'none'
+  };
+
+  password_login = React.createRef();
+  email_login = React.createRef();
+  password_alert = React.createRef();
+  email_alert = React.createRef();
+  name_signup = React.createRef();
+  email_signup = React.createRef();
+  password_signup = React.createRef();
+
   sign_change = e => {
     if (e.target.className.indexOf('login_bottom_text') != -1) {
-      document.querySelector('.login_prompt').style.display = 'none';
-      document.querySelector('.signup_prompt').style.display = 'flex';
+      this.props.change_login_prompt_status('signup_prompt');
+      console.log(this.state);
     } else if (e.target.className.indexOf('signup_bottom_text') != -1) {
-      document.querySelector('.login_prompt').style.display = 'flex';
-      document.querySelector('.signup_prompt').style.display = 'none';
+      this.props.change_login_prompt_status('login_prompt');
     }
   };
 
   login_submit = e => {
     e.preventDefault();
-    let email = document.querySelector('#email_login').value;
-    let password = document.querySelector('#password_login').value;
+
+    let email = this.email_login.current.value;
+    let password = this.password_login.current.value;
+
     fetch('/signIn', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
@@ -28,11 +41,11 @@ class Login extends Component {
       })
     }).then(response => {
       response.json().then(e => {
-        document.querySelector('#password_login').value = '';
+        this.password_login.current.value = '';
         if (e.signIn == 'wrong_password') {
-          document.querySelector('.password_alert').style.visibility = 'visible';
+          this.password_alert.current.style.visibility = 'visible';
         } else if (e.signIn == 'email_not_found') {
-          document.querySelector('.email_alert').style.visibility = 'visible';
+          this.email_alert.current.style.visibility = 'visible';
         } else if (e.signIn == 'success') {
           this.props.login_check_success({
             status: 'login',
@@ -49,9 +62,9 @@ class Login extends Component {
   signup_submit = e => {
     e.preventDefault();
 
-    let name = document.querySelector('#name_signup').value;
-    let email = document.querySelector('#email_signup').value;
-    let password = document.querySelector('#password_signup').value;
+    let name = this.name_signup.current.value;
+    let email = this.email_signup.current.value;
+    let password = this.password_signup.current.value;
     fetch('/signup', {
       credentials: 'include',
       method: 'POST', // or 'PUT'
@@ -61,9 +74,9 @@ class Login extends Component {
       })
     }).then(response => {
       response.json().then(e => {
-        document.querySelector('#password_login').value = '';
+        this.password_login.current.value = '';
         if (e.signUp === 'already_singUp') {
-          document.querySelector('.password_alert').style.visibility = 'visible';
+          this.password_alert.current.style.visibility = 'visible';
         } else if (e.signUp == 'success') {
           function getCookie(name) {
             var value = '; ' + document.cookie;
@@ -107,30 +120,43 @@ class Login extends Component {
   };
 
   hidden_email_alert = () => {
-    document.querySelector('.email_alert').style.visibility = 'hidden';
+    this.email_alert.current.style.visibility = 'hidden';
   };
 
   hidden_password_alert = () => {
-    document.querySelector('.password_alert').style.visibility = 'hidden';
+    this.password_alert.current.style.visibility = 'hidden';
   };
 
   render() {
     let login_message;
 
     return (
-      <div className='login_background' onClick={this.sign_change}>
-        <div className='login_prompt'>
+      <div className={this.props.login_prompt === 'none' ? 'login_background' : 'login_background login_background_show'} onClick={this.sign_change}>
+        <div className={this.props.login_prompt === 'login_prompt' ? 'login_prompt login_prompt_show' : 'login_prompt login_prompt_hide'}>
           <div className='login_prompt_container'>
             <form onSubmit={this.login_submit}>
               <label htmlFor='email_login'>E-mail</label>
               <br />
-              <input type='email' id='email_login' placeholder='jim123@gmail.com' required onChange={this.hidden_email_alert} />
-              <p className='email_alert'>email 尚未註冊</p>
+              <input type='email' id='email_login' ref={this.email_login} placeholder='jim123@gmail.com' required onChange={this.hidden_email_alert} />
+              <p className='email_alert' ref={this.email_alert}>
+                email 尚未註冊
+              </p>
               <br />
               <label htmlFor='password_login'>Password</label>
               <br />
-              <input type='password' id='password_login' placeholder='●●●●●●●●' required minLength='4' maxLength='16' onChange={this.hidden_password_alert} />
-              <p className='password_alert'>密碼錯誤，請重新輸入</p>
+              <input
+                type='password'
+                id='password_login'
+                ref={this.password_login}
+                placeholder='●●●●●●●●'
+                required
+                minLength='4'
+                maxLength='16'
+                onChange={this.hidden_password_alert}
+              />
+              <p className='password_alert' ref={this.password_alert}>
+                密碼錯誤，請重新輸入
+              </p>
               <br />
               <button type='submit' className='login_submit'>
                 登入
@@ -142,20 +168,20 @@ class Login extends Component {
             <p>還沒有帳號？按這裡註冊</p>
           </div>
         </div>
-        <div className='signup_prompt'>
+        <div className={this.props.login_prompt === 'signup_prompt' ? 'signup_prompt signup_prompt_show' : 'signup_prompt'}>
           <div className='signup_prompt_container'>
             <form onSubmit={this.signup_submit}>
               <label htmlFor='name_signup'>Name</label>
               <br />
-              <input type='name' id='name_signup' placeholder='jimjim' required minLength='4' maxLength='16' />
+              <input type='name' id='name_signup' ref={this.name_signup} placeholder='jimjim' required minLength='4' maxLength='16' />
               <br />
               <label htmlFor='email_signup'>E-mail</label>
               <br />
-              <input type='email' id='email_signup' placeholder='jim123@gmail.com' required />
+              <input type='email' id='email_signup' ref={this.email_signup} placeholder='jim123@gmail.com' required />
               <br />
               <label htmlFor='password_signup'>Password</label>
               <br />
-              <input type='password' id='password_signup' placeholder='●●●●●●●●' required minLength='4' maxLength='16' />
+              <input type='password' id='password_signup' ref={this.password_signup} placeholder='●●●●●●●●' required minLength='4' maxLength='16' />
               <br />
               <button type='submit' className='signup_submit'>
                 註冊
@@ -172,12 +198,12 @@ class Login extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { login_status: state.login_status };
+  return { login_prompt: state.login_prompt };
 };
 
 // export default Contents;
 
 export default connect(
   mapStateToProps,
-  { login_check_success: login_check_success }
+  { login_check_success: login_check_success, change_login_prompt_status: change_login_prompt_status }
 )(Login);

@@ -10,21 +10,24 @@ let logo_104 = require('../img/104logo.png');
 let logo_meetjobs = require('../img/meetjobslogo.svg');
 
 class Nav extends Component {
+  nav_top_search_t = React.createRef();
+  nav_top_search_input = React.createRef();
+
   nav_search_click = () => {
-    document.querySelector('.nav_top_search_t').style.display = 'none';
-    document.querySelector('.nav_top_search_input').style.display = 'block';
-    document.querySelector('.nav_top_search_input').focus();
+    this.nav_top_search_t.current.style.display = 'none';
+    this.nav_top_search_input.current.style.display = 'block';
+    this.nav_top_search_input.current.focus();
   };
   input_focus_out = () => {
-    // document.querySelector('.nav_top_search_input').value = '';
-    document.querySelector('.nav_top_search_input').style.display = 'none';
-    document.querySelector('.nav_top_search_t').style.display = 'inline';
+    this.nav_top_search_input.current.value = '';
+    this.nav_top_search_input.current.style.display = 'none';
+    this.nav_top_search_t.current.style.display = 'inline';
   };
   on_search_submit = e => {
     e.preventDefault();
-    let keyword = document.querySelector('.nav_top_search_input').value;
+    let keyword = this.nav_top_search_input.current.value;
     this.props.fetch_jobs({ page: 1, source: 'search', keyword: keyword });
-    document.querySelector('.nav_top_search_input').blur();
+    this.nav_top_search_input.current.blur();
   };
   componentDidMount() {
     let current_source = this.props.jobs_data.source || 'yourator';
@@ -66,9 +69,11 @@ class Nav extends Component {
         </div>
         <div className='nav_top_search nav_top_option  nav_top_not_selected' onClick={this.nav_search_click}>
           <div className='nav_top_option_p' style={{ display: 'flex' }}>
-            <span className='nav_top_search_t'>Search</span>
+            <span className='nav_top_search_t' ref={this.nav_top_search_t}>
+              Search
+            </span>
             <form action='' onSubmit={this.on_search_submit}>
-              <input type='text' className='nav_top_search_input' style={{ display: 'none' }} onBlur={this.input_focus_out} />
+              <input type='text' className='nav_top_search_input' ref={this.nav_top_search_input} style={{ display: 'none' }} onBlur={this.input_focus_out} />
             </form>
           </div>
         </div>

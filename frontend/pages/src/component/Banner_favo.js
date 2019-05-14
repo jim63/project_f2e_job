@@ -8,13 +8,13 @@ import banner2 from '../img/banner2.jpeg';
 import banner3 from '../img/banner3.jpeg';
 
 class Banner extends Component {
+  banner_ref = [];
+
   banner_change = () => {
     this.props.change_banner();
-
     let banner_status = this.props.banner_status;
 
-    let banner = document.querySelectorAll('.banner_control');
-    banner.forEach(ele => {
+    this.banner_ref.forEach(ele => {
       ele.classList.remove('default_banner');
       ele.classList.remove('not_default_banner');
       if (ele.className.indexOf(banner_status + 1) !== -1) {
@@ -37,15 +37,10 @@ class Banner extends Component {
   }
 
   render() {
-    let top_right;
-    if (this.props.user_status.status === 'login') {
-      top_right = <Logout />;
-    }
-
     let banner_condition = (
       <div className='banner_container'>
         <div style={{ position: 'relative' }}>
-          <div className='current_banner banner_control default_banner banner_1'>
+          <div className='current_banner banner_control default_banner banner_1' ref={banner => (this.banner_ref[0] = banner)}>
             <div className='banner'>
               <img src={banner} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden' }} />
               <div className='bannerText'>
@@ -54,7 +49,7 @@ class Banner extends Component {
               </div>
             </div>
           </div>
-          <div className='not_current_banner banner_control not_default_banner banner_2'>
+          <div className='not_current_banner banner_control not_default_banner banner_2' ref={banner => (this.banner_ref[1] = banner)}>
             <div className='banner'>
               <img src={banner2} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.8' }} />
               <div className='bannerText' style={{ color: 'white', textShadow: '2px 2px #443a42' }}>
@@ -64,7 +59,7 @@ class Banner extends Component {
               </div>
             </div>
           </div>
-          <div className='not_current_banner banner_control not_default_banner banner_3'>
+          <div className='not_current_banner banner_control not_default_banner banner_3' ref={banner => (this.banner_ref[2] = banner)}>
             <div className='banner'>
               <img src={banner3} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.7' }} />
               <div className='bannerText' style={{ color: 'rgba(255,0,0,0.7)', textShadow: '1px 1px #443a42' }}>

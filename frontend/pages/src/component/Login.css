@@ -7,6 +7,11 @@
   z-index: 9;
   display: none;
 }
+
+.login_background_show {
+  display: flex;
+}
+
 .signup_prompt,
 .login_prompt {
   width: 70%;
@@ -22,6 +27,14 @@
 
 .signup_prompt {
   display: none;
+}
+.login_prompt_hide {
+  display: none;
+}
+
+.login_prompt_show,
+.signup_prompt_show {
+  display: flex;
 }
 
 .signup_prompt_container,

@@ -14,7 +14,7 @@ class Header extends Component {
   render() {
     let top_right;
     if (this.props.user_status.status === 'login') {
-      top_right = <Logout />;
+      top_right = <Logout ref={this.props.log_out_container} />;
     }
 
     let login_block;
@@ -33,7 +33,7 @@ class Header extends Component {
     }
 
     return (
-      <header className='header' style={{}}>
+      <header className='header'>
         <Link to='/' className='link_home'>
           <span className='header_logo'>
             <img className='header_logo_img' src={logo} alt='' />

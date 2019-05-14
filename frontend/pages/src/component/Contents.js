@@ -13,15 +13,8 @@ class Contents extends Component {
     this.props.fetch_jobs({ source: 'yourator', page: 1 });
   }
 
-  componentDidUpdate() {
-    // document.getElementById('jobsContainer').scrollIntoView();
-  }
-
   changePage = (page, source) => {
-    // document.getElementById('jobsContainer').scrollIntoView();
     document.querySelector('.nav_top').scrollIntoView();
-
-    // this.props.fetch_jobs({ page: 'pending', source: source });
     this.props.fetch_jobs({ page: page, source: source });
   };
 

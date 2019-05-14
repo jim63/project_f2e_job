@@ -95,3 +95,7 @@ export const update_favo = obj => {
 export const update_detail = obj => {
   return { type: 'UPDATE_DETAIL', payload: obj };
 };
+
+export const change_login_prompt_status = obj => {
+  return { type: 'CHANGE_PROMPT_STATUS', payload: obj };
+};

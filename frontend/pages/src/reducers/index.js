@@ -61,10 +61,18 @@ const detail = (detail = '', action = '') => {
   return detail;
 };
 
+const login_prompt = (status = 'none', action = '') => {
+  if (action.type === 'CHANGE_PROMPT_STATUS') {
+    return action.payload;
+  }
+  return status;
+};
+
 export default combineReducers({
   jobs: jobs,
   user_status: user_status,
   banner_status: banner_status,
   favo_job: favo_job,
-  detail: detail
+  detail: detail,
+  login_prompt: login_prompt
 });

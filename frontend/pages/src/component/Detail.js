@@ -5,10 +5,6 @@ import { update_detail } from '../action/index';
 import { withRouter } from 'react-router';
 
 class Detail extends Component {
-  // detail_link_click() {
-  //   document.querySelector('.detail_link_block').classList.toggle('detail_link_block_none');
-  // }
-
   state = { loading: this.props.loading };
   componentDidMount() {
     this.setState({ loading: true });
