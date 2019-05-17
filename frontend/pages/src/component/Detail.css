@@ -25,7 +25,7 @@
 
 .detail_inside {
   transition: none;
-  border: 1px solid #aaa;
+  /* border: 1px solid #aaa; */
   padding: 30px;
 }
 
