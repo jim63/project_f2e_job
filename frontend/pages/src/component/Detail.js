@@ -286,10 +286,10 @@ class Detail extends Component {
 
             <div className='detail_link_block'>
               <a href={this.props.detail.link_job} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
-                <div className='detail_link'>到 yourator 看工作</div>
+                <div className='detail_link'>到 Yourator 看工作</div>
               </a>
               <a href={this.props.detail.link_company} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
-                <div className='detail_link'>到 yourator 看公司</div>
+                <div className='detail_link'>到 Yourator 看公司</div>
               </a>
             </div>
           </div>
@@ -383,10 +383,10 @@ class Detail extends Component {
             />
             <div className='detail_link_block'>
               <a href={this.props.detail.link_job} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
-                <div className='detail_link'>到 meetjobs 看工作</div>
+                <div className='detail_link'>到 Meetjobs 看工作</div>
               </a>
               <a href={this.props.detail.link_company} target='_blank' rel='noopener noreferrer' style={{ textDecoration: 'none' }}>
-                <div className='detail_link'>到 meetjobs 看公司</div>
+                <div className='detail_link'>到 Meetjobs 看公司</div>
               </a>
             </div>
           </div>

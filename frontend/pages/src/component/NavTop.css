@@ -34,7 +34,7 @@
   transform: translate(-50%, -50%);
 }
 .nav_top_yourator {
-  background-image: linear-gradient(-45deg, #6b73ff, #000dff);
+  background-image: linear-gradient(-45deg, #abaeeb, #262852);
   /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
   /* z-index: 10; */
 }
@@ -46,7 +46,7 @@
 }
 
 .nav_top_meetjobs {
-  background-image: linear-gradient(-45deg, #52e5e7, #130cb7);
+  background-image: linear-gradient(-45deg, #153d3d, #060438);
   /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
   /* z-index: 10; */
 }
