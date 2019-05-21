@@ -1,4 +1,5 @@
-<p style="text-align:center;font-size:20px">An online multiplayer bridge game with React, Redux and Node.js.</p>
+## <center>An f2e job collection platform with React, Redux and Node.js.</center>
+
 
 
 ## Technologies
@@ -12,11 +13,11 @@
 
 ## Features
 ### Member management
-![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/login.png?raw=true)
 Users can sign up and login by email and password
+![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/login.png?raw=true)
 
 - At front-end, 
-  - check the validation of email and password
+  - check the basic validation of email and password
   - check login status by cookies
 
 - At backend, 
@@ -24,18 +25,28 @@ Users can sign up and login by email and password
   - store the salted password hash
 
 ### Collect jobs
-Collect front jobs from Yourator, Meet.jobs and 104, and you can fold if there are too many jobs
+Collect front jobs from Yourator, Meet.jobs and 104, even they can search jobs across three platforms
 
-At front-end,
+![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/homePage.png?raw=true)
+
+- At front-end,
   - use css flex-box layout
 
 - At backend,
   - web-crawling with Node.js
   - manipulate MsSQL with CRUD
 
+  
+### Show detail
+Show details of the job, and we provide links to the origin source
+![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/details.png?raw=true)
 
-### Search jobs across three platforms
-Quickly find the front-end job opportunities by the company name
+- At front-end,
+	- use Google Maps API 
+
 
 ### Member favorite
 Memorize jobs which user like
+
+- Users can fold it, if they think the page is too long
+![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/favorite.png?raw=true)
