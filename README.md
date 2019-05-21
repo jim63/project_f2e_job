@@ -1,11 +1,4 @@
-<p style="text-align:center">An online multiplayer bridge game with React, Redux and Node.js.</p>
-
-
-May be include:
- 1. react & redux
- 2. web scraping
- 3. canvas
- 4. EC2 + mysql + node.js
+<p style="text-align:center;font-size:20px">An online multiplayer bridge game with React, Redux and Node.js.</p>
 
 
 ## Technologies
@@ -19,6 +12,7 @@ May be include:
 
 ## Features
 ### Member management
+![image](https://github.com/jim63/project_f2e_job/blob/master/md_photo/login.png?raw=true)
 Users can sign up and login by email and password
 
 - At front-end, 
