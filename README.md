@@ -1,6 +1,6 @@
-## <center>An f2e job collection platform with React, Redux and Node.js.</center>
+## An f2e job collection platform with React, Redux and Node.js.
 
-
+[f2e jobs](http://oledu.tw)
 
 ## Technologies
 - React
