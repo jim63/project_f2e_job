@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './component/Header';
-import Banner from './component/Banner';
-import Nav from './component/Nav';
 import NavTop from './component/NavTop';
 import Contents from './component/Contents';
 import Footer from './component/Footer';

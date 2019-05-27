@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import { log } from 'util';
 import { fetch_jobs } from '../action';
 
-let logo_yourator = require('../img/youratorlogo.png');
-let logo_104 = require('../img/104logo.png');
-let logo_meetjobs = require('../img/meetjobslogo.svg');
-
+//
 class Nav extends Component {
   nav_top_search_t = React.createRef();
   nav_top_search_input = React.createRef();
