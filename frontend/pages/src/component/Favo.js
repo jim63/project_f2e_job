@@ -28,6 +28,7 @@ class Favo extends Component {
 
   componentDidUpdate() {
     if (this.props.favo_job.length === 0) {
+      
       let favo = this.props.favo;
       fetch('/favo', {
         credentials: 'include',
@@ -43,6 +44,9 @@ class Favo extends Component {
       });
     }
   }
+
+
+
 
   changePage = (page, source) => {
     this.props.fetch_jobs({ page: page, source: source });
