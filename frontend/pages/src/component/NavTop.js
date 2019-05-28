@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ButtonCompany from '../component/ButtonCompany';
 import './NavTop.css';
 import { connect } from 'react-redux';
 import { log } from 'util';

@@ -4,8 +4,8 @@ import './Favo.css';
 import { connect } from 'react-redux';
 import { fetch_jobs, update_favo } from '../action/index';
 import Pages from './Pages';
-import default_104 from '../img/default_104.png';
-import default_yourator from '../img/default_yourator.png';
+// import default_104 from '../img/default_104.png';
+// import default_yourator from '../img/default_yourator.png';
 
 class Favo extends Component {
   componentDidMount() {
@@ -87,7 +87,7 @@ class Favo extends Component {
         return (
           <CardJob
             key={e.id}
-            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
+            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : `https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/default_yourator.png`) || (e.picture !== 'undefined' ? e.picture : `https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/default_104.png`)}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}
@@ -109,7 +109,7 @@ class Favo extends Component {
         return (
           <CardJob
             key={e.id}
-            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture : default_yourator) || (e.picture !== 'undefined' ? e.picture : default_104)}
+            imgSRC={(e.company_picture !== 'undefined' ? e.company_picture :  `https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/default_yourator.png`) || (e.picture !== 'undefined' ? e.picture :  `https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/default_104.png`)}
             company={e.company_name}
             jobTitle={e.job_name}
             location={e.location}

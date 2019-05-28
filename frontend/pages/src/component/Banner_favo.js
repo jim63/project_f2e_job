@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { fetch_jobs, login_check_success, login_check_fail, change_banner, change_banner_default } from '../action/index';
 import Logout from './Logout';
 import './Banner_favo.css';
-import banner from '../img/banner-18.png';
-import banner2 from '../img/banner2.jpeg';
-import banner3 from '../img/banner3.jpeg';
+// import banner from '../img/banner-18.png';
+// import banner2 from '../img/banner2.jpeg';
+// import banner3 from '../img/banner3.jpeg';
 
 class Banner extends Component {
   banner_ref = [];
@@ -42,7 +42,7 @@ class Banner extends Component {
         <div style={{ position: 'relative' }}>
           <div className='current_banner banner_control default_banner banner_1' ref={banner => (this.banner_ref[0] = banner)}>
             <div className='banner'>
-              <img src={banner} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden' }} />
+              <img src={`https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/banner-18.png`} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden' }} />
               <div className='bannerText'>
                 <p>WORK LIFE BALANCE</p>
                 <p>ARE YOU READY?</p>
@@ -51,7 +51,7 @@ class Banner extends Component {
           </div>
           <div className='not_current_banner banner_control not_default_banner banner_2' ref={banner => (this.banner_ref[1] = banner)}>
             <div className='banner'>
-              <img src={banner2} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.8' }} />
+              <img src={`https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/banner2.jpeg`} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.8' }} />
               <div className='bannerText' style={{ color: 'white', textShadow: '2px 2px #443a42' }}>
                 <p>STUCK IN LIFE </p>
                 <p>OR</p>
@@ -61,7 +61,7 @@ class Banner extends Component {
           </div>
           <div className='not_current_banner banner_control not_default_banner banner_3' ref={banner => (this.banner_ref[2] = banner)}>
             <div className='banner'>
-              <img src={banner3} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.7' }} />
+              <img src={`https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/banner3.jpeg`} className='banner_ani_2' style={{ width: '100%', height: 'auto', overflow: 'hidden', opacity: '0.7' }} />
               <div className='bannerText' style={{ color: 'rgba(255,0,0,0.7)', textShadow: '1px 1px #443a42' }}>
                 <p>Java is to JavaScript what Car is to Carpet.</p>
               </div>

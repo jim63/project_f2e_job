@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import logo from '../img/logo-1.svg';
+// import logo from '../img/logo-1.svg';
 import Logout from './Logout';
 
 class Header extends Component {
@@ -36,7 +36,7 @@ class Header extends Component {
       <header className='header'>
         <Link to='/' className='link_home'>
           <span className='header_logo'>
-            <img className='header_logo_img' src={logo} alt='' />
+            <img className='header_logo_img' src={`https://s3-ap-southeast-1.amazonaws.com/f2ejobs/f2e_pics/logo-1.svg`} alt='' />
           </span>
         </Link>
         {login_block}
