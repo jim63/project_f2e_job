@@ -25,12 +25,9 @@ app.use(
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-  // res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.header('Access-Control-Allow-Origin', 'http://3.18.93.25:3006');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
-
   next();
 });
 
@@ -44,7 +41,8 @@ httpsServer.listen(443);
 
 app.get('/favo', (req, res) => {
   let session_id = req.cookies.session_id;
-  db.query(`SELECT * FROM member where session_id= '${session_id}'`, (err, result, fields) => {
+  let sql = `SELECT * FROM member where session_id= '` + db.escape(session_id) + `'`;
+  db.query(sql, (err, result, fields) => {
     if (result.length === 0) {
       res.status(301).redirect('/');
     } else {
