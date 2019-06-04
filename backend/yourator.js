@@ -122,8 +122,6 @@ function goJobPage(url_job_page, time = 0) {
             }
           });
 
-          console.log(info.scale);
-
           info.company_desc = $('.company-description').text();
 
           resolve({ jd: jd, info: info });

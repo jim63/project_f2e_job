@@ -20,7 +20,6 @@ class Login extends Component {
   sign_change = e => {
     if (e.target.className.indexOf('login_bottom_text') != -1) {
       this.props.change_login_prompt_status('signup_prompt');
-      console.log(this.state);
     } else if (e.target.className.indexOf('signup_bottom_text') != -1) {
       this.props.change_login_prompt_status('login_prompt');
     }

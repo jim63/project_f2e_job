@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Header from './component/Header';
 import NavTop from './component/NavTop';
 import Contents from './component/Contents';
 import Footer from './component/Footer';
 import Login from './component/Login';
-import Logout from './component/Logout';
 import Favo from './component/Favo';
 import Detail from './component/Detail';
 import Banner_favo from './component/Banner_favo';
 import { connect } from 'react-redux';
 import { fetch_jobs, login_check_success, login_check_fail, change_login_prompt_status } from './action/index';
 import './main.css';
+
 class App extends Component {
   log_out_container = React.createRef();
 
@@ -22,7 +21,6 @@ class App extends Component {
         if (
           e.target.className.indexOf('welcome_button') == -1 &&
           e.target.className.indexOf('log_out_container') == -1 &&
-          // e.target.className.indexOf('check_favorite') == -1 &&
           e.target.className.indexOf('logout_check') == -1
         ) {
           document.querySelector('.log_out_container').classList.add('log_out_container_disappear');
@@ -100,8 +98,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('log_out_container', this.log_out_container.current);
-
     let top_right;
     if (this.props.user_status.status === 'unknown') {
       top_right = <Login />;

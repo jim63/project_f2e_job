@@ -61,8 +61,6 @@ function getJobsFromPage(page) {
 }
 
 function goJobPage(url_job_page, time) {
-  console.log('qqq', time);
-
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
       request(
@@ -72,7 +70,6 @@ function goJobPage(url_job_page, time) {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         (e, r, b) => {
-          console.log(url_job_page);
           if (e) {
             console.log('err', e);
           }
@@ -245,7 +242,6 @@ function goComPage(url_job_page, time) {
         'Content-Type': 'application/json;charset=UTF-8'
       },
       (e, r, b) => {
-        console.log(url_job_page);
         if (e) {
           console.log('err', e);
         }
