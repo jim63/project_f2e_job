@@ -41,7 +41,8 @@ httpsServer.listen(443);
 
 app.get('/favo', (req, res) => {
   let session_id = req.cookies.session_id;
-  let sql = `SELECT * FROM member where session_id= '` + db.escape(session_id) + `'`;
+  let sql = `SELECT * FROM member where session_id= ` + db.escape(session_id);
+
   db.query(sql, (err, result, fields) => {
     if (result.length === 0) {
       res.status(301).redirect('/');
