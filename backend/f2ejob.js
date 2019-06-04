@@ -41,7 +41,7 @@ httpsServer.listen(443);
 
 app.get('/favo', (req, res) => {
   let session_id = req.cookies.session_id;
-  let sql = `SELECT * FROM member where session_id= ` + db.escape(session_id);
+  let sql = `SELECT * FROM member where session_id= ` + db.escape(session_id) + ';';
 
   db.query(sql, (err, result, fields) => {
     if (result.length === 0) {
@@ -74,7 +74,6 @@ app.get('/104', (req, res) => {
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-        console.log('\n');
         let digit_high = e.salary_high.split('').findIndex(val => val > 0);
         let salary_high = e.salary_high
           .slice(digit_high)
@@ -99,11 +98,11 @@ app.get('/meetjobs', (req, res) => {
 });
 
 app.get('/find', (req, res) => {
-  console.log(req.query);
   let source = req.query.source;
   let id = req.query.id;
   if (source === '104') {
-    db.query(`SELECT * FROM job_104 where job_id=${id}`, (e, r, b) => {
+    let sql = `SELECT * FROM job_104 where job_id=` + db.escape(id) + ';';
+    db.query(sql, (e, r, b) => {
       if (e) {
         return e;
       }
@@ -115,7 +114,6 @@ app.get('/find', (req, res) => {
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-          console.log('\n');
           let digit_high = e.salary_high.split('').findIndex(val => val > 0);
           let salary_high = e.salary_high
             .slice(digit_high)
@@ -127,22 +125,22 @@ app.get('/find', (req, res) => {
       res.json({ data: r });
     });
   } else if (source === 'yourator') {
-    db.query(`SELECT * FROM job_yourator where job_id=${id}`, (e, r, b) => {
+    let sql = `SELECT * FROM job_yourator where job_id=` + db.escape(id) + ';';
+    db.query(sql, (e, r, b) => {
       if (e) {
         return e;
       }
       if (r.length > 0) {
-        console.log(r);
         res.json({ data: r });
       }
     });
   } else if (source === 'meetjobs') {
-    db.query(`SELECT * FROM job_meetjobs where job_id=${id}`, (e, r, b) => {
+    let sql = `SELECT * FROM job_meetjobs where job_id=` + db.escape(id) + ';';
+    db.query(sql, (e, r, b) => {
       if (e) {
         return e;
       }
       if (r.length > 0) {
-        console.log(r);
         res.json({ data: r });
       }
     });
@@ -151,7 +149,6 @@ app.get('/find', (req, res) => {
 
 app.get('/search', (req, res) => {
   let keywords = req.query.keyword;
-  console.log(keywords);
 
   function splitStr(sChars) {
     var str = '';
@@ -188,11 +185,10 @@ app.get('/search', (req, res) => {
       each_string += ')';
       query_arr.push(each_string);
       query = query_arr.join(' or ');
-      console.log(query);
     });
 
     return new Promise((resolve, reject) => {
-      db.query(`SELECT * FROM job_${source} where ${query}`, (err, result, fields) => {
+      let sql = db.query(`SELECT * FROM job_${source} where ${query}`, (err, result, fields) => {
         if (err) {
           resolve(err);
         }
@@ -203,7 +199,6 @@ app.get('/search', (req, res) => {
               .slice(digit_low)
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            console.log('\n');
             let digit_high = e.salary_high.split('').findIndex(val => val > 0);
             let salary_high = e.salary_high
               .slice(digit_high)
@@ -261,7 +256,9 @@ app.post('/signIn', (req, res) => {
   const saltRounds = 10;
   let email = req.body.email;
   let password = req.body.password;
-  db.query(`SELECT * FROM member where email = '${email}';`, (err, result, fields) => {
+  let sql = `SELECT * FROM member where email = ` + db.escape(email) + ';';
+
+  db.query(sql, (err, result, fields) => {
     if (err) {
       res.json({ signIn: 'err1' });
     }
@@ -274,7 +271,9 @@ app.post('/signIn', (req, res) => {
       bcrypt.compare(password, password_hash).then(function(result) {
         if (result) {
           bcrypt.hash(password, saltRounds).then(function(session_id) {
-            db.query(`UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`, (err, result, fields) => {
+            let sql = `UPDATE member SET session_id = ` + db.escape(session_id) + `WHERE email = ` + db.escape(email) + ';';
+            db.query(sql, (err, result, fields) => {
+              // db.query(`UPDATE member SET session_id = '${session_id}' WHERE email = '${email}';`, (err, result, fields) => {
               if (err) {
                 res.json({ signIn: 'try_again' });
               } else {
@@ -293,7 +292,8 @@ app.post('/signIn', (req, res) => {
 
 app.post('/checkSessionID', (req, res) => {
   let session_id = unescape(req.body.session_id);
-  db.query(`SELECT * FROM member where session_id= '${session_id}'`, (err, result, fields) => {
+  let sql = `SELECT * FROM member where session_id= ` + db.escape(session_id) + ';';
+  db.query(sql, (err, result, fields) => {
     if (result.length === 0) {
       res.json({ result: 'not_found' });
     } else {
@@ -325,16 +325,10 @@ app.post('/addFavo', (req, res) => {
   let source = req.body.source;
   let jobid = req.body.jobid;
   db.query(`SELECT * FROM member where session_id = '${session_id}'`, (err, result, fields) => {
-    console.log('rrr', result);
-
     let favo_list = JSON.parse(result[0].favorite_job);
 
-    console.log('list', favo_list);
-
     if (favo_list[source].indexOf(jobid) === -1) {
-      console.log('prev', favo_list);
       favo_list[source].push(jobid);
-      console.log('new', favo_list);
       let favo_list_str = JSON.stringify(favo_list);
       db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
         if (err) {
@@ -353,17 +347,13 @@ app.post('/removeFavo', (req, res) => {
   let source = req.body.source;
   let jobid = req.body.jobid;
 
-  console.log(session_id, source, jobid);
-
   db.query(`SELECT * FROM member where session_id = '${session_id}'`, (err, result, fields) => {
     let favo_list = JSON.parse(result[0].favorite_job);
     if (favo_list[source].indexOf(jobid) !== -1) {
-      console.log('prev', favo_list);
       let new_spec = favo_list[source].filter(ele => {
         return ele != jobid;
       });
       favo_list[source] = new_spec;
-      console.log('new', favo_list);
 
       let favo_list_str = JSON.stringify(favo_list);
       db.query(`UPDATE member SET favorite_job = '${favo_list_str}' WHERE session_id='${session_id}'`, (err, result, fields) => {
@@ -380,7 +370,6 @@ app.post('/removeFavo', (req, res) => {
 
 app.post('/favo', (req, res) => {
   let favo = req.body.favo;
-  console.log('favo', favo);
 
   let favo_104 = { '104': favo['104'] };
   let favo_yourator = { yourator: favo['yourator'] };
@@ -390,7 +379,6 @@ app.post('/favo', (req, res) => {
     let source = Object.keys(obj)[0];
     let id = obj[source];
 
-    console.log(source, id);
     if (id.length !== 0) {
       return new Promise((resolve, reject) => {
         db.query(
@@ -408,7 +396,6 @@ app.post('/favo', (req, res) => {
                   .slice(digit_low)
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                console.log('\n');
                 let digit_high = e.salary_high.split('').findIndex(val => val > 0);
                 let salary_high = e.salary_high
                   .slice(digit_high)
@@ -437,19 +424,11 @@ app.post('/favo', (req, res) => {
 });
 
 app.get('/jobs/:source/:id', (req, res) => {
-  console.log(21321312);
-
   res.sendfile('./public/index.html');
 });
 
 let query_favo = async (source, id) => {
   let gg = await new Promise((resolve, reject) => {
-    console.log(
-      `SELECT job_name FROM job_${source} where job_id IN (${id.map(ele => {
-        return "'" + ele + "'";
-      })});`
-    );
-
     db.query(
       `SELECT job_id FROM job_${source} where job_id IN (${id.map(ele => {
         return "'" + ele + "'";
@@ -463,19 +442,3 @@ let query_favo = async (source, id) => {
     );
   });
 };
-
-query_favo('yourator', [6955, 6986, 5836, 2835, 5430, 3320, 6889, 4920, 7262, 1143, 5115, 7161, 4788]);
-
-const saltRounds = 10;
-const myPassword = '123';
-const testPassword = 'password2';
-const myHash = '$2b$10$p4pTcLZfZq.PQ6Ssc8.TJuGv7Nj8ZTqAlSzY59V3mWw0Ab/jK1Apy'; // myPassword加密後結果(驗證用)
-
-bcrypt.hash(myPassword, saltRounds).then(function(hash) {
-  // Store hash in your password DB.
-  // console.log(hash);
-});
-
-bcrypt.compare('113', myHash).then(function(res) {
-  // console.log(res); // true
-});
