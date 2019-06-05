@@ -36,7 +36,7 @@ class App extends Component {
         this.props.fetch_jobs({ page: 1, source: 'meetjobs' });
         document.querySelector('.nav_top').scrollIntoView();
       } else if (e.target.className.indexOf('nav_top_search') !== -1) {
-        this.props.fetch_jobs({ page: 'pending', source: 'search' });
+        // this.props.fetch_jobs({ page: 'pending', source: 'search' });
       } else {
         if (e.target.className.indexOf('login_button') != -1) {
           this.props.change_login_prompt_status('login_prompt');
