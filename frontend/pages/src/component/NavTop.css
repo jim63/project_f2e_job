@@ -24,7 +24,7 @@
   height: 22px;
   width: 100%;
   font-size: 21px;
-  color: white;
+  color: #443a42;
 }
 
 .nav_top_option_p {
@@ -35,26 +35,18 @@
 }
 .nav_top_yourator {
   background-image: linear-gradient(-45deg, #abaeeb, #262852);
-  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
-  /* z-index: 10; */
 }
 
 .nav_top_104 {
   background-image: linear-gradient(-45deg, #fccf31, #f55555);
-  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
-  /* z-index: 10; */
 }
 
 .nav_top_meetjobs {
   background-image: linear-gradient(-45deg, #153d3d, #060438);
-  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
-  /* z-index: 10; */
 }
 
 .nav_top_search {
   background-image: linear-gradient(-45deg, #eeeeee, #443a42);
-  /* box-shadow: 5px 5px 7px rgba(100, 100, 100, 0.7); */
-  /* z-index: 10; */
 }
 
 .nav_top_not_selected {
