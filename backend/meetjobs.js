@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
 app.set('view engine', 'pug');
 app.use(express.static('public'));
 
-let port = 3006;
+let port = 4001;
 app.listen(port, () => {
   console.log(`the app is rumming on localhost:${port}`);
 });

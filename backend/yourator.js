@@ -9,7 +9,7 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 
-let port = 3007;
+let port = 4000;
 app.listen(port, () => {
   console.log(`the app is running on localhost:${port}`);
 });
